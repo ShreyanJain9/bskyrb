@@ -39,9 +39,19 @@ module ATProto
 
     return response
   end
+  def get_skoot_by_url(url)
+    headers = { "Authorization" => "Bearer #{@atp_auth_token}" }
+
+    username_of_person_in_link = url.split('/')[-3]
+    did_of_person_in_link = JSON.parse(resolveHandle(username_of_person_in_link))['did']
+    url_identifier = url.split('/')[-1]
+
+    uri = "at://#{did_of_person_in_link}/app.bsky.feed.post/#{url_identifier}"
+
+    response = Net::HTTP.get(URI("#{@atp_host}/xrpc/app.bsky.feed.getPostThread?uri=#{uri}"), headers)
+
+    return response
+  end
+
   end
 end 
-
-bsky = ATProto::Session.new("shreyan.bsky.social", "***REMOVED***")
-mydid = bsky.resolveHandle("shreyanjain.net")
-puts(mydid)
