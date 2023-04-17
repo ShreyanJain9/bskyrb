@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "bskyrb"
-  spec.version       = "0.1.0"
+  spec.version       = "0.1.0.1"
   spec.authors       = ["Shreyan Jain"]
   spec.email         = ["shreyan.jain.9@outlook.com"]
   spec.description   = "A script for interacting with bsky/atproto"
