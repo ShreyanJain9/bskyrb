@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "bskyrb/version"
+# require_relative "bskyrb/version"
 require 'json'
 require 'net/http'
 require 'date'
@@ -53,5 +53,12 @@ module ATProto
     return response
   end
 
-  end
+  
+def method_missing(method_name, *args)
+  message = "You called #{method_name} with #{args}. This method doesn't exist."
+  
+      raise NoMethodError, message
+  
+end
+end 
 end 
