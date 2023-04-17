@@ -30,5 +30,18 @@ module ATProto
     def getdid()
       puts @did
     end
+    
+  def resolveHandle(username) # aka getDid
+    headers = { "Authorization" => "Bearer #{@atp_auth_token}" }
+
+    uri = URI("#{@atp_host}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}")
+    response = Net::HTTP.get(uri, headers)
+
+    return response
+  end
   end
 end 
+
+bsky = ATProto::Session.new("shreyan.bsky.social", "***REMOVED***")
+mydid = bsky.resolveHandle("shreyanjain.net")
+puts(mydid)
