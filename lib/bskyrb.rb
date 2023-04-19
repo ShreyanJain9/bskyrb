@@ -3,20 +3,22 @@
 # require_relative "bskyrb/version"
 require 'json'
 require 'net/http'
+require 'httparty'
 require 'date'
 module ATProto
   class Session
-    def initialize(username, password)
-      @atp_host = "https://bsky.social"
+    def initialize(username, password, pds)
+      @atp_host = pds
       @atp_auth_token = ""
       @did = ""
       @username = username
-  
+      # headers = { "Content-Type" => "application/json" }
       data = { "identifier" => username, "password" => password }.to_json
   
       uri = URI("#{@atp_host}/xrpc/com.atproto.server.createSession")
       response = Net::HTTP.post(uri, data, 'Content-Type' => 'application/json')
-  
+     # response = HTTParty.post(uri, body: data.to_json, headers: {'Content-Type' => 'application/json'} )
+
       parsed_response = JSON.parse(response.body)
   
       @atp_auth_token = parsed_response['accessJwt']
@@ -28,19 +30,17 @@ module ATProto
       @did = parsed_response['did']
     end
     def getdid()
-      puts @did
+      return @did
     end
     
-  def resolveHandle(username) # aka getDid
-    headers = { "Authorization" => "Bearer #{@atp_auth_token}" }
-
-    uri = URI("#{@atp_host}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}")
-    response = Net::HTTP.get(uri, headers)
-
-    return response
+  def resolveHandle(username)
+    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
+    response = HTTParty.get("#{@atp_host}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}", headers: headers)
+  
+    return response.body
   end
   def get_skoot_by_url(url)
-    headers = { "Authorization" => "Bearer #{@atp_auth_token}" }
+    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
 
     username_of_person_in_link = url.split('/')[-3]
     did_of_person_in_link = JSON.parse(resolveHandle(username_of_person_in_link))['did']
@@ -48,12 +48,49 @@ module ATProto
 
     uri = "at://#{did_of_person_in_link}/app.bsky.feed.post/#{url_identifier}"
 
-    response = Net::HTTP.get(URI("#{@atp_host}/xrpc/app.bsky.feed.getPostThread?uri=#{uri}"), headers)
+    response = HTTParty.get("#{@atp_host}/xrpc/app.bsky.feed.getPostThread?uri=#{uri}", headers: headers)
 
     return response
   end
 
+  def uploadBlob(blob_path, content_type)
+    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => content_type }
+    image_bytes = File.binread(blob_path)
+
+    uri = URI("#{@atp_host}/xrpc/com.atproto.repo.uploadBlob")
+    response = HTTParty.post("#{@atp_host}/xrpc/com.atproto.repo.uploadBlob", body: image_bytes, headers: headers)
+
+    return response
+  end
   
+
+  def post(postcontent)
+    timestamp = DateTime.now.iso8601(3)
+    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
+
+    data = {
+      "collection" => "app.bsky.feed.post",
+      "$type" => "app.bsky.feed.post",
+      "repo" => "#{@did}",
+      "record" => {
+        "$type" => "app.bsky.feed.post",
+        "createdAt" => timestamp,
+        "text" => postcontent
+      }
+    }
+
+    uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
+
+
+    resp = HTTParty.post(
+      uri,
+      body: data.to_json,
+      headers: headers
+    )
+   # response = Net::HTTP.post(uri, data.to_json, headers)
+    return resp
+  end
+
 def method_missing(method_name, *args)
   message = "You called #{method_name} with #{args}. This method doesn't exist."
   
@@ -62,3 +99,10 @@ def method_missing(method_name, *args)
 end
 end 
 end 
+
+bsky = ATProto::Session.new('shreyan.bsky.social', '***REMOVED***', "https://bsky.social")
+
+  puts(bsky.getdid)
+  puts(bsky.resolveHandle("shreyanjain.net"))
+  puts(bsky.get_skoot_by_url("https://staging.bsky.app/profile/msh.bsky.social/post/3jtos4s6jfa2y"))
+  puts(bsky.post("testing again, don't mind this"))

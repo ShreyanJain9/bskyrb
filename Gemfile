@@ -8,3 +8,4 @@ gemspec
 gem 'date'
 gem 'json'
 gem 'net-http'
+gem 'httparty'
