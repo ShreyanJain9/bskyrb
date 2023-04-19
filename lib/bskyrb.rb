@@ -100,9 +100,4 @@ end
 end 
 end 
 
-bsky = ATProto::Session.new('shreyan.bsky.social', 'Lakeb1rd!', "https://bsky.social")
 
-  puts(bsky.getdid)
-  puts(bsky.resolveHandle("shreyanjain.net"))
-  puts(bsky.get_skoot_by_url("https://staging.bsky.app/profile/msh.bsky.social/post/3jtos4s6jfa2y"))
-  puts(bsky.post("testing again, don't mind this"))
