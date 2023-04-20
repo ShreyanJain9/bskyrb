@@ -15,7 +15,7 @@ module ATProto
       @did = ""
       @username = username
       # headers = { "Content-Type" => "application/json" }
-      data = JSON.dump({"identifier" => username, "password" => password})
+      data = {"identifier" => username, "password" => password}.to_json
 
       uri = URI("#{@atp_host}/xrpc/com.atproto.server.createSession")
       response = Net::HTTP.post(uri, data, "Content-Type" => "application/json")
@@ -65,7 +65,7 @@ module ATProto
       uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
       HTTParty.post(
         uri,
-        body: JSON.dump(jsondata),
+        body: jsondata.to_json,
         headers: headers
       )
     end
