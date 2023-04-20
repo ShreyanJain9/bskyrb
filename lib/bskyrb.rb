@@ -63,11 +63,20 @@ module ATProto
       return response
     end
     
+    def createRecord(jsondata)
+      #TODO merge frequently used code
+      headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
+      uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
+      resp = HTTParty.post(
+        uri,
+        body: jsondata.to_json,
+        headers: headers
+      )
+      return resp
+    end
 
     def post(postcontent)
       timestamp = DateTime.now.iso8601(3)
-      headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
-
       data = {
         "collection" => "app.bsky.feed.post",
         "$type" => "app.bsky.feed.post",
@@ -78,24 +87,15 @@ module ATProto
           "text" => postcontent
         }
       }
-
-      uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
-
-
-      resp = HTTParty.post(
-        uri,
-        body: data.to_json,
-        headers: headers
-      )
+      record = self.createRecord(data)
     # response = Net::HTTP.post(uri, data.to_json, headers)
-      return resp
+      return record 
     end
 
     def follow(username)
       timestamp = DateTime.now.iso8601(3)
-      headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
-      response = self.resolveHandle(username)
-      did = JSON.parse(response)["did"]
+      handle = self.resolveHandle(username)
+      did = JSON.parse(handle)["did"]
       data = {
         "collection" => "app.bsky.graph.follow",
         "repo" => "#{@did}",
@@ -105,15 +105,8 @@ module ATProto
           "$type" => "app.bsky.graph.follow",
         }
       }
-      uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
-
-
-      resp = HTTParty.post(
-        uri,
-        body: data.to_json,
-        headers: headers
-      )
-      return resp
+      response = self.createRecord(data)
+      return response
     end
 
     def get_latest_skoot(accountname)
