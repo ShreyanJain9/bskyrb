@@ -7,7 +7,7 @@ require 'httparty'
 require 'date'
 module ATProto
   class Session
-    def initialize(username, password, pds)
+    def initialize(username, password, pds = "https://bsky.social")
       @atp_host = pds
       @atp_auth_token = ""
       @did = ""
@@ -91,6 +91,31 @@ module ATProto
     return resp
   end
 
+  def follow(username)
+    timestamp = DateTime.now.iso8601(3)
+    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
+    response = self.resolveHandle(username)
+    did = JSON.parse(response)["did"]
+    data = {
+      "collection" => "app.bsky.graph.follow",
+      "repo" => "#{@did}",
+      "record" => {
+        "subject" => did,
+        "createdAt" => timestamp,
+        "$type" => "app.bsky.graph.follow",
+      }
+    }
+    uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
+
+
+    resp = HTTParty.post(
+      uri,
+      body: data.to_json,
+      headers: headers
+    )
+    return resp
+  end
+
 def method_missing(method_name, *args)
   message = "You called #{method_name} with #{args}. This method doesn't exist."
   
@@ -99,5 +124,3 @@ def method_missing(method_name, *args)
 end
 end 
 end 
-
-
