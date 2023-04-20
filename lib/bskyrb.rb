@@ -33,94 +33,109 @@ module ATProto
       return @did
     end
     
-  def resolveHandle(username)
-    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
-    response = HTTParty.get("#{@atp_host}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}", headers: headers)
-  
-    return response.body
-  end
-  def get_skoot_by_url(url)
-    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
+    def resolveHandle(username)
+      headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
+      response = HTTParty.get("#{@atp_host}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}", headers: headers)
+    
+      return response.body
+    end
+    def get_skoot_by_url(url)
+      headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
 
-    username_of_person_in_link = url.split('/')[-3]
-    did_of_person_in_link = JSON.parse(resolveHandle(username_of_person_in_link))['did']
-    url_identifier = url.split('/')[-1]
+      username_of_person_in_link = url.split('/')[-3]
+      did_of_person_in_link = JSON.parse(resolveHandle(username_of_person_in_link))['did']
+      url_identifier = url.split('/')[-1]
 
-    uri = "at://#{did_of_person_in_link}/app.bsky.feed.post/#{url_identifier}"
+      uri = "at://#{did_of_person_in_link}/app.bsky.feed.post/#{url_identifier}"
 
-    response = HTTParty.get("#{@atp_host}/xrpc/app.bsky.feed.getPostThread?uri=#{uri}", headers: headers)
+      response = HTTParty.get("#{@atp_host}/xrpc/app.bsky.feed.getPostThread?uri=#{uri}", headers: headers)
 
-    return response
-  end
+      return response
+    end
 
-  def uploadBlob(blob_path, content_type)
-    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => content_type }
-    image_bytes = File.binread(blob_path)
+    def uploadBlob(blob_path, content_type)
+      headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => content_type }
+      image_bytes = File.binread(blob_path)
 
-    uri = URI("#{@atp_host}/xrpc/com.atproto.repo.uploadBlob")
-    response = HTTParty.post("#{@atp_host}/xrpc/com.atproto.repo.uploadBlob", body: image_bytes, headers: headers)
+      uri = URI("#{@atp_host}/xrpc/com.atproto.repo.uploadBlob")
+      response = HTTParty.post("#{@atp_host}/xrpc/com.atproto.repo.uploadBlob", body: image_bytes, headers: headers)
 
-    return response
-  end
-  
+      return response
+    end
+    
 
-  def post(postcontent)
-    timestamp = DateTime.now.iso8601(3)
-    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
+    def post(postcontent)
+      timestamp = DateTime.now.iso8601(3)
+      headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
 
-    data = {
-      "collection" => "app.bsky.feed.post",
-      "$type" => "app.bsky.feed.post",
-      "repo" => "#{@did}",
-      "record" => {
+      data = {
+        "collection" => "app.bsky.feed.post",
         "$type" => "app.bsky.feed.post",
-        "createdAt" => timestamp,
-        "text" => postcontent
+        "repo" => "#{@did}",
+        "record" => {
+          "$type" => "app.bsky.feed.post",
+          "createdAt" => timestamp,
+          "text" => postcontent
+        }
       }
-    }
 
-    uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
+      uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
 
 
-    resp = HTTParty.post(
-      uri,
-      body: data.to_json,
-      headers: headers
-    )
-   # response = Net::HTTP.post(uri, data.to_json, headers)
-    return resp
-  end
+      resp = HTTParty.post(
+        uri,
+        body: data.to_json,
+        headers: headers
+      )
+    # response = Net::HTTP.post(uri, data.to_json, headers)
+      return resp
+    end
 
-  def follow(username)
-    timestamp = DateTime.now.iso8601(3)
-    headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
-    response = self.resolveHandle(username)
-    did = JSON.parse(response)["did"]
-    data = {
-      "collection" => "app.bsky.graph.follow",
-      "repo" => "#{@did}",
-      "record" => {
-        "subject" => did,
-        "createdAt" => timestamp,
-        "$type" => "app.bsky.graph.follow",
+    def follow(username)
+      timestamp = DateTime.now.iso8601(3)
+      headers = { "Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json" }
+      response = self.resolveHandle(username)
+      did = JSON.parse(response)["did"]
+      data = {
+        "collection" => "app.bsky.graph.follow",
+        "repo" => "#{@did}",
+        "record" => {
+          "subject" => did,
+          "createdAt" => timestamp,
+          "$type" => "app.bsky.graph.follow",
+        }
       }
-    }
-    uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
+      uri = URI("#{@atp_host}/xrpc/com.atproto.repo.createRecord")
 
 
-    resp = HTTParty.post(
-      uri,
-      body: data.to_json,
-      headers: headers
-    )
-    return resp
-  end
+      resp = HTTParty.post(
+        uri,
+        body: data.to_json,
+        headers: headers
+      )
+      return resp
+    end
 
-def method_missing(method_name, *args)
-  message = "You called #{method_name} with #{args}. This method doesn't exist."
+    def get_latest_skoot(accountname)
+      self.get_latest_n_skoots(accountname, 1)
+    end
   
-      raise NoMethodError, message
+    def get_latest_n_skoots(username, n=5)
+      headers = {"Authorization": "Bearer #{@atp_auth_token}"}
+      resp = HTTParty.get(
+        "#{@atp_host}/xrpc/app.bsky.feed.getAuthorFeed?actor=#{username}&limit=#{n}",
+        headers: headers
+      )
+      
   
-end
-end 
+      resp
+    end
+  
+    def method_missing(method_name, *args)
+      message = "You called #{method_name} with #{args}. This method doesn't exist."
+      
+          raise NoMethodError, message
+      
+    end
+  end 
 end 
