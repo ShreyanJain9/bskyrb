@@ -1,8 +1,13 @@
 # Bskyrb
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bskyrb`. To experiment with that code, run `bin/console` for an interactive prompt.
+- [Installation](#installation)
+- [Usage](#usage)
+- [Development](#development)
+  - [Type checking](#type-checking)
+  - [Formatting](#formatting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Code of Conduct](#code-of-conduct)
 
 ## Installation
 
@@ -30,6 +35,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ### Type checking
 
 bskyrb uses [.rbs type definitions](https://github.com/ruby/rbs). To check for accuracy, run `bin/typecheck`. Not all of the output will be useful, especially during rapid development, but it is a good idea to have types at least for the bluesky objects.
+
+Use the [`rbs collection` tool](https://github.com/ruby/rbs/blob/master/docs/collection.md) to manage definitions for third-party dependencies, for example HTTParty.
 
 ### Formatting
 

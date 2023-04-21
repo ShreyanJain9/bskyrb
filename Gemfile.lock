@@ -96,10 +96,6 @@ PLATFORMS
 
 DEPENDENCIES
   bskyrb!
-  date
-  httparty
-  json
-  net-http
   parallel (= 1.10.0)
   standard
   steep

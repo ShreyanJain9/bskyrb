@@ -2,10 +2,8 @@ D = Steep::Diagnostic
 
 target :lib do
   signature "sig"
-
-  check "lib"                       # Directory name
   check "bin"
-  # ignore "lib/templates/*.rb"
+  check "lib"
 
   # library "pathname", "set"       # Standard libraries
   # library "strong_json"           # Gems
