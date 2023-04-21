@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# require_relative "bskyrb/version"
+require_relative "bskyrb/version"
 require "json"
 require "net/http"
 require "httparty"
@@ -83,7 +83,6 @@ module ATProto
         }
       }
       create_record(data)
-      # response = Net::HTTP.post(uri, data.to_json, headers)
     end
 
     def follow(username)
