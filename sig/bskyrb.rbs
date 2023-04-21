@@ -1,12 +1,23 @@
 module Bskyrb
-  VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
-end
+  module RequestUtils
+    def default_headers: -> Hash[String, String]
+    def create_record_uri: (String) -> URI
+  end
 
-module ATProto
+  class Credentials
+    @username: String
+    @pw: String
+
+    def initialize: (String, String) -> void
+  end
+
   class Session
-    def resolve_handle: (String) -> String
-    def get_latest_n_skoots: (String, ?Integer) -> Array[untyped]
-    def create_record: (Hash[untyped, untyped]) -> untyped
+    @credentials: Bskyrb::Credentials
+    @pds: String
+    @access_token: String
+    @refresh_token: String
+
+    def initialize: (Bskyrb::Credentials, String, Boolean) -> void
+    def open!: -> void
   end
 end

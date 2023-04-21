@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bskyrb (0.2)
+    bskyrb (0.0.1)
       date
       httparty
       json (>= 2.0)
@@ -96,10 +96,6 @@ PLATFORMS
 
 DEPENDENCIES
   bskyrb!
-  date
-  httparty
-  json
-  net-http
   parallel (= 1.10.0)
   standard
   steep
