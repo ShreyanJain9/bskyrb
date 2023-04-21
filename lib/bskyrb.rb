@@ -112,5 +112,10 @@ module ATProto
         headers: headers
       )
     end
+    def get_skyline(n = 10)
+      headers = {"Authorization" => "Bearer #{@atp_auth_token}", "Content-Type" => "application/json"}
+      response = HTTParty.get("#{@atp_host}/xrpc/app.bsky.feed.getTimeline?limit=#{n}", headers: headers)
+      response.body
+    end
   end
 end
