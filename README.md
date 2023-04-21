@@ -34,11 +34,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ### Type checking
 
-Somebody fix this!! -@thearchduke
+bskyrb uses [.rbs type definitions](https://github.com/ruby/rbs). To check for accuracy, run `bin/typecheck`. Not all of the output will be useful, especially during rapid development, but it is a good idea to have types at least for the bluesky objects.
 
-~~bskyrb uses [.rbs type definitions](https://github.com/ruby/rbs). To check for accuracy, run `bin/typecheck`. Not all of the output will be useful, especially during rapid development, but it is a good idea to have types at least for the bluesky objects.~~
-
-~~Use the [`rbs collection` tool](https://github.com/ruby/rbs/blob/master/docs/collection.md) to manage definitions for third-party dependencies, for example HTTParty.~~
+Use the [`rbs collection` tool](https://github.com/ruby/rbs/blob/master/docs/collection.md) to manage definitions for third-party dependencies, for example HTTParty.
 
 ### Formatting
 
