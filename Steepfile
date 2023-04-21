@@ -4,7 +4,6 @@ target :lib do
   signature "sig"
   check "bin"
   check "lib"
-  ignore "lib/bskyrb/version.rb"
 
   # library "pathname", "set"       # Standard libraries
   # library "strong_json"           # Gems

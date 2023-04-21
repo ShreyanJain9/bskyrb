@@ -4,7 +4,7 @@ require "httparty"
 module Bskyrb
   module RequestUtils
     def default_headers
-      { "Content-Type" => "application/json" }
+      { "Content-Type": "application/json" }
     end
 
     def create_record_uri(pds)
@@ -13,7 +13,7 @@ module Bskyrb
 
     def default_authenticated_headers(session)
       default_headers.merge({
-        Authorization: "Bearer #{session.access_token}"
+        "Authorization": "Bearer #{session.access_token}"
       })
     end
   end
@@ -30,7 +30,7 @@ module Bskyrb
   class Session
     include RequestUtils
 
-    attr_reader :credentials, :pds, :access_token, :refresh_token
+    attr_reader :credentials, :pds, :access_token, :refresh_token, :did
 
     def initialize(credentials, pds, should_open = true)
       @credentials = credentials
