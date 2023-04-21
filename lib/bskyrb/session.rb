@@ -4,17 +4,40 @@ require "httparty"
 module Bskyrb
   module RequestUtils
     def default_headers
-      { "Content-Type": "application/json" }
+      {"Content-Type": "application/json"}
     end
 
     def create_record_uri(pds)
       URI("#{pds}/xrpc/com.atproto.repo.createRecord")
     end
 
+    def upload_blob_uri(pds)
+      URI("#{pds}/xrpc/com.atproto.repo.uploadBlob")
+    end
+
+    def get_post_thread_uri(pds, at_post_link)
+      URI("#{pds}/xrpc/app.bsky.feed.getPostThread?uri=#{at_post_link}")
+    end
+
+    def get_author_feed_uri(pds, username, limit)
+      URI("#{pds}/xrpc/app.bsky.feed.getAuthorFeed?actor=#{username}&limit=#{limit}")
+    end
+
     def default_authenticated_headers(session)
       default_headers.merge({
-        "Authorization": "Bearer #{session.access_token}"
+        Authorization: "Bearer #{session.access_token}"
       })
+    end
+
+    def at_post_link(url)
+      # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
+      # regex by chatgpt:
+      raise "The provided URL #{url} does not match the expected schema" unless /https:\/\/[a-zA-Z0-9.-]+\/profile\/[a-zA-Z0-9.-]+\/post\/[a-zA-Z0-9.-]+/.match?(url)
+      parsed = URI(url)
+      username = parsed.path.split("/")[-3]
+      did = resolve_handle(username)["did"]
+      post_id = parsed.path.split("/")[-1]
+      "at://#{did}/app.bsky.feed.post/#{post_id}"
     end
   end
 
