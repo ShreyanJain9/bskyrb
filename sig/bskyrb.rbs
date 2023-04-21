@@ -2,3 +2,11 @@ module Bskyrb
   VERSION: String
   # See the writing guide of rbs: https://github.com/ruby/rbs#guides
 end
+
+module ATProto
+  class Session
+    def resolve_handle: (String) -> String
+    def get_latest_n_skoots: (String, ?Integer) -> Array[untyped]
+    def create_record: (Hash[untyped, untyped]) -> untyped
+  end
+end
