@@ -3,8 +3,14 @@ require "httparty"
 
 module Bskyrb
   module RequestUtils
+    def resolve_handle(pds, username)
+      HTTParty.get(
+        URI("#{pds}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}")
+      )
+    end
+
     def default_headers
-      {"Content-Type": "application/json"}
+      {"Content-Type" => "application/json"}
     end
 
     def create_record_uri(pds)
@@ -29,15 +35,15 @@ module Bskyrb
       })
     end
 
-    def at_post_link(url)
+    def at_post_link(pds, url)
       # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
+      url = url.to_s
       # regex by chatgpt:
       raise "The provided URL #{url} does not match the expected schema" unless /https:\/\/[a-zA-Z0-9.-]+\/profile\/[a-zA-Z0-9.-]+\/post\/[a-zA-Z0-9.-]+/.match?(url)
-      parsed = URI(url)
-      username = parsed.path.split("/")[-3]
-      did = resolve_handle(username)["did"]
-      post_id = parsed.path.split("/")[-1]
-      "at://#{did}/app.bsky.feed.post/#{post_id}"
+      username = url.split("/")[-3]
+      did = resolve_handle(pds, username)["did"]
+      post_id = url.split("/")[-1]
+      URI("at://#{did}/app.bsky.feed.post/#{post_id}")
     end
   end
 

@@ -3,8 +3,15 @@ module Bskyrb
 
   module RequestUtils
     def default_headers: -> Hash[String, String]
-    def create_record_uri: (String) -> URI
+    def create_record_uri: (String) -> URI::Generic
     def default_authenticated_headers: (Session session) -> Hash[(String | Symbol), String]
+    def upload_blob_uri: (String pds) -> URI::Generic
+    def get_post_thread_uri: (String pds, String | URI::Generic at_post_link) -> URI::Generic
+    def get_author_feed_uri: (String pds, String username, Integer limit) -> URI::Generic
+    def at_post_link: (String pds, String url) -> URI::Generic
+    def resolve_handle: (String pds, String username) -> HTTParty::Response
+    def get_latest_post: (String username) -> HTTParty::Response
+    def get_latest_n_posts: (String username, Integer n) -> HTTParty::Response
   end
 
   class Credentials
@@ -32,7 +39,14 @@ module Bskyrb
 
     attr_reader session: Session
 
+    def get_post_by_url: (String url) -> HTTParty::Response
+    def upload_blob: (String, String) -> HTTParty::Response
+    def create_post: (String text) -> HTTParty::Response
+    def follow: (String username) -> HTTParty::Response
+    def get_latest_post: (String username) -> HTTParty::Response
+    def get_latest_n_posts: (String username, Integer n) -> HTTParty::Response
     def initialize: (Session session) -> void
+    def create_record: (Hash[untyped, untyped] data_hash) -> HTTParty::Response
   end
 end
 

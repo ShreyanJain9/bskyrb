@@ -7,17 +7,10 @@ module Bskyrb
       @session = session
     end
 
-    def resolve_handle(username)
-      HTTParty.get(
-        URI("#{session.pds}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}"),
-        headers: default_authenticated_headers(session)
-      )
-    end
-
     def get_post_by_url(url)
       # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
       # regex by chatgpt:
-      link = at_post_link(url)
+      link = at_post_link(session.pds, url)
       HTTParty.get(
         get_post_thread_uri(session.pds, link),
         headers: default_authenticated_headers(session)
@@ -63,7 +56,7 @@ module Bskyrb
           "collection" => "app.bsky.graph.follow",
           "repo" => session.did,
           "record" => {
-            "subject" => resolve_handle(username)["did"],
+            "subject" => resolve_handle(session.pds, username)["did"],
             "createdAt" => DateTime.now.iso8601(3),
             "$type" => "app.bsky.graph.follow"
           }
