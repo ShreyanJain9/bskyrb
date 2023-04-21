@@ -6,6 +6,7 @@
   - [Type checking](#type-checking)
   - [Formatting](#formatting)
 - [Contributing](#contributing)
+  - [TODO](#todo)
 - [License](#license)
 - [Code of Conduct](#code-of-conduct)
 
@@ -30,21 +31,26 @@ Create a new session:
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org). And configure the type checker:
 
 ### Type checking
 
 bskyrb uses [.rbs type definitions](https://github.com/ruby/rbs). To check for accuracy, run `bin/typecheck`. Not all of the output will be useful, especially during rapid development, but it is a good idea to have types at least for the bluesky objects.
 
-Use the [`rbs collection` tool](https://github.com/ruby/rbs/blob/master/docs/collection.md) to manage definitions for third-party dependencies, for example HTTParty.
+Use the [`rbs collection` tool](https://github.com/ruby/rbs/blob/master/docs/collection.md) to manage definitions for third-party dependencies, for example HTTParty. Use `bundle exec rbs collection install` to download third-party definitions (**you will need to do this before `bin/typecheck` will work**).
 
 ### Formatting
 
 So nobody has to argue about formatting, bskyrb uses the `standard` gem. Run `bin/format` to format the code in this repo.
 
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bskyrb. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/bskyrb/blob/master/CODE_OF_CONDUCT.md).
+Please do!
+
+### TODO
+
+- Fix build
 
 ## License
 
