@@ -1,14 +1,9 @@
 # frozen_string_literal: true
 
-# require "bskyrb/session"
-# require "bskyrb/version"
-# require "json"
-# require "net/http"
-# require "httparty"
-# require "date"
-# require "uri"
+require "bskyrb/session"
+require "bskyrb/skyline"
 
-module Bskyrb
+# module Bskyrb
   # class Session
   #   '''
   #   Used to log in, store credentials, etc.
@@ -124,4 +119,4 @@ module Bskyrb
   #     )
   #   end
   # end
-end
+# end
