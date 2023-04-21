@@ -12,12 +12,12 @@ module Bskyrb
   end
 
   class Session
-    @credentials: Bskyrb::Credentials
+    attr_accessor credentials: Bskyrb::Credentials
     @pds: String
     @access_token: String
     @refresh_token: String
 
-    def initialize: (Bskyrb::Credentials, String, Boolean) -> void
+    def initialize: (Bskyrb::Credentials, String, bool) -> void
     def open!: -> void
   end
 end
