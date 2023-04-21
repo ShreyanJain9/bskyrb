@@ -1,3 +1,4 @@
+require_relative 'lib/bskyrb/version'
 Gem::Specification.new do |spec|
   spec.name = "bskyrb"
   spec.version = Bskyrb::VERSION
@@ -7,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Interact with bsky/atproto using Ruby"
   spec.homepage = "https://github.com/ShreyanJain9/bskyrb"
   spec.license = "MIT"
-  spec.files = ["lib/bskyrb.rb"]
+  spec.files = Dir["/lib/"]
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "json", ">= 2.0"
