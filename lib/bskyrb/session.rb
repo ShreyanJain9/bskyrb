@@ -10,6 +10,12 @@ module Bskyrb
     def create_record_uri(pds)
       URI("#{pds}/xrpc/com.atproto.repo.createRecord")
     end
+
+    def default_authenticated_headers(session)
+      default_headers.merge({
+        Authorization: "Bearer #{session.access_token}"
+      })
+    end
   end
 
   class Credentials
