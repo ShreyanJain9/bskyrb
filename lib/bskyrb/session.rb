@@ -29,6 +29,10 @@ module Bskyrb
       URI("#{pds}/xrpc/app.bsky.feed.getAuthorFeed?actor=#{username}&limit=#{limit}")
     end
 
+    def get_timeline_uri(pds, limit)
+      URI("#{pds}/xrpc/app.bsky.feed.getTimeline?limit=#{limit}")
+    end
+
     def default_authenticated_headers(session)
       default_headers.merge({
         Authorization: "Bearer #{session.access_token}"

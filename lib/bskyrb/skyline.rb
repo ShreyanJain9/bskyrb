@@ -74,5 +74,12 @@ module Bskyrb
         headers: default_authenticated_headers(session)
       )
     end
+
+    def get_skyline(n)
+      HTTParty.get(
+        get_timeline_uri(session.pds, n),
+        headers: default_authenticated_headers(session)
+      )
+    end
   end
 end

@@ -12,6 +12,7 @@ module Bskyrb
     def resolve_handle: (String pds, String username) -> HTTParty::Response
     def get_latest_post: (String username) -> HTTParty::Response
     def get_latest_n_posts: (String username, Integer n) -> HTTParty::Response
+    def get_timeline_uri: (String pds, Integer limit) -> URI::Generic
   end
 
   class Credentials
@@ -47,6 +48,7 @@ module Bskyrb
     def get_latest_n_posts: (String username, Integer n) -> HTTParty::Response
     def initialize: (Session session) -> void
     def create_record: (Hash[untyped, untyped] data_hash) -> HTTParty::Response
+    def get_skyline: (Integer n) -> HTTParty::Response
   end
 end
 
