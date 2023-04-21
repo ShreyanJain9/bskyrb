@@ -50,7 +50,9 @@ Please do!
 
 ### TODO
 
-- Fix build
+- Build
+- Tests
+- (Eventually) Publish/release pipeline
 
 ## License
 
