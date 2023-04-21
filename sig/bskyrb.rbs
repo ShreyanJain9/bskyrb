@@ -1,12 +1,59 @@
 module Bskyrb
   VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+
+  module RequestUtils
+    def default_headers: -> Hash[String, String]
+    def create_record_uri: (String) -> URI::Generic
+    def default_authenticated_headers: (Session session) -> Hash[(String | Symbol), String]
+    def upload_blob_uri: (String pds) -> URI::Generic
+    def get_post_thread_uri: (String pds, String | URI::Generic at_post_link) -> URI::Generic
+    def get_author_feed_uri: (String pds, String username, Integer limit) -> URI::Generic
+    def at_post_link: (String pds, String url) -> URI::Generic
+    def resolve_handle: (String pds, String username) -> HTTParty::Response
+    def get_latest_post: (String username) -> HTTParty::Response
+    def get_latest_n_posts: (String username, Integer n) -> HTTParty::Response
+    def get_timeline_uri: (String pds, Integer limit) -> URI::Generic
+  end
+
+  class Credentials
+    attr_reader username: String
+    attr_reader pw: String
+
+    def initialize: (String, String) -> void
+  end
+
+  class Session
+    include Bskyrb::RequestUtils
+
+    attr_reader credentials: Bskyrb::Credentials
+    attr_reader pds: String
+    attr_reader access_token: String
+    attr_reader refresh_token: String
+    attr_reader did: String
+
+    def initialize: (Bskyrb::Credentials, String, ?bool) -> void
+    def open!: -> void
+  end
+
+  class SkylineManager
+    include RequestUtils
+
+    attr_reader session: Session
+
+    def get_post_by_url: (String url) -> HTTParty::Response
+    def upload_blob: (String, String) -> HTTParty::Response
+    def create_post: (String text) -> HTTParty::Response
+    def follow: (String username) -> HTTParty::Response
+    def get_latest_post: (String username) -> HTTParty::Response
+    def get_latest_n_posts: (String username, Integer n) -> HTTParty::Response
+    def initialize: (Session session) -> void
+    def create_record: (Hash[untyped, untyped] data_hash) -> HTTParty::Response
+    def get_skyline: (Integer n) -> HTTParty::Response
+  end
 end
 
-module ATProto
-  class Session
-    def resolve_handle: (String) -> String
-    def get_latest_n_skoots: (String, ?Integer) -> Array[untyped]
-    def create_record: (Hash[untyped, untyped]) -> untyped
+module HTTParty
+  class Response
+    def []: (String | Symbol) -> untyped
   end
 end
