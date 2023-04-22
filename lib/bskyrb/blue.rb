@@ -1,5 +1,5 @@
 module Bskyrb
-  class SkylineManager
+  class BlueManager
     include RequestUtils
     attr_reader :session
 
@@ -35,6 +35,45 @@ module Bskyrb
       )
     end
 
+    def detect_facets(json_hash) # TODO, DOES NOT WORK YET
+        # For some reason this always fails at finding text records and I have no idea why
+        # Detect domain names that have been @mentioned in the text
+        matches = json_hash["record"]["text"].scan(/@([^\s\.]+\.[^\s]+)/)
+
+        # Create a facets array to hold the resolved handles
+        facets = []
+
+        # Loop through the matches and resolve the handles
+        matches.each do |match|
+          handle = match[0]
+          resolved_handle = resolve_handle(handle)
+          byte_start = json_hash["record"]["text"].index("@" + handle)
+          byte_end = byte_start + handle.length
+          facet = {
+            "$type": "app.bsky.richtext.facet",
+            "features": [
+              {
+                "$type": "app.bsky.richtext.facet#mention",
+                "did": resolved_handle
+              }
+            ],
+            "index": {
+              "byteStart": byte_start,
+              "byteEnd": byte_end
+            }
+          }
+          facets.push(facet)
+        end
+
+        # Append the facets to the JSON hash
+        json_hash["record"]["facets"] = facets
+
+        # Convert the JSON hash back to a string
+        json_string_with_facets = JSON.generate(json_hash)
+
+        return "Doesn't work yet"
+    end
+
     def create_post(text)
       timestamp = DateTime.now.iso8601(3)
       data = {
@@ -47,9 +86,9 @@ module Bskyrb
           text: text
         }
       }
-      create_record(data)
+     create_record(data)
     end
-
+    
     def follow(username)
       create_record(
         {
