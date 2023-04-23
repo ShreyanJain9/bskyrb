@@ -24,8 +24,27 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 Create a new session:
 
-`bsky = ATProto::Session.new(username, password)`
-`bsky.post("Hello from bskyrb!")`
+```ruby
+
+require 'bskyrb' 
+
+username = 'your_username'
+
+password = 'your_password'
+
+pds_url = 'https://bsky.social'
+
+
+credentials = Bskyrb::Credentials.new(username, password)
+
+session = Bskyrb::Session.new(credentials, pds_url)
+
+bsky = Bskyrb::RecordManager.new(session)
+
+bsky.create_post("Hello world from bskyrb!")
+
+```
+
 
 ## Development
 
