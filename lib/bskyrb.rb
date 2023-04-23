@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 require "bskyrb/session"
-require "bskyrb/blue"
+require "bskyrb/records"
 
