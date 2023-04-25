@@ -1836,4 +1836,3595 @@ module Bskyrb
       end
     end
   end
+
+  module AppBskyActorGetprofile
+    module GetProfile
+      class Input
+        attr_accessor :actor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actor=, hash["actor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actor" => actor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module AppBskyActorGetprofiles
+    module GetProfiles
+      class Input
+        attr_accessor :actors
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actors=, hash["actors"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actors" => actors.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :profiles
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:profiles=, hash["profiles"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "profiles" => profiles.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyActorGetsuggestions
+    module GetSuggestions
+      class Input
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :actors
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:actors=, hash["actors"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "actors" => actors.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyActorSearchactors
+    module SearchActors
+      class Input
+        attr_accessor :term
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:term=, hash["term"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "term" => term.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :actors
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:actors=, hash["actors"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "actors" => actors.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyActorSearchactorstypeahead
+    module SearchActorsTypeahead
+      class Input
+        attr_accessor :term
+
+        attr_accessor :limit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:term=, hash["term"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "term" => term.to_s,
+
+            "limit" => limit.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :actors
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actors=, hash["actors"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actors" => actors.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetauthorfeed
+    module GetAuthorFeed
+      class Input
+        attr_accessor :actor
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actor=, hash["actor"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actor" => actor.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :feed
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:feed=, hash["feed"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "feed" => feed.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetlikes
+    module GetLikes
+      class Input
+        attr_accessor :uri
+
+        attr_accessor :cid
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "cid" => cid.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :uri
+
+        attr_accessor :cid
+
+        attr_accessor :cursor
+
+        attr_accessor :likes
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:likes=, hash["likes"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "cid" => cid.to_s,
+
+            "cursor" => cursor.to_s,
+
+            "likes" => likes.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetpostthread
+    module GetPostThread
+      class Input
+        attr_accessor :uri
+
+        attr_accessor :depth
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:depth=, hash["depth"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "depth" => depth.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :thread
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:thread=, hash["thread"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "thread" => thread.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetposts
+    module GetPosts
+      class Input
+        attr_accessor :uris
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uris=, hash["uris"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uris" => uris.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :posts
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:posts=, hash["posts"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "posts" => posts.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetrepostedby
+    module GetRepostedBy
+      class Input
+        attr_accessor :uri
+
+        attr_accessor :cid
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "cid" => cid.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :uri
+
+        attr_accessor :cid
+
+        attr_accessor :cursor
+
+        attr_accessor :repostedBy
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:repostedBy=, hash["repostedBy"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "cid" => cid.to_s,
+
+            "cursor" => cursor.to_s,
+
+            "repostedBy" => repostedBy.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGettimeline
+    module GetTimeline
+      class Input
+        attr_accessor :algorithm
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:algorithm=, hash["algorithm"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "algorithm" => algorithm.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :feed
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:feed=, hash["feed"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "feed" => feed.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyGraphGetfollowers
+    module GetFollowers
+      class Input
+        attr_accessor :actor
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actor=, hash["actor"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actor" => actor.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :subject
+
+        attr_accessor :cursor
+
+        attr_accessor :followers
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:subject=, hash["subject"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:followers=, hash["followers"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "subject" => subject.to_s,
+
+            "cursor" => cursor.to_s,
+
+            "followers" => followers.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyGraphGetfollows
+    module GetFollows
+      class Input
+        attr_accessor :actor
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actor=, hash["actor"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actor" => actor.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :subject
+
+        attr_accessor :cursor
+
+        attr_accessor :follows
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:subject=, hash["subject"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:follows=, hash["follows"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "subject" => subject.to_s,
+
+            "cursor" => cursor.to_s,
+
+            "follows" => follows.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyGraphGetmutes
+    module GetMutes
+      class Input
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :mutes
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:mutes=, hash["mutes"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "mutes" => mutes.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyGraphMuteactor
+    module MuteActor
+      class Input
+        attr_accessor :actor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actor=, hash["actor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actor" => actor.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyGraphUnmuteactor
+    module UnmuteActor
+      class Input
+        attr_accessor :actor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actor=, hash["actor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actor" => actor.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyNotificationGetunreadcount
+    module GetUnreadCount
+      class Input
+        attr_accessor :seenAt
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:seenAt=, hash["seenAt"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "seenAt" => seenAt.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :count
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:count=, hash["count"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "count" => count.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyNotificationListnotifications
+    module ListNotifications
+      class Input
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        attr_accessor :seenAt
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:seenAt=, hash["seenAt"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s,
+
+            "seenAt" => seenAt.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :notifications
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:notifications=, hash["notifications"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "notifications" => notifications.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyNotificationUpdateseen
+    module UpdateSeen
+      class Input
+        attr_accessor :seenAt
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:seenAt=, hash["seenAt"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "seenAt" => seenAt.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyUnspeccedGetpopular
+    module GetPopular
+      class Input
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :feed
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:feed=, hash["feed"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "feed" => feed.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminDisableinvitecodes
+    module DisableInviteCodes
+      class Input
+        attr_accessor :codes
+
+        attr_accessor :accounts
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:codes=, hash["codes"])
+
+          instance.send(:accounts=, hash["accounts"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "codes" => codes.to_s,
+
+            "accounts" => accounts.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminGetinvitecodes
+    module GetInviteCodes
+      class Input
+        attr_accessor :sort
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:sort=, hash["sort"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "sort" => sort.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :codes
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:codes=, hash["codes"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "codes" => codes.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminGetmoderationaction
+    module GetModerationAction
+      class Input
+        attr_accessor :id
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:id=, hash["id"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "id" => id.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminGetmoderationactions
+    module GetModerationActions
+      class Input
+        attr_accessor :subject
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:subject=, hash["subject"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "subject" => subject.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :actions
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:actions=, hash["actions"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "actions" => actions.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminGetmoderationreport
+    module GetModerationReport
+      class Input
+        attr_accessor :id
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:id=, hash["id"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "id" => id.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminGetmoderationreports
+    module GetModerationReports
+      class Input
+        attr_accessor :subject
+
+        attr_accessor :resolved
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:subject=, hash["subject"])
+
+          instance.send(:resolved=, hash["resolved"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "subject" => subject.to_s,
+
+            "resolved" => resolved.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :reports
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:reports=, hash["reports"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "reports" => reports.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminGetrecord
+    module GetRecord
+      class Input
+        attr_accessor :uri
+
+        attr_accessor :cid
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "cid" => cid.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminGetrepo
+    module GetRepo
+      class Input
+        attr_accessor :did
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminResolvemoderationreports
+    module ResolveModerationReports
+      class Input
+        attr_accessor :actionId
+
+        attr_accessor :reportIds
+
+        attr_accessor :createdBy
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actionId=, hash["actionId"])
+
+          instance.send(:reportIds=, hash["reportIds"])
+
+          instance.send(:createdBy=, hash["createdBy"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actionId" => actionId.to_s,
+
+            "reportIds" => reportIds.to_s,
+
+            "createdBy" => createdBy.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminReversemoderationaction
+    module ReverseModerationAction
+      class Input
+        attr_accessor :id
+
+        attr_accessor :reason
+
+        attr_accessor :createdBy
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:id=, hash["id"])
+
+          instance.send(:reason=, hash["reason"])
+
+          instance.send(:createdBy=, hash["createdBy"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "id" => id.to_s,
+
+            "reason" => reason.to_s,
+
+            "createdBy" => createdBy.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminSearchrepos
+    module SearchRepos
+      class Input
+        attr_accessor :term
+
+        attr_accessor :invitedBy
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:term=, hash["term"])
+
+          instance.send(:invitedBy=, hash["invitedBy"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "term" => term.to_s,
+
+            "invitedBy" => invitedBy.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :repos
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:repos=, hash["repos"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "repos" => repos.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminTakemoderationaction
+    module TakeModerationAction
+      class Input
+        attr_accessor :action
+
+        attr_accessor :subject
+
+        attr_accessor :subjectBlobCids
+
+        attr_accessor :createLabelVals
+
+        attr_accessor :negateLabelVals
+
+        attr_accessor :reason
+
+        attr_accessor :createdBy
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:action=, hash["action"])
+
+          instance.send(:subject=, hash["subject"])
+
+          instance.send(:subjectBlobCids=, hash["subjectBlobCids"])
+
+          instance.send(:createLabelVals=, hash["createLabelVals"])
+
+          instance.send(:negateLabelVals=, hash["negateLabelVals"])
+
+          instance.send(:reason=, hash["reason"])
+
+          instance.send(:createdBy=, hash["createdBy"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "action" => action.to_s,
+
+            "subject" => subject.to_s,
+
+            "subjectBlobCids" => subjectBlobCids.to_s,
+
+            "createLabelVals" => createLabelVals.to_s,
+
+            "negateLabelVals" => negateLabelVals.to_s,
+
+            "reason" => reason.to_s,
+
+            "createdBy" => createdBy.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminUpdateaccountemail
+    module UpdateAccountEmail
+      class Input
+        attr_accessor :account
+
+        attr_accessor :email
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:account=, hash["account"])
+
+          instance.send(:email=, hash["email"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "account" => account.to_s,
+
+            "email" => email.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminUpdateaccounthandle
+    module UpdateAccountHandle
+      class Input
+        attr_accessor :did
+
+        attr_accessor :handle
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:handle=, hash["handle"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "handle" => handle.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoIdentityResolvehandle
+    module ResolveHandle
+      class Input
+        attr_accessor :handle
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:handle=, hash["handle"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "handle" => handle.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :did
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoIdentityUpdatehandle
+    module UpdateHandle
+      class Input
+        attr_accessor :handle
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:handle=, hash["handle"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "handle" => handle.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoLabelQuerylabels
+    module QueryLabels
+      class Input
+        attr_accessor :uriPatterns
+
+        attr_accessor :sources
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uriPatterns=, hash["uriPatterns"])
+
+          instance.send(:sources=, hash["sources"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uriPatterns" => uriPatterns.to_s,
+
+            "sources" => sources.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :labels
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:labels=, hash["labels"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "labels" => labels.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoModerationCreatereport
+    module CreateReport
+      class Input
+        attr_accessor :reasonType
+
+        attr_accessor :reason
+
+        attr_accessor :subject
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:reasonType=, hash["reasonType"])
+
+          instance.send(:reason=, hash["reason"])
+
+          instance.send(:subject=, hash["subject"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "reasonType" => reasonType.to_s,
+
+            "reason" => reason.to_s,
+
+            "subject" => subject.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :id
+
+        attr_accessor :reasonType
+
+        attr_accessor :reason
+
+        attr_accessor :subject
+
+        attr_accessor :reportedBy
+
+        attr_accessor :createdAt
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:id=, hash["id"])
+
+          instance.send(:reasonType=, hash["reasonType"])
+
+          instance.send(:reason=, hash["reason"])
+
+          instance.send(:subject=, hash["subject"])
+
+          instance.send(:reportedBy=, hash["reportedBy"])
+
+          instance.send(:createdAt=, hash["createdAt"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "id" => id.to_s,
+
+            "reasonType" => reasonType.to_s,
+
+            "reason" => reason.to_s,
+
+            "subject" => subject.to_s,
+
+            "reportedBy" => reportedBy.to_s,
+
+            "createdAt" => createdAt.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoRepoApplywrites
+    module ApplyWrites
+      class Input
+        attr_accessor :repo
+
+        attr_accessor :validate
+
+        attr_accessor :writes
+
+        attr_accessor :swapCommit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance.send(:validate=, hash["validate"])
+
+          instance.send(:writes=, hash["writes"])
+
+          instance.send(:swapCommit=, hash["swapCommit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo.to_s,
+
+            "validate" => validate.to_s,
+
+            "writes" => writes.to_s,
+
+            "swapCommit" => swapCommit.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoRepoCreaterecord
+    module CreateRecord
+      class Input
+        attr_accessor :repo
+
+        attr_accessor :collection
+
+        attr_accessor :rkey
+
+        attr_accessor :validate
+
+        attr_accessor :record
+
+        attr_accessor :swapCommit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance.send(:collection=, hash["collection"])
+
+          instance.send(:rkey=, hash["rkey"])
+
+          instance.send(:validate=, hash["validate"])
+
+          instance.send(:record=, hash["record"])
+
+          instance.send(:swapCommit=, hash["swapCommit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo.to_s,
+
+            "collection" => collection.to_s,
+
+            "rkey" => rkey.to_s,
+
+            "validate" => validate.to_s,
+
+            "record" => record.to_s,
+
+            "swapCommit" => swapCommit.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :uri
+
+        attr_accessor :cid
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "cid" => cid.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoRepoDeleterecord
+    module DeleteRecord
+      class Input
+        attr_accessor :repo
+
+        attr_accessor :collection
+
+        attr_accessor :rkey
+
+        attr_accessor :swapRecord
+
+        attr_accessor :swapCommit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance.send(:collection=, hash["collection"])
+
+          instance.send(:rkey=, hash["rkey"])
+
+          instance.send(:swapRecord=, hash["swapRecord"])
+
+          instance.send(:swapCommit=, hash["swapCommit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo.to_s,
+
+            "collection" => collection.to_s,
+
+            "rkey" => rkey.to_s,
+
+            "swapRecord" => swapRecord.to_s,
+
+            "swapCommit" => swapCommit.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoRepoDescriberepo
+    module DescribeRepo
+      class Input
+        attr_accessor :repo
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :handle
+
+        attr_accessor :did
+
+        attr_accessor :didDoc
+
+        attr_accessor :collections
+
+        attr_accessor :handleIsCorrect
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:handle=, hash["handle"])
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:didDoc=, hash["didDoc"])
+
+          instance.send(:collections=, hash["collections"])
+
+          instance.send(:handleIsCorrect=, hash["handleIsCorrect"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "handle" => handle.to_s,
+
+            "did" => did.to_s,
+
+            "didDoc" => didDoc.to_s,
+
+            "collections" => collections.to_s,
+
+            "handleIsCorrect" => handleIsCorrect.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoRepoGetrecord
+    module GetRecord
+      class Input
+        attr_accessor :repo
+
+        attr_accessor :collection
+
+        attr_accessor :rkey
+
+        attr_accessor :cid
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance.send(:collection=, hash["collection"])
+
+          instance.send(:rkey=, hash["rkey"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo.to_s,
+
+            "collection" => collection.to_s,
+
+            "rkey" => rkey.to_s,
+
+            "cid" => cid.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :uri
+
+        attr_accessor :cid
+
+        attr_accessor :value
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance.send(:value=, hash["value"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "cid" => cid.to_s,
+
+            "value" => value.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoRepoListrecords
+    module ListRecords
+      class Input
+        attr_accessor :repo
+
+        attr_accessor :collection
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        attr_accessor :rkeyStart
+
+        attr_accessor :rkeyEnd
+
+        attr_accessor :reverse
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance.send(:collection=, hash["collection"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:rkeyStart=, hash["rkeyStart"])
+
+          instance.send(:rkeyEnd=, hash["rkeyEnd"])
+
+          instance.send(:reverse=, hash["reverse"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo.to_s,
+
+            "collection" => collection.to_s,
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s,
+
+            "rkeyStart" => rkeyStart.to_s,
+
+            "rkeyEnd" => rkeyEnd.to_s,
+
+            "reverse" => reverse.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :records
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:records=, hash["records"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "records" => records.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoRepoPutrecord
+    module PutRecord
+      class Input
+        attr_accessor :repo
+
+        attr_accessor :collection
+
+        attr_accessor :rkey
+
+        attr_accessor :validate
+
+        attr_accessor :record
+
+        attr_accessor :swapRecord
+
+        attr_accessor :swapCommit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance.send(:collection=, hash["collection"])
+
+          instance.send(:rkey=, hash["rkey"])
+
+          instance.send(:validate=, hash["validate"])
+
+          instance.send(:record=, hash["record"])
+
+          instance.send(:swapRecord=, hash["swapRecord"])
+
+          instance.send(:swapCommit=, hash["swapCommit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo.to_s,
+
+            "collection" => collection.to_s,
+
+            "rkey" => rkey.to_s,
+
+            "validate" => validate.to_s,
+
+            "record" => record.to_s,
+
+            "swapRecord" => swapRecord.to_s,
+
+            "swapCommit" => swapCommit.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :uri
+
+        attr_accessor :cid
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:uri=, hash["uri"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "uri" => uri.to_s,
+
+            "cid" => cid.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoRepoUploadblob
+    module UploadBlob
+      class Output
+        attr_accessor :blob
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:blob=, hash["blob"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "blob" => blob.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerCreateaccount
+    module CreateAccount
+      class Input
+        attr_accessor :email
+
+        attr_accessor :handle
+
+        attr_accessor :inviteCode
+
+        attr_accessor :password
+
+        attr_accessor :recoveryKey
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:email=, hash["email"])
+
+          instance.send(:handle=, hash["handle"])
+
+          instance.send(:inviteCode=, hash["inviteCode"])
+
+          instance.send(:password=, hash["password"])
+
+          instance.send(:recoveryKey=, hash["recoveryKey"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "email" => email.to_s,
+
+            "handle" => handle.to_s,
+
+            "inviteCode" => inviteCode.to_s,
+
+            "password" => password.to_s,
+
+            "recoveryKey" => recoveryKey.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :accessJwt
+
+        attr_accessor :refreshJwt
+
+        attr_accessor :handle
+
+        attr_accessor :did
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:accessJwt=, hash["accessJwt"])
+
+          instance.send(:refreshJwt=, hash["refreshJwt"])
+
+          instance.send(:handle=, hash["handle"])
+
+          instance.send(:did=, hash["did"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "accessJwt" => accessJwt.to_s,
+
+            "refreshJwt" => refreshJwt.to_s,
+
+            "handle" => handle.to_s,
+
+            "did" => did.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerCreateapppassword
+    module CreateAppPassword
+      class Input
+        attr_accessor :name
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:name=, hash["name"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "name" => name.to_s
+
+          }
+        end
+      end
+
+      class Output
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerCreateinvitecode
+    module CreateInviteCode
+      class Input
+        attr_accessor :useCount
+
+        attr_accessor :forAccount
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:useCount=, hash["useCount"])
+
+          instance.send(:forAccount=, hash["forAccount"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "useCount" => useCount.to_s,
+
+            "forAccount" => forAccount.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :code
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:code=, hash["code"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "code" => code.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerCreateinvitecodes
+    module CreateInviteCodes
+      class Input
+        attr_accessor :codeCount
+
+        attr_accessor :useCount
+
+        attr_accessor :forAccounts
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:codeCount=, hash["codeCount"])
+
+          instance.send(:useCount=, hash["useCount"])
+
+          instance.send(:forAccounts=, hash["forAccounts"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "codeCount" => codeCount.to_s,
+
+            "useCount" => useCount.to_s,
+
+            "forAccounts" => forAccounts.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :codes
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:codes=, hash["codes"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "codes" => codes.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerCreatesession
+    module CreateSession
+      class Input
+        attr_accessor :identifier
+
+        attr_accessor :password
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:identifier=, hash["identifier"])
+
+          instance.send(:password=, hash["password"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "identifier" => identifier.to_s,
+
+            "password" => password.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :accessJwt
+
+        attr_accessor :refreshJwt
+
+        attr_accessor :handle
+
+        attr_accessor :did
+
+        attr_accessor :email
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:accessJwt=, hash["accessJwt"])
+
+          instance.send(:refreshJwt=, hash["refreshJwt"])
+
+          instance.send(:handle=, hash["handle"])
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:email=, hash["email"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "accessJwt" => accessJwt.to_s,
+
+            "refreshJwt" => refreshJwt.to_s,
+
+            "handle" => handle.to_s,
+
+            "did" => did.to_s,
+
+            "email" => email.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerDeleteaccount
+    module DeleteAccount
+      class Input
+        attr_accessor :did
+
+        attr_accessor :password
+
+        attr_accessor :token
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:password=, hash["password"])
+
+          instance.send(:token=, hash["token"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "password" => password.to_s,
+
+            "token" => token.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerDeletesession
+    module DeleteSession
+    end
+  end
+
+  module ComAtprotoServerDescribeserver
+    module DescribeServer
+      class Output
+        attr_accessor :inviteCodeRequired
+
+        attr_accessor :availableUserDomains
+
+        attr_accessor :links
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:inviteCodeRequired=, hash["inviteCodeRequired"])
+
+          instance.send(:availableUserDomains=, hash["availableUserDomains"])
+
+          instance.send(:links=, hash["links"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "inviteCodeRequired" => inviteCodeRequired.to_s,
+
+            "availableUserDomains" => availableUserDomains.to_s,
+
+            "links" => links.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerGetaccountinvitecodes
+    module GetAccountInviteCodes
+      class Input
+        attr_accessor :includeUsed
+
+        attr_accessor :createAvailable
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:includeUsed=, hash["includeUsed"])
+
+          instance.send(:createAvailable=, hash["createAvailable"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "includeUsed" => includeUsed.to_s,
+
+            "createAvailable" => createAvailable.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :codes
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:codes=, hash["codes"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "codes" => codes.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerGetsession
+    module GetSession
+      class Output
+        attr_accessor :handle
+
+        attr_accessor :did
+
+        attr_accessor :email
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:handle=, hash["handle"])
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:email=, hash["email"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "handle" => handle.to_s,
+
+            "did" => did.to_s,
+
+            "email" => email.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerListapppasswords
+    module ListAppPasswords
+      class Output
+        attr_accessor :passwords
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:passwords=, hash["passwords"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "passwords" => passwords.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerRefreshsession
+    module RefreshSession
+      class Output
+        attr_accessor :accessJwt
+
+        attr_accessor :refreshJwt
+
+        attr_accessor :handle
+
+        attr_accessor :did
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:accessJwt=, hash["accessJwt"])
+
+          instance.send(:refreshJwt=, hash["refreshJwt"])
+
+          instance.send(:handle=, hash["handle"])
+
+          instance.send(:did=, hash["did"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "accessJwt" => accessJwt.to_s,
+
+            "refreshJwt" => refreshJwt.to_s,
+
+            "handle" => handle.to_s,
+
+            "did" => did.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerRequestaccountdelete
+    module RequestAccountDelete
+    end
+  end
+
+  module ComAtprotoServerRequestpasswordreset
+    module RequestPasswordReset
+      class Input
+        attr_accessor :email
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:email=, hash["email"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "email" => email.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerResetpassword
+    module ResetPassword
+      class Input
+        attr_accessor :token
+
+        attr_accessor :password
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:token=, hash["token"])
+
+          instance.send(:password=, hash["password"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "token" => token.to_s,
+
+            "password" => password.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoServerRevokeapppassword
+    module RevokeAppPassword
+      class Input
+        attr_accessor :name
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:name=, hash["name"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "name" => name.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncGetblob
+    module GetBlob
+      class Input
+        attr_accessor :did
+
+        attr_accessor :cid
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:cid=, hash["cid"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "cid" => cid.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncGetblocks
+    module GetBlocks
+      class Input
+        attr_accessor :did
+
+        attr_accessor :cids
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:cids=, hash["cids"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "cids" => cids.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncGetcheckout
+    module GetCheckout
+      class Input
+        attr_accessor :did
+
+        attr_accessor :commit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:commit=, hash["commit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "commit" => commit.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncGetcommitpath
+    module GetCommitPath
+      class Input
+        attr_accessor :did
+
+        attr_accessor :latest
+
+        attr_accessor :earliest
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:latest=, hash["latest"])
+
+          instance.send(:earliest=, hash["earliest"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "latest" => latest.to_s,
+
+            "earliest" => earliest.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :commits
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:commits=, hash["commits"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "commits" => commits.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncGethead
+    module GetHead
+      class Input
+        attr_accessor :did
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :root
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:root=, hash["root"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "root" => root.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncGetrecord
+    module GetRecord
+      class Input
+        attr_accessor :did
+
+        attr_accessor :collection
+
+        attr_accessor :rkey
+
+        attr_accessor :commit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:collection=, hash["collection"])
+
+          instance.send(:rkey=, hash["rkey"])
+
+          instance.send(:commit=, hash["commit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "collection" => collection.to_s,
+
+            "rkey" => rkey.to_s,
+
+            "commit" => commit.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncGetrepo
+    module GetRepo
+      class Input
+        attr_accessor :did
+
+        attr_accessor :earliest
+
+        attr_accessor :latest
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:earliest=, hash["earliest"])
+
+          instance.send(:latest=, hash["latest"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "earliest" => earliest.to_s,
+
+            "latest" => latest.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncListblobs
+    module ListBlobs
+      class Input
+        attr_accessor :did
+
+        attr_accessor :latest
+
+        attr_accessor :earliest
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:latest=, hash["latest"])
+
+          instance.send(:earliest=, hash["earliest"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did.to_s,
+
+            "latest" => latest.to_s,
+
+            "earliest" => earliest.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cids
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cids=, hash["cids"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cids" => cids.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncListrepos
+    module ListRepos
+      class Input
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "limit" => limit.to_s,
+
+            "cursor" => cursor.to_s
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :repos
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:repos=, hash["repos"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor.to_s,
+
+            "repos" => repos.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncNotifyofupdate
+    module NotifyOfUpdate
+      class Input
+        attr_accessor :hostname
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:hostname=, hash["hostname"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "hostname" => hostname.to_s
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoSyncRequestcrawl
+    module RequestCrawl
+      class Input
+        attr_accessor :hostname
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:hostname=, hash["hostname"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "hostname" => hostname.to_s
+
+          }
+        end
+      end
+    end
+  end
 end

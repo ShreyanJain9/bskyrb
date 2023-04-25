@@ -1,17 +1,18 @@
 module Bskyrb
   VERSION: String
+  type postArray = Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Output | Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
 
   module RequestUtils
+    def query_obj_to_query_params: (untyped) -> untyped
     def default_headers: -> Hash[String, String]
-    def create_record_uri: (String) -> String
+    def create_record_uri: (String) -> (String | nil)
     def default_authenticated_headers: (Session session) -> Hash[(String | Symbol), String]
     def upload_blob_uri: (String pds) -> String
-    def get_post_thread_uri: (String pds, String | String at_post_link) -> String
-    def get_author_feed_uri: (String pds, String username, Integer limit) -> String
+    def get_post_thread_uri: (String pds, Bskyrb::AppBskyFeedGetpostthread::GetPostThread::Input query) -> String
+    def get_author_feed_uri: (String pds, Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Input query) -> String
     def at_post_link: (String pds, String url) -> String
     def resolve_handle: (String pds, String username) -> HTTParty::Response
-    def get_latest_n_posts: (String username, Integer n) -> HTTParty::Response
-    def get_timeline_uri: (String pds, Integer limit) -> String
+    def get_timeline_uri: (String pds, Bskyrb::AppBskyFeedGettimeline::GetTimeline::Input query) -> String
   end
 
   class Credentials
@@ -39,16 +40,16 @@ module Bskyrb
 
     attr_reader session: Session
 
-    def get_post_by_url: (String url) -> Bskyrb::AppBskyFeedDefs::PostView
+    def get_post_by_url: (String url, ?Integer) -> Bskyrb::AppBskyFeedDefs::PostView
     def upload_blob: (String, String) -> HTTParty::Response
     def create_post: (String text) -> HTTParty::Response
     def follow: (String username) -> HTTParty::Response
     def get_latest_post: (String username) -> (Bskyrb::AppBskyFeedDefs::FeedViewPost | nil)
-    def get_latest_n_posts: (String username, Integer n) -> Array[Bskyrb::AppBskyFeedDefs::FeedViewPost]
+    def get_latest_n_posts: (String username, Integer n) -> Bskyrb::postArray
     def initialize: (Session session) -> void
     def create_record: (Hash[untyped, untyped] data_hash) -> HTTParty::Response
-    def get_skyline: (Integer n) -> Array[Bskyrb::AppBskyFeedDefs::FeedViewPost]
-    def hydrate_feed: (HTTParty::Response) -> Array[Bskyrb::AppBskyFeedDefs::FeedViewPost]
+    def get_skyline: (Integer n) -> Bskyrb::postArray
+    def hydrate_feed: (HTTParty::Response, untyped) -> Bskyrb::postArray
   end
 end
 

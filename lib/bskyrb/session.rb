@@ -9,6 +9,14 @@ module Bskyrb
       )
     end
 
+    def query_obj_to_query_params(q)
+      out = "?"
+      q.to_h.each do |key, value|
+        out += "#{key}=#{value}&" unless value.nil? || value.empty?
+      end
+      out.slice(0...-1)
+    end
+
     def default_headers
       {"Content-Type" => "application/json"}
     end
@@ -21,16 +29,16 @@ module Bskyrb
       "#{pds}/xrpc/com.atproto.repo.uploadBlob"
     end
 
-    def get_post_thread_uri(pds, at_post_link)
-      "#{pds}/xrpc/app.bsky.feed.getPostThread?uri=#{at_post_link}"
+    def get_post_thread_uri(pds, query)
+      "#{pds}/xrpc/app.bsky.feed.getPostThread#{query_obj_to_query_params(query)}"
     end
 
-    def get_author_feed_uri(pds, username, limit)
-      "#{pds}/xrpc/app.bsky.feed.getAuthorFeed?actor=#{username}&limit=#{limit}"
+    def get_author_feed_uri(pds, query)
+      "#{pds}/xrpc/app.bsky.feed.getAuthorFeed#{query_obj_to_query_params(query)}"
     end
 
-    def get_timeline_uri(pds, limit)
-      "#{pds}/xrpc/app.bsky.feed.getTimeline?limit=#{limit}"
+    def get_timeline_uri(pds, query)
+      "#{pds}/xrpc/app.bsky.feed.getTimeline#{query_obj_to_query_params(query)}"
     end
 
     def default_authenticated_headers(session)
