@@ -1,0 +1,969 @@
+module Bskyrb
+  module AppBskyActorDefs
+    class ProfileViewBasic
+      attr_accessor did: untyped
+
+      attr_accessor handle: untyped
+
+      attr_accessor displayName: untyped
+
+      attr_accessor avatar: untyped
+
+      attr_accessor viewer: untyped
+
+      attr_accessor labels: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyActorDefs
+    class ProfileView
+      attr_accessor did: untyped
+
+      attr_accessor handle: untyped
+
+      attr_accessor displayName: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor avatar: untyped
+
+      attr_accessor indexedAt: untyped
+
+      attr_accessor viewer: untyped
+
+      attr_accessor labels: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyActorDefs
+    class ProfileViewDetailed
+      attr_accessor did: untyped
+
+      attr_accessor handle: untyped
+
+      attr_accessor displayName: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor avatar: untyped
+
+      attr_accessor banner: untyped
+
+      attr_accessor followersCount: untyped
+
+      attr_accessor followsCount: untyped
+
+      attr_accessor postsCount: untyped
+
+      attr_accessor indexedAt: untyped
+
+      attr_accessor viewer: untyped
+
+      attr_accessor labels: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyActorDefs
+    class ViewerState
+      attr_accessor muted: untyped
+
+      attr_accessor following: untyped
+
+      attr_accessor followedBy: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedExternal
+    class External
+      attr_accessor uri: untyped
+
+      attr_accessor title: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor thumb: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedExternal
+    class View
+      attr_accessor external: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedExternal
+    class ViewExternal
+      attr_accessor uri: untyped
+
+      attr_accessor title: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor thumb: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedImages
+    class Image
+      attr_accessor image: untyped
+
+      attr_accessor alt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedImages
+    class View
+      attr_accessor images: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedImages
+    class ViewImage
+      attr_accessor thumb: untyped
+
+      attr_accessor fullsize: untyped
+
+      attr_accessor alt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedRecord
+    class View
+      attr_accessor record: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedRecord
+    class ViewRecord
+      attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
+
+      attr_accessor author: untyped
+
+      attr_accessor value: untyped
+
+      attr_accessor embeds: untyped
+
+      attr_accessor indexedAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedRecord
+    class ViewNotFound
+      attr_accessor uri: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedRecordwithmedia
+    class View
+      attr_accessor record: untyped
+
+      attr_accessor media: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class PostView
+      attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
+
+      attr_accessor author: untyped
+
+      attr_accessor record: untyped
+
+      attr_accessor embed: untyped
+
+      attr_accessor replyCount: untyped
+
+      attr_accessor repostCount: untyped
+
+      attr_accessor likeCount: untyped
+
+      attr_accessor indexedAt: untyped
+
+      attr_accessor viewer: untyped
+
+      attr_accessor labels: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class ViewerState
+      attr_accessor repost: untyped
+
+      attr_accessor like: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class FeedViewPost
+      attr_accessor post: untyped
+
+      attr_accessor reply: untyped
+
+      attr_accessor reason: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class ReplyRef
+      attr_accessor root: untyped
+
+      attr_accessor parent: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class ReasonRepost
+      attr_accessor by: untyped
+
+      attr_accessor indexedAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class ThreadViewPost
+      attr_accessor post: untyped
+
+      attr_accessor parent: untyped
+
+      attr_accessor replies: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class NotFoundPost
+      attr_accessor uri: untyped
+
+      attr_accessor notFound: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedGetlikes
+    class Like
+      attr_accessor indexedAt: untyped
+
+      attr_accessor createdAt: untyped
+
+      attr_accessor actor: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedPost
+    class ReplyRef
+      attr_accessor root: untyped
+
+      attr_accessor parent: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedPost
+    class Entity
+      attr_accessor index: untyped
+
+      attr_accessor value: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedPost
+    class TextSlice
+      attr_accessor start: untyped
+
+      attr_accessor end: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyNotificationListnotifications
+    class Notification
+      attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
+
+      attr_accessor author: untyped
+
+      attr_accessor reason: untyped
+
+      attr_accessor reasonSubject: untyped
+
+      attr_accessor record: untyped
+
+      attr_accessor isRead: untyped
+
+      attr_accessor indexedAt: untyped
+
+      attr_accessor labels: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyRichtextFacet
+    class Mention
+      attr_accessor did: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyRichtextFacet
+    class Link
+      attr_accessor uri: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyRichtextFacet
+    class ByteSlice
+      attr_accessor byteStart: untyped
+
+      attr_accessor byteEnd: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ActionView
+      attr_accessor id: untyped
+
+      attr_accessor action: untyped
+
+      attr_accessor subject: untyped
+
+      attr_accessor subjectBlobCids: untyped
+
+      attr_accessor createLabelVals: untyped
+
+      attr_accessor negateLabelVals: untyped
+
+      attr_accessor reason: untyped
+
+      attr_accessor createdBy: untyped
+
+      attr_accessor createdAt: untyped
+
+      attr_accessor reversal: untyped
+
+      attr_accessor resolvedReportIds: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ActionViewDetail
+      attr_accessor id: untyped
+
+      attr_accessor action: untyped
+
+      attr_accessor subject: untyped
+
+      attr_accessor subjectBlobs: untyped
+
+      attr_accessor createLabelVals: untyped
+
+      attr_accessor negateLabelVals: untyped
+
+      attr_accessor reason: untyped
+
+      attr_accessor createdBy: untyped
+
+      attr_accessor createdAt: untyped
+
+      attr_accessor reversal: untyped
+
+      attr_accessor resolvedReports: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ActionViewCurrent
+      attr_accessor id: untyped
+
+      attr_accessor action: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ActionReversal
+      attr_accessor reason: untyped
+
+      attr_accessor createdBy: untyped
+
+      attr_accessor createdAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ActionType
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class Takedown
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class Flag
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class Acknowledge
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ReportView
+      attr_accessor id: untyped
+
+      attr_accessor reasonType: untyped
+
+      attr_accessor reason: untyped
+
+      attr_accessor subject: untyped
+
+      attr_accessor reportedBy: untyped
+
+      attr_accessor createdAt: untyped
+
+      attr_accessor resolvedByActionIds: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ReportViewDetail
+      attr_accessor id: untyped
+
+      attr_accessor reasonType: untyped
+
+      attr_accessor reason: untyped
+
+      attr_accessor subject: untyped
+
+      attr_accessor reportedBy: untyped
+
+      attr_accessor createdAt: untyped
+
+      attr_accessor resolvedByActions: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class RepoView
+      attr_accessor did: untyped
+
+      attr_accessor handle: untyped
+
+      attr_accessor email: untyped
+
+      attr_accessor relatedRecords: untyped
+
+      attr_accessor indexedAt: untyped
+
+      attr_accessor moderation: untyped
+
+      attr_accessor invitedBy: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class RepoViewDetail
+      attr_accessor did: untyped
+
+      attr_accessor handle: untyped
+
+      attr_accessor email: untyped
+
+      attr_accessor relatedRecords: untyped
+
+      attr_accessor indexedAt: untyped
+
+      attr_accessor moderation: untyped
+
+      attr_accessor labels: untyped
+
+      attr_accessor invitedBy: untyped
+
+      attr_accessor invites: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class RepoRef
+      attr_accessor did: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class RecordView
+      attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
+
+      attr_accessor value: untyped
+
+      attr_accessor blobCids: untyped
+
+      attr_accessor indexedAt: untyped
+
+      attr_accessor moderation: untyped
+
+      attr_accessor repo: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class RecordViewDetail
+      attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
+
+      attr_accessor value: untyped
+
+      attr_accessor blobs: untyped
+
+      attr_accessor labels: untyped
+
+      attr_accessor indexedAt: untyped
+
+      attr_accessor moderation: untyped
+
+      attr_accessor repo: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class Moderation
+      attr_accessor currentAction: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ModerationDetail
+      attr_accessor currentAction: untyped
+
+      attr_accessor actions: untyped
+
+      attr_accessor reports: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class BlobView
+      attr_accessor cid: untyped
+
+      attr_accessor mimeType: untyped
+
+      attr_accessor size: untyped
+
+      attr_accessor createdAt: untyped
+
+      attr_accessor details: untyped
+
+      attr_accessor moderation: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class ImageDetails
+      attr_accessor width: untyped
+
+      attr_accessor height: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class VideoDetails
+      attr_accessor width: untyped
+
+      attr_accessor height: untyped
+
+      attr_accessor length: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoLabelDefs
+    class Label
+      attr_accessor src: untyped
+
+      attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
+
+      attr_accessor val: untyped
+
+      attr_accessor neg: untyped
+
+      attr_accessor cts: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoLabelSubscribelabels
+    class Labels
+      attr_accessor seq: untyped
+
+      attr_accessor labels: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoLabelSubscribelabels
+    class Info
+      attr_accessor name: untyped
+
+      attr_accessor message: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoModerationDefs
+    class ReasonType
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoModerationDefs
+    class ReasonSpam
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoModerationDefs
+    class ReasonViolation
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoModerationDefs
+    class ReasonMisleading
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoModerationDefs
+    class ReasonSexual
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoModerationDefs
+    class ReasonRude
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoModerationDefs
+    class ReasonOther
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoRepoApplywrites
+    class Create
+      attr_accessor collection: untyped
+
+      attr_accessor rkey: untyped
+
+      attr_accessor value: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoRepoApplywrites
+    class Update
+      attr_accessor collection: untyped
+
+      attr_accessor rkey: untyped
+
+      attr_accessor value: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoRepoApplywrites
+    class Delete
+      attr_accessor collection: untyped
+
+      attr_accessor rkey: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoRepoListrecords
+    class Record
+      attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
+
+      attr_accessor value: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoServerCreateapppassword
+    class AppPassword
+      attr_accessor name: untyped
+
+      attr_accessor password: untyped
+
+      attr_accessor createdAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoServerCreateinvitecodes
+    class AccountCodes
+      attr_accessor account: untyped
+
+      attr_accessor codes: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoServerDefs
+    class InviteCode
+      attr_accessor code: untyped
+
+      attr_accessor available: untyped
+
+      attr_accessor disabled: untyped
+
+      attr_accessor forAccount: untyped
+
+      attr_accessor createdBy: untyped
+
+      attr_accessor createdAt: untyped
+
+      attr_accessor uses: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoServerDefs
+    class InviteCodeUse
+      attr_accessor usedBy: untyped
+
+      attr_accessor usedAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoServerDescribeserver
+    class Links
+      attr_accessor privacyPolicy: untyped
+
+      attr_accessor termsOfService: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoServerListapppasswords
+    class AppPassword
+      attr_accessor name: untyped
+
+      attr_accessor createdAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoSyncListrepos
+    class Repo
+      attr_accessor did: untyped
+
+      attr_accessor head: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoSyncSubscriberepos
+    class Commit
+      attr_accessor seq: untyped
+
+      attr_accessor rebase: untyped
+
+      attr_accessor tooBig: untyped
+
+      attr_accessor repo: untyped
+
+      attr_accessor commit: untyped
+
+      attr_accessor prev: untyped
+
+      attr_accessor blocks: untyped
+
+      attr_accessor ops: untyped
+
+      attr_accessor blobs: untyped
+
+      attr_accessor time: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoSyncSubscriberepos
+    class Handle
+      attr_accessor seq: untyped
+
+      attr_accessor did: untyped
+
+      attr_accessor handle: untyped
+
+      attr_accessor time: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoSyncSubscriberepos
+    class Migrate
+      attr_accessor seq: untyped
+
+      attr_accessor did: untyped
+
+      attr_accessor migrateTo: untyped
+
+      attr_accessor time: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoSyncSubscriberepos
+    class Tombstone
+      attr_accessor seq: untyped
+
+      attr_accessor did: untyped
+
+      attr_accessor time: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoSyncSubscriberepos
+    class Info
+      attr_accessor name: untyped
+
+      attr_accessor message: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoSyncSubscriberepos
+    class RepoOp
+      attr_accessor action: untyped
+
+      attr_accessor path: untyped
+
+      attr_accessor cid: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+end
