@@ -3,6 +3,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Development](#development)
+- [Code generation](#code-generation)
   - [Type checking](#type-checking)
   - [Formatting](#formatting)
 - [Contributing](#contributing)
@@ -26,7 +27,7 @@ Create a new session:
 
 ```ruby
 
-require 'bskyrb' 
+require 'bskyrb'
 
 username = 'your_username'
 
@@ -51,6 +52,58 @@ bsky.create_post("Hello world from bskyrb!")
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org). And configure the type checker:
+
+## Code generation
+
+We are working on a script to generate classes from the atproto lexicon. So far we have made non-query objects. To recreate them:
+
+```
+git submodule add https://github.com/bluesky-social/atproto.git
+# or just clone it!
+bin/codegen
+```
+
+This crawls the lexicon directory in your newly-cloned atproto repo, and generates formatted classes based on the json schemas embedded in the files. You can then hydrate them like so:
+
+```ruby
+# make your RecordManager, then...
+
+post_by_url = manager.get_post_by_url("https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27")
+
+my_post = Bskyrb::AppBskyFeedDefs::PostView.from_hash post_by_url["thread"]["post"]
+
+=>
+#<Bskyrb::AppBskyFeedDefs::PostView:0x000000010432a0a0
+ @author=
+  {"did"=>"did:plc:scx5mrfxxrqlfzkjcpbt3xfr",
+   "handle"=>"naia.bsky.social",
+   "displayName"=>"naia",
+   "avatar"=>
+    "https://cdn.bsky.social/imgproxy/0uv5pCOimHKw44PfnCt5_XpnOICHz1KeHCl8dknI_ZY/rs:fill:1000:1000:1:0/plain/bafkreibabes4xznjzdwxqj4hzirg7lofhl2detvabroibakewssfkr
+      "alt"=>""}]},
+ @indexedAt="2023-04-10T16:51:21.391Z",
+ @labels=[],
+ @likeCount=27,
+ @record=
+  {"text"=>"gm from the new deck chair i built yesterday\n\nthe sky is very blue",
+   "$type"=>"app.bsky.feed.post",
+   "embed"=>
+    {"$type"=>"app.bsky.embed.images",
+     "images"=>
+      [{"alt"=>"",
+        "image"=>{"$type"=>"blob", "ref"=>{"$link"=>"bafkreif52k6kev6xgy2ydptub5oryss3gsscajrec6zh5r2els4si2yj7i"}, "mimeType"=>"image/jpeg", "size"=>796921}}]},
+   "createdAt"=>"2023-04-10T16:51:21.049Z"},
+ @replyCount=4,
+ @repostCount=2,
+ @uri="at://did:plc:scx5mrfxxrqlfzkjcpbt3xfr/app.bsky.feed.post/3jszsrnruws27",
+ @viewer={}>
+```
+
+Next steps:
+
+- Recursion--hydrate the classes embedded in the classes. Some parsing to enable this already happens in `LexiconParser`.
+- Generate classes for queries and other unusual object types.
+- Integrate our new classes into the API call methods.
 
 ### Type checking
 

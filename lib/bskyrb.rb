@@ -2,4 +2,4 @@
 
 require "bskyrb/session"
 require "bskyrb/records"
-
+require "bskyrb/generated_classes"
