@@ -7,6 +7,8 @@ gemspec
 
 group :development do
   gem "standard"
-  gem "steep"
+  gem "steep", ">= 1.3.2"
   gem "parallel", "1.10.0"
+  gem "byebug"
+  gem "rbs"
 end

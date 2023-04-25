@@ -11,10 +11,11 @@ module Bskyrb
       # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
       # regex by chatgpt:
       link = at_post_link(session.pds, url)
-      HTTParty.get(
+      res = HTTParty.get(
         get_post_thread_uri(session.pds, link),
         headers: default_authenticated_headers(session)
       )
+      Bskyrb::AppBskyFeedDefs::PostView.from_hash res["thread"]["post"]
     end
 
     def upload_blob(blob_path, content_type)
@@ -36,42 +37,42 @@ module Bskyrb
     end
 
     def detect_facets(json_hash) # TODO, DOES NOT WORK YET
-        # For some reason this always fails at finding text records and I have no idea why
-        # Detect domain names that have been @mentioned in the text
-        matches = json_hash["record"]["text"].scan(/@([^\s\.]+\.[^\s]+)/)
+      # For some reason this always fails at finding text records and I have no idea why
+      # Detect domain names that have been @mentioned in the text
+      matches = json_hash["record"]["text"].scan(/@([^\s.]+\.[^\s]+)/)
 
-        # Create a facets array to hold the resolved handles
-        facets = []
+      # Create a facets array to hold the resolved handles
+      facets = []
 
-        # Loop through the matches and resolve the handles
-        matches.each do |match|
-          handle = match[0]
-          resolved_handle = resolve_handle(handle)
-          byte_start = json_hash["record"]["text"].index("@" + handle)
-          byte_end = byte_start + handle.length
-          facet = {
-            "$type": "app.bsky.richtext.facet",
-            "features": [
-              {
-                "$type": "app.bsky.richtext.facet#mention",
-                "did": resolved_handle
-              }
-            ],
-            "index": {
-              "byteStart": byte_start,
-              "byteEnd": byte_end
+      # Loop through the matches and resolve the handles
+      matches.each do |match|
+        handle = match[0]
+        resolved_handle = resolve_handle(session.pds, handle)
+        byte_start = json_hash["record"]["text"].index("@" + handle)
+        byte_end = byte_start + handle.length
+        facet = {
+          "$type": "app.bsky.richtext.facet",
+          features: [
+            {
+              "$type": "app.bsky.richtext.facet#mention",
+              did: resolved_handle
             }
+          ],
+          index: {
+            byteStart: byte_start,
+            byteEnd: byte_end
           }
-          facets.push(facet)
-        end
+        }
+        facets.push(facet)
+      end
 
-        # Append the facets to the JSON hash
-        json_hash["record"]["facets"] = facets
+      # Append the facets to the JSON hash
+      json_hash["record"]["facets"] = facets
 
-        # Convert the JSON hash back to a string
-        json_string_with_facets = JSON.generate(json_hash)
+      # Convert the JSON hash back to a string
+      json_string_with_facets = JSON.generate(json_hash)
 
-        return "Doesn't work yet"
+      "Doesn't work yet"
     end
 
     def create_post(text)
@@ -86,9 +87,9 @@ module Bskyrb
           text: text
         }
       }
-     create_record(data)
+      create_record(data)
     end
-    
+
     def follow(username)
       create_record(
         {
@@ -104,21 +105,31 @@ module Bskyrb
     end
 
     def get_latest_post(username)
-      get_latest_n_posts(username, 1)
+      feed = get_latest_n_posts(username, 1)
+      feed.first
     end
 
     def get_latest_n_posts(username, n)
-      HTTParty.get(
+      hydrate_feed HTTParty.get(
         get_author_feed_uri(session.pds, username, n),
         headers: default_authenticated_headers(session)
       )
     end
 
     def get_skyline(n)
-      HTTParty.get(
+      hydrate_feed HTTParty.get(
         get_timeline_uri(session.pds, n),
         headers: default_authenticated_headers(session)
       )
+    end
+
+    def hydrate_feed(hash)
+      hash["feed"].map do |h|
+        Bskyrb::AppBskyFeedDefs::FeedViewPost.from_hash(h).tap do |obj|
+          obj.post = Bskyrb::AppBskyFeedDefs::PostView.from_hash h["post"]
+          obj.reply = Bskyrb::AppBskyFeedDefs::ReplyRef.from_hash h["reply"]
+        end
+      end
     end
   end
 end
