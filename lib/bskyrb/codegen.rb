@@ -149,7 +149,7 @@ module <%= klass_str.split("::").first %>
       def to_h
         {
           <% properties[top_level_key].each do |key, value| %>
-            "<%= key %>" => <%= key %>.to_s,
+            "<%= key %>" => <%= key %>,
           <% end %>
         }
       end

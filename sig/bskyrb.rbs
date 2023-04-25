@@ -47,7 +47,7 @@ module Bskyrb
     def get_latest_post: (String username) -> (Bskyrb::AppBskyFeedDefs::FeedViewPost | nil)
     def get_latest_n_posts: (String username, Integer n) -> Bskyrb::postArray
     def initialize: (Session session) -> void
-    def create_record: (Hash[untyped, untyped] data_hash) -> HTTParty::Response
+    def create_record: (untyped) -> HTTParty::Response
     def get_skyline: (Integer n) -> Bskyrb::postArray
     def hydrate_feed: (HTTParty::Response, untyped) -> Bskyrb::postArray
   end
