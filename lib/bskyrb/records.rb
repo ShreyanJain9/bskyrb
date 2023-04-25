@@ -70,9 +70,9 @@ module Bskyrb
       json_hash["record"]["facets"] = facets
 
       # Convert the JSON hash back to a string
-      json_string_with_facets = JSON.generate(json_hash)
+      JSON.generate(json_hash)
 
-      "Doesn't work yet"
+      # "Doesn't work yet"
     end
 
     def create_post(text)
