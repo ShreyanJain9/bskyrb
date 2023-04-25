@@ -7,12 +7,15 @@ module Bskyrb
       @session = session
     end
 
-    def get_post_by_url(url)
+    def get_post_by_url(url, depth = 10)
       # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
       # regex by chatgpt:
-      link = at_post_link(session.pds, url)
+      query = Bskyrb::AppBskyFeedGetpostthread::GetPostThread::Input.new.tap do |q|
+        q.uri = at_post_link(session.pds, url)
+        q.depth = depth
+      end
       res = HTTParty.get(
-        get_post_thread_uri(session.pds, link),
+        get_post_thread_uri(session.pds, query),
         headers: default_authenticated_headers(session)
       )
       Bskyrb::AppBskyFeedDefs::PostView.from_hash res["thread"]["post"]
@@ -28,10 +31,13 @@ module Bskyrb
       )
     end
 
-    def create_record(data_hash)
+    def create_record(input)
+      unless input.is_a?(Hash) || input.class.name.include?("Input")
+        raise "`create_record` takes an Input class or a hash"
+      end
       HTTParty.post(
         create_record_uri(session.pds),
-        body: data_hash.to_json,
+        body: input.to_h.compact.to_json,
         headers: default_authenticated_headers(session)
       )
     end
@@ -76,58 +82,65 @@ module Bskyrb
     end
 
     def create_post(text)
-      timestamp = DateTime.now.iso8601(3)
-      data = {
-        collection: "app.bsky.feed.post",
-        "$type": "app.bsky.feed.post",
-        repo: session.did,
-        record: {
-          "$type": "app.bsky.feed.post",
-          createdAt: timestamp,
-          text: text
+      input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
+        "collection" => "app.bsky.feed.post",
+        "$type" => "app.bsky.feed.post",
+        "repo" => session.did,
+        "record" => {
+          "$type" => "app.bsky.feed.post",
+          "createdAt" => DateTime.now.iso8601(3),
+          "text" => text
         }
-      }
-      create_record(data)
+      })
+      create_record(input)
     end
 
     def follow(username)
-      create_record(
-        {
-          "collection" => "app.bsky.graph.follow",
-          "repo" => session.did,
-          "record" => {
-            "subject" => resolve_handle(session.pds, username)["did"],
-            "createdAt" => DateTime.now.iso8601(3),
-            "$type" => "app.bsky.graph.follow"
-          }
+      input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
+        "collection" => "app.bsky.graph.follow",
+        "repo" => session.did,
+        "record" => {
+          "subject" => resolve_handle(session.pds, username)["did"],
+          "createdAt" => DateTime.now.iso8601(3),
+          "$type" => "app.bsky.graph.follow"
         }
-      )
+      })
+      create_record(input)
     end
 
     def get_latest_post(username)
       feed = get_latest_n_posts(username, 1)
-      feed.first
+      feed.feed.first
     end
 
     def get_latest_n_posts(username, n)
+      query = Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Input.new.tap do |q|
+        q.actor = username
+        q.limit = n
+      end
       hydrate_feed HTTParty.get(
-        get_author_feed_uri(session.pds, username, n),
+        get_author_feed_uri(session.pds, query),
         headers: default_authenticated_headers(session)
-      )
+      ), Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Output
     end
 
     def get_skyline(n)
+      query = Bskyrb::AppBskyFeedGettimeline::GetTimeline::Input.new.tap do |q|
+        q.limit = n
+      end
       hydrate_feed HTTParty.get(
-        get_timeline_uri(session.pds, n),
+        get_timeline_uri(session.pds, query),
         headers: default_authenticated_headers(session)
-      )
+      ), Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
     end
 
-    def hydrate_feed(hash)
-      hash["feed"].map do |h|
-        Bskyrb::AppBskyFeedDefs::FeedViewPost.from_hash(h).tap do |obj|
-          obj.post = Bskyrb::AppBskyFeedDefs::PostView.from_hash h["post"]
-          obj.reply = Bskyrb::AppBskyFeedDefs::ReplyRef.from_hash h["reply"]
+    def hydrate_feed(response_hash, klass)
+      klass.from_hash(response_hash).tap do |feed|
+        feed.feed = response_hash["feed"].map do |h|
+          Bskyrb::AppBskyFeedDefs::FeedViewPost.from_hash(h).tap do |obj|
+            obj.post = Bskyrb::AppBskyFeedDefs::PostView.from_hash h["post"]
+            obj.reply = Bskyrb::AppBskyFeedDefs::ReplyRef.from_hash h["reply"] if h["reply"]
+          end
         end
       end
     end
