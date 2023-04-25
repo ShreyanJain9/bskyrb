@@ -4,7 +4,7 @@ target :lib do
   signature "sig"
   check "bin"
   check "lib"
-
+  ignore "lib/bskyrb/codegen.rb"
   # library "pathname", "set"       # Standard libraries
   # library "strong_json"           # Gems
 

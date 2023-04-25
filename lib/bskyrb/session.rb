@@ -5,7 +5,7 @@ module Bskyrb
   module RequestUtils
     def resolve_handle(pds, username)
       HTTParty.get(
-        URI("#{pds}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}")
+        "#{pds}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}"
       )
     end
 
@@ -14,23 +14,23 @@ module Bskyrb
     end
 
     def create_record_uri(pds)
-      URI("#{pds}/xrpc/com.atproto.repo.createRecord")
+      "#{pds}/xrpc/com.atproto.repo.createRecord"
     end
 
     def upload_blob_uri(pds)
-      URI("#{pds}/xrpc/com.atproto.repo.uploadBlob")
+      "#{pds}/xrpc/com.atproto.repo.uploadBlob"
     end
 
     def get_post_thread_uri(pds, at_post_link)
-      URI("#{pds}/xrpc/app.bsky.feed.getPostThread?uri=#{at_post_link}")
+      "#{pds}/xrpc/app.bsky.feed.getPostThread?uri=#{at_post_link}"
     end
 
     def get_author_feed_uri(pds, username, limit)
-      URI("#{pds}/xrpc/app.bsky.feed.getAuthorFeed?actor=#{username}&limit=#{limit}")
+      "#{pds}/xrpc/app.bsky.feed.getAuthorFeed?actor=#{username}&limit=#{limit}"
     end
 
     def get_timeline_uri(pds, limit)
-      URI("#{pds}/xrpc/app.bsky.feed.getTimeline?limit=#{limit}")
+      "#{pds}/xrpc/app.bsky.feed.getTimeline?limit=#{limit}"
     end
 
     def default_authenticated_headers(session)
@@ -47,7 +47,7 @@ module Bskyrb
       username = url.split("/")[-3]
       did = resolve_handle(pds, username)["did"]
       post_id = url.split("/")[-1]
-      URI("at://#{did}/app.bsky.feed.post/#{post_id}")
+      "at://#{did}/app.bsky.feed.post/#{post_id}"
     end
   end
 
