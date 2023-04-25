@@ -13,3 +13,4 @@ bskyrb-0.1.1.gem
 bskyrb.code-workspace
 /.gem_rbs_collection/
 bskyrb-0.3.gem
+lib/bskytest.rb
