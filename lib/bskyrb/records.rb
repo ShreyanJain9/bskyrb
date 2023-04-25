@@ -7,7 +7,7 @@ module Bskyrb
       @session = session
     end
 
-    def get_post_by_url(url, depth=10)
+    def get_post_by_url(url, depth = 10)
       # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
       # regex by chatgpt:
       query = Bskyrb::AppBskyFeedGetpostthread::GetPostThread::Input.new.tap do |q|
@@ -31,10 +31,13 @@ module Bskyrb
       )
     end
 
-    def create_record(data_hash)
+    def create_record(input)
+      unless input.is_a?(Hash) || input.class.name.include?("Input")
+        raise "`create_record` takes an Input class or a hash"
+      end
       HTTParty.post(
         create_record_uri(session.pds),
-        body: data_hash.to_json,
+        body: input.to_h.compact.to_json,
         headers: default_authenticated_headers(session)
       )
     end
@@ -79,32 +82,30 @@ module Bskyrb
     end
 
     def create_post(text)
-      timestamp = DateTime.now.iso8601(3)
-      data = {
-        collection: "app.bsky.feed.post",
-        "$type": "app.bsky.feed.post",
-        repo: session.did,
-        record: {
-          "$type": "app.bsky.feed.post",
-          createdAt: timestamp,
-          text: text
+      input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
+        "collection" => "app.bsky.feed.post",
+        "$type" => "app.bsky.feed.post",
+        "repo" => session.did,
+        "record" => {
+          "$type" => "app.bsky.feed.post",
+          "createdAt" => DateTime.now.iso8601(3),
+          "text" => text
         }
-      }
-      create_record(data)
+      })
+      create_record(input)
     end
 
     def follow(username)
-      create_record(
-        {
-          "collection" => "app.bsky.graph.follow",
-          "repo" => session.did,
-          "record" => {
-            "subject" => resolve_handle(session.pds, username)["did"],
-            "createdAt" => DateTime.now.iso8601(3),
-            "$type" => "app.bsky.graph.follow"
-          }
+      input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
+        "collection" => "app.bsky.graph.follow",
+        "repo" => session.did,
+        "record" => {
+          "subject" => resolve_handle(session.pds, username)["did"],
+          "createdAt" => DateTime.now.iso8601(3),
+          "$type" => "app.bsky.graph.follow"
         }
-      )
+      })
+      create_record(input)
     end
 
     def get_latest_post(username)

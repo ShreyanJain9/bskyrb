@@ -1854,7 +1854,7 @@ module Bskyrb
         def to_h
           {
 
-            "actor" => actor.to_s
+            "actor" => actor
 
           }
         end
@@ -1890,7 +1890,7 @@ module Bskyrb
         def to_h
           {
 
-            "actors" => actors.to_s
+            "actors" => actors
 
           }
         end
@@ -1911,7 +1911,7 @@ module Bskyrb
         def to_h
           {
 
-            "profiles" => profiles.to_s
+            "profiles" => profiles
 
           }
         end
@@ -1940,9 +1940,9 @@ module Bskyrb
         def to_h
           {
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -1967,9 +1967,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "actors" => actors.to_s
+            "actors" => actors
 
           }
         end
@@ -2002,11 +2002,11 @@ module Bskyrb
         def to_h
           {
 
-            "term" => term.to_s,
+            "term" => term,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2031,9 +2031,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "actors" => actors.to_s
+            "actors" => actors
 
           }
         end
@@ -2062,9 +2062,9 @@ module Bskyrb
         def to_h
           {
 
-            "term" => term.to_s,
+            "term" => term,
 
-            "limit" => limit.to_s
+            "limit" => limit
 
           }
         end
@@ -2085,7 +2085,7 @@ module Bskyrb
         def to_h
           {
 
-            "actors" => actors.to_s
+            "actors" => actors
 
           }
         end
@@ -2118,11 +2118,11 @@ module Bskyrb
         def to_h
           {
 
-            "actor" => actor.to_s,
+            "actor" => actor,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2147,9 +2147,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "feed" => feed.to_s
+            "feed" => feed
 
           }
         end
@@ -2186,13 +2186,13 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "cid" => cid.to_s,
+            "cid" => cid,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2225,13 +2225,13 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "cid" => cid.to_s,
+            "cid" => cid,
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "likes" => likes.to_s
+            "likes" => likes
 
           }
         end
@@ -2260,9 +2260,9 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "depth" => depth.to_s
+            "depth" => depth
 
           }
         end
@@ -2283,7 +2283,7 @@ module Bskyrb
         def to_h
           {
 
-            "thread" => thread.to_s
+            "thread" => thread
 
           }
         end
@@ -2308,7 +2308,7 @@ module Bskyrb
         def to_h
           {
 
-            "uris" => uris.to_s
+            "uris" => uris
 
           }
         end
@@ -2329,7 +2329,7 @@ module Bskyrb
         def to_h
           {
 
-            "posts" => posts.to_s
+            "posts" => posts
 
           }
         end
@@ -2366,13 +2366,13 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "cid" => cid.to_s,
+            "cid" => cid,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2405,13 +2405,13 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "cid" => cid.to_s,
+            "cid" => cid,
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "repostedBy" => repostedBy.to_s
+            "repostedBy" => repostedBy
 
           }
         end
@@ -2444,11 +2444,11 @@ module Bskyrb
         def to_h
           {
 
-            "algorithm" => algorithm.to_s,
+            "algorithm" => algorithm,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2473,9 +2473,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "feed" => feed.to_s
+            "feed" => feed
 
           }
         end
@@ -2508,11 +2508,11 @@ module Bskyrb
         def to_h
           {
 
-            "actor" => actor.to_s,
+            "actor" => actor,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2541,11 +2541,11 @@ module Bskyrb
         def to_h
           {
 
-            "subject" => subject.to_s,
+            "subject" => subject,
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "followers" => followers.to_s
+            "followers" => followers
 
           }
         end
@@ -2578,11 +2578,11 @@ module Bskyrb
         def to_h
           {
 
-            "actor" => actor.to_s,
+            "actor" => actor,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2611,11 +2611,11 @@ module Bskyrb
         def to_h
           {
 
-            "subject" => subject.to_s,
+            "subject" => subject,
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "follows" => follows.to_s
+            "follows" => follows
 
           }
         end
@@ -2644,9 +2644,9 @@ module Bskyrb
         def to_h
           {
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2671,9 +2671,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "mutes" => mutes.to_s
+            "mutes" => mutes
 
           }
         end
@@ -2698,7 +2698,7 @@ module Bskyrb
         def to_h
           {
 
-            "actor" => actor.to_s
+            "actor" => actor
 
           }
         end
@@ -2723,7 +2723,7 @@ module Bskyrb
         def to_h
           {
 
-            "actor" => actor.to_s
+            "actor" => actor
 
           }
         end
@@ -2748,7 +2748,7 @@ module Bskyrb
         def to_h
           {
 
-            "seenAt" => seenAt.to_s
+            "seenAt" => seenAt
 
           }
         end
@@ -2769,7 +2769,7 @@ module Bskyrb
         def to_h
           {
 
-            "count" => count.to_s
+            "count" => count
 
           }
         end
@@ -2802,11 +2802,11 @@ module Bskyrb
         def to_h
           {
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "seenAt" => seenAt.to_s
+            "seenAt" => seenAt
 
           }
         end
@@ -2831,9 +2831,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "notifications" => notifications.to_s
+            "notifications" => notifications
 
           }
         end
@@ -2858,7 +2858,7 @@ module Bskyrb
         def to_h
           {
 
-            "seenAt" => seenAt.to_s
+            "seenAt" => seenAt
 
           }
         end
@@ -2887,9 +2887,9 @@ module Bskyrb
         def to_h
           {
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -2914,9 +2914,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "feed" => feed.to_s
+            "feed" => feed
 
           }
         end
@@ -2945,9 +2945,9 @@ module Bskyrb
         def to_h
           {
 
-            "codes" => codes.to_s,
+            "codes" => codes,
 
-            "accounts" => accounts.to_s
+            "accounts" => accounts
 
           }
         end
@@ -2980,11 +2980,11 @@ module Bskyrb
         def to_h
           {
 
-            "sort" => sort.to_s,
+            "sort" => sort,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -3009,9 +3009,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "codes" => codes.to_s
+            "codes" => codes
 
           }
         end
@@ -3036,7 +3036,7 @@ module Bskyrb
         def to_h
           {
 
-            "id" => id.to_s
+            "id" => id
 
           }
         end
@@ -3080,11 +3080,11 @@ module Bskyrb
         def to_h
           {
 
-            "subject" => subject.to_s,
+            "subject" => subject,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -3109,9 +3109,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "actions" => actions.to_s
+            "actions" => actions
 
           }
         end
@@ -3136,7 +3136,7 @@ module Bskyrb
         def to_h
           {
 
-            "id" => id.to_s
+            "id" => id
 
           }
         end
@@ -3184,13 +3184,13 @@ module Bskyrb
         def to_h
           {
 
-            "subject" => subject.to_s,
+            "subject" => subject,
 
-            "resolved" => resolved.to_s,
+            "resolved" => resolved,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -3215,9 +3215,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "reports" => reports.to_s
+            "reports" => reports
 
           }
         end
@@ -3246,9 +3246,9 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "cid" => cid.to_s
+            "cid" => cid
 
           }
         end
@@ -3284,7 +3284,7 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s
+            "did" => did
 
           }
         end
@@ -3328,11 +3328,11 @@ module Bskyrb
         def to_h
           {
 
-            "actionId" => actionId.to_s,
+            "actionId" => actionId,
 
-            "reportIds" => reportIds.to_s,
+            "reportIds" => reportIds,
 
-            "createdBy" => createdBy.to_s
+            "createdBy" => createdBy
 
           }
         end
@@ -3376,11 +3376,11 @@ module Bskyrb
         def to_h
           {
 
-            "id" => id.to_s,
+            "id" => id,
 
-            "reason" => reason.to_s,
+            "reason" => reason,
 
-            "createdBy" => createdBy.to_s
+            "createdBy" => createdBy
 
           }
         end
@@ -3428,13 +3428,13 @@ module Bskyrb
         def to_h
           {
 
-            "term" => term.to_s,
+            "term" => term,
 
-            "invitedBy" => invitedBy.to_s,
+            "invitedBy" => invitedBy,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -3459,9 +3459,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "repos" => repos.to_s
+            "repos" => repos
 
           }
         end
@@ -3510,19 +3510,19 @@ module Bskyrb
         def to_h
           {
 
-            "action" => action.to_s,
+            "action" => action,
 
-            "subject" => subject.to_s,
+            "subject" => subject,
 
-            "subjectBlobCids" => subjectBlobCids.to_s,
+            "subjectBlobCids" => subjectBlobCids,
 
-            "createLabelVals" => createLabelVals.to_s,
+            "createLabelVals" => createLabelVals,
 
-            "negateLabelVals" => negateLabelVals.to_s,
+            "negateLabelVals" => negateLabelVals,
 
-            "reason" => reason.to_s,
+            "reason" => reason,
 
-            "createdBy" => createdBy.to_s
+            "createdBy" => createdBy
 
           }
         end
@@ -3562,9 +3562,9 @@ module Bskyrb
         def to_h
           {
 
-            "account" => account.to_s,
+            "account" => account,
 
-            "email" => email.to_s
+            "email" => email
 
           }
         end
@@ -3593,9 +3593,9 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "handle" => handle.to_s
+            "handle" => handle
 
           }
         end
@@ -3620,7 +3620,7 @@ module Bskyrb
         def to_h
           {
 
-            "handle" => handle.to_s
+            "handle" => handle
 
           }
         end
@@ -3641,7 +3641,7 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s
+            "did" => did
 
           }
         end
@@ -3666,7 +3666,7 @@ module Bskyrb
         def to_h
           {
 
-            "handle" => handle.to_s
+            "handle" => handle
 
           }
         end
@@ -3703,13 +3703,13 @@ module Bskyrb
         def to_h
           {
 
-            "uriPatterns" => uriPatterns.to_s,
+            "uriPatterns" => uriPatterns,
 
-            "sources" => sources.to_s,
+            "sources" => sources,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -3734,9 +3734,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "labels" => labels.to_s
+            "labels" => labels
 
           }
         end
@@ -3769,11 +3769,11 @@ module Bskyrb
         def to_h
           {
 
-            "reasonType" => reasonType.to_s,
+            "reasonType" => reasonType,
 
-            "reason" => reason.to_s,
+            "reason" => reason,
 
-            "subject" => subject.to_s
+            "subject" => subject
 
           }
         end
@@ -3814,17 +3814,17 @@ module Bskyrb
         def to_h
           {
 
-            "id" => id.to_s,
+            "id" => id,
 
-            "reasonType" => reasonType.to_s,
+            "reasonType" => reasonType,
 
-            "reason" => reason.to_s,
+            "reason" => reason,
 
-            "subject" => subject.to_s,
+            "subject" => subject,
 
-            "reportedBy" => reportedBy.to_s,
+            "reportedBy" => reportedBy,
 
-            "createdAt" => createdAt.to_s
+            "createdAt" => createdAt
 
           }
         end
@@ -3861,13 +3861,13 @@ module Bskyrb
         def to_h
           {
 
-            "repo" => repo.to_s,
+            "repo" => repo,
 
-            "validate" => validate.to_s,
+            "validate" => validate,
 
-            "writes" => writes.to_s,
+            "writes" => writes,
 
-            "swapCommit" => swapCommit.to_s
+            "swapCommit" => swapCommit
 
           }
         end
@@ -3912,17 +3912,17 @@ module Bskyrb
         def to_h
           {
 
-            "repo" => repo.to_s,
+            "repo" => repo,
 
-            "collection" => collection.to_s,
+            "collection" => collection,
 
-            "rkey" => rkey.to_s,
+            "rkey" => rkey,
 
-            "validate" => validate.to_s,
+            "validate" => validate,
 
-            "record" => record.to_s,
+            "record" => record,
 
-            "swapCommit" => swapCommit.to_s
+            "swapCommit" => swapCommit
 
           }
         end
@@ -3947,9 +3947,9 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "cid" => cid.to_s
+            "cid" => cid
 
           }
         end
@@ -3990,15 +3990,15 @@ module Bskyrb
         def to_h
           {
 
-            "repo" => repo.to_s,
+            "repo" => repo,
 
-            "collection" => collection.to_s,
+            "collection" => collection,
 
-            "rkey" => rkey.to_s,
+            "rkey" => rkey,
 
-            "swapRecord" => swapRecord.to_s,
+            "swapRecord" => swapRecord,
 
-            "swapCommit" => swapCommit.to_s
+            "swapCommit" => swapCommit
 
           }
         end
@@ -4023,7 +4023,7 @@ module Bskyrb
         def to_h
           {
 
-            "repo" => repo.to_s
+            "repo" => repo
 
           }
         end
@@ -4060,15 +4060,15 @@ module Bskyrb
         def to_h
           {
 
-            "handle" => handle.to_s,
+            "handle" => handle,
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "didDoc" => didDoc.to_s,
+            "didDoc" => didDoc,
 
-            "collections" => collections.to_s,
+            "collections" => collections,
 
-            "handleIsCorrect" => handleIsCorrect.to_s
+            "handleIsCorrect" => handleIsCorrect
 
           }
         end
@@ -4105,13 +4105,13 @@ module Bskyrb
         def to_h
           {
 
-            "repo" => repo.to_s,
+            "repo" => repo,
 
-            "collection" => collection.to_s,
+            "collection" => collection,
 
-            "rkey" => rkey.to_s,
+            "rkey" => rkey,
 
-            "cid" => cid.to_s
+            "cid" => cid
 
           }
         end
@@ -4140,11 +4140,11 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "cid" => cid.to_s,
+            "cid" => cid,
 
-            "value" => value.to_s
+            "value" => value
 
           }
         end
@@ -4193,19 +4193,19 @@ module Bskyrb
         def to_h
           {
 
-            "repo" => repo.to_s,
+            "repo" => repo,
 
-            "collection" => collection.to_s,
+            "collection" => collection,
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "rkeyStart" => rkeyStart.to_s,
+            "rkeyStart" => rkeyStart,
 
-            "rkeyEnd" => rkeyEnd.to_s,
+            "rkeyEnd" => rkeyEnd,
 
-            "reverse" => reverse.to_s
+            "reverse" => reverse
 
           }
         end
@@ -4230,9 +4230,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "records" => records.to_s
+            "records" => records
 
           }
         end
@@ -4281,19 +4281,19 @@ module Bskyrb
         def to_h
           {
 
-            "repo" => repo.to_s,
+            "repo" => repo,
 
-            "collection" => collection.to_s,
+            "collection" => collection,
 
-            "rkey" => rkey.to_s,
+            "rkey" => rkey,
 
-            "validate" => validate.to_s,
+            "validate" => validate,
 
-            "record" => record.to_s,
+            "record" => record,
 
-            "swapRecord" => swapRecord.to_s,
+            "swapRecord" => swapRecord,
 
-            "swapCommit" => swapCommit.to_s
+            "swapCommit" => swapCommit
 
           }
         end
@@ -4318,9 +4318,9 @@ module Bskyrb
         def to_h
           {
 
-            "uri" => uri.to_s,
+            "uri" => uri,
 
-            "cid" => cid.to_s
+            "cid" => cid
 
           }
         end
@@ -4345,7 +4345,7 @@ module Bskyrb
         def to_h
           {
 
-            "blob" => blob.to_s
+            "blob" => blob
 
           }
         end
@@ -4386,15 +4386,15 @@ module Bskyrb
         def to_h
           {
 
-            "email" => email.to_s,
+            "email" => email,
 
-            "handle" => handle.to_s,
+            "handle" => handle,
 
-            "inviteCode" => inviteCode.to_s,
+            "inviteCode" => inviteCode,
 
-            "password" => password.to_s,
+            "password" => password,
 
-            "recoveryKey" => recoveryKey.to_s
+            "recoveryKey" => recoveryKey
 
           }
         end
@@ -4427,13 +4427,13 @@ module Bskyrb
         def to_h
           {
 
-            "accessJwt" => accessJwt.to_s,
+            "accessJwt" => accessJwt,
 
-            "refreshJwt" => refreshJwt.to_s,
+            "refreshJwt" => refreshJwt,
 
-            "handle" => handle.to_s,
+            "handle" => handle,
 
-            "did" => did.to_s
+            "did" => did
 
           }
         end
@@ -4458,7 +4458,7 @@ module Bskyrb
         def to_h
           {
 
-            "name" => name.to_s
+            "name" => name
 
           }
         end
@@ -4498,9 +4498,9 @@ module Bskyrb
         def to_h
           {
 
-            "useCount" => useCount.to_s,
+            "useCount" => useCount,
 
-            "forAccount" => forAccount.to_s
+            "forAccount" => forAccount
 
           }
         end
@@ -4521,7 +4521,7 @@ module Bskyrb
         def to_h
           {
 
-            "code" => code.to_s
+            "code" => code
 
           }
         end
@@ -4554,11 +4554,11 @@ module Bskyrb
         def to_h
           {
 
-            "codeCount" => codeCount.to_s,
+            "codeCount" => codeCount,
 
-            "useCount" => useCount.to_s,
+            "useCount" => useCount,
 
-            "forAccounts" => forAccounts.to_s
+            "forAccounts" => forAccounts
 
           }
         end
@@ -4579,7 +4579,7 @@ module Bskyrb
         def to_h
           {
 
-            "codes" => codes.to_s
+            "codes" => codes
 
           }
         end
@@ -4608,9 +4608,9 @@ module Bskyrb
         def to_h
           {
 
-            "identifier" => identifier.to_s,
+            "identifier" => identifier,
 
-            "password" => password.to_s
+            "password" => password
 
           }
         end
@@ -4647,15 +4647,15 @@ module Bskyrb
         def to_h
           {
 
-            "accessJwt" => accessJwt.to_s,
+            "accessJwt" => accessJwt,
 
-            "refreshJwt" => refreshJwt.to_s,
+            "refreshJwt" => refreshJwt,
 
-            "handle" => handle.to_s,
+            "handle" => handle,
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "email" => email.to_s
+            "email" => email
 
           }
         end
@@ -4688,11 +4688,11 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "password" => password.to_s,
+            "password" => password,
 
-            "token" => token.to_s
+            "token" => token
 
           }
         end
@@ -4730,11 +4730,11 @@ module Bskyrb
         def to_h
           {
 
-            "inviteCodeRequired" => inviteCodeRequired.to_s,
+            "inviteCodeRequired" => inviteCodeRequired,
 
-            "availableUserDomains" => availableUserDomains.to_s,
+            "availableUserDomains" => availableUserDomains,
 
-            "links" => links.to_s
+            "links" => links
 
           }
         end
@@ -4763,9 +4763,9 @@ module Bskyrb
         def to_h
           {
 
-            "includeUsed" => includeUsed.to_s,
+            "includeUsed" => includeUsed,
 
-            "createAvailable" => createAvailable.to_s
+            "createAvailable" => createAvailable
 
           }
         end
@@ -4786,7 +4786,7 @@ module Bskyrb
         def to_h
           {
 
-            "codes" => codes.to_s
+            "codes" => codes
 
           }
         end
@@ -4819,11 +4819,11 @@ module Bskyrb
         def to_h
           {
 
-            "handle" => handle.to_s,
+            "handle" => handle,
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "email" => email.to_s
+            "email" => email
 
           }
         end
@@ -4848,7 +4848,7 @@ module Bskyrb
         def to_h
           {
 
-            "passwords" => passwords.to_s
+            "passwords" => passwords
 
           }
         end
@@ -4885,13 +4885,13 @@ module Bskyrb
         def to_h
           {
 
-            "accessJwt" => accessJwt.to_s,
+            "accessJwt" => accessJwt,
 
-            "refreshJwt" => refreshJwt.to_s,
+            "refreshJwt" => refreshJwt,
 
-            "handle" => handle.to_s,
+            "handle" => handle,
 
-            "did" => did.to_s
+            "did" => did
 
           }
         end
@@ -4921,7 +4921,7 @@ module Bskyrb
         def to_h
           {
 
-            "email" => email.to_s
+            "email" => email
 
           }
         end
@@ -4950,9 +4950,9 @@ module Bskyrb
         def to_h
           {
 
-            "token" => token.to_s,
+            "token" => token,
 
-            "password" => password.to_s
+            "password" => password
 
           }
         end
@@ -4977,7 +4977,7 @@ module Bskyrb
         def to_h
           {
 
-            "name" => name.to_s
+            "name" => name
 
           }
         end
@@ -5006,9 +5006,9 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "cid" => cid.to_s
+            "cid" => cid
 
           }
         end
@@ -5037,9 +5037,9 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "cids" => cids.to_s
+            "cids" => cids
 
           }
         end
@@ -5068,9 +5068,9 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "commit" => commit.to_s
+            "commit" => commit
 
           }
         end
@@ -5103,11 +5103,11 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "latest" => latest.to_s,
+            "latest" => latest,
 
-            "earliest" => earliest.to_s
+            "earliest" => earliest
 
           }
         end
@@ -5128,7 +5128,7 @@ module Bskyrb
         def to_h
           {
 
-            "commits" => commits.to_s
+            "commits" => commits
 
           }
         end
@@ -5153,7 +5153,7 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s
+            "did" => did
 
           }
         end
@@ -5174,7 +5174,7 @@ module Bskyrb
         def to_h
           {
 
-            "root" => root.to_s
+            "root" => root
 
           }
         end
@@ -5211,13 +5211,13 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "collection" => collection.to_s,
+            "collection" => collection,
 
-            "rkey" => rkey.to_s,
+            "rkey" => rkey,
 
-            "commit" => commit.to_s
+            "commit" => commit
 
           }
         end
@@ -5250,11 +5250,11 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "earliest" => earliest.to_s,
+            "earliest" => earliest,
 
-            "latest" => latest.to_s
+            "latest" => latest
 
           }
         end
@@ -5287,11 +5287,11 @@ module Bskyrb
         def to_h
           {
 
-            "did" => did.to_s,
+            "did" => did,
 
-            "latest" => latest.to_s,
+            "latest" => latest,
 
-            "earliest" => earliest.to_s
+            "earliest" => earliest
 
           }
         end
@@ -5312,7 +5312,7 @@ module Bskyrb
         def to_h
           {
 
-            "cids" => cids.to_s
+            "cids" => cids
 
           }
         end
@@ -5341,9 +5341,9 @@ module Bskyrb
         def to_h
           {
 
-            "limit" => limit.to_s,
+            "limit" => limit,
 
-            "cursor" => cursor.to_s
+            "cursor" => cursor
 
           }
         end
@@ -5368,9 +5368,9 @@ module Bskyrb
         def to_h
           {
 
-            "cursor" => cursor.to_s,
+            "cursor" => cursor,
 
-            "repos" => repos.to_s
+            "repos" => repos
 
           }
         end
@@ -5395,7 +5395,7 @@ module Bskyrb
         def to_h
           {
 
-            "hostname" => hostname.to_s
+            "hostname" => hostname
 
           }
         end
@@ -5420,7 +5420,7 @@ module Bskyrb
         def to_h
           {
 
-            "hostname" => hostname.to_s
+            "hostname" => hostname
 
           }
         end
