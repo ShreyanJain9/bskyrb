@@ -13,6 +13,7 @@ module Bskyrb
     def at_post_link: (String pds, String url) -> String
     def resolve_handle: (String pds, String username) -> HTTParty::Response
     def get_timeline_uri: (String pds, Bskyrb::AppBskyFeedGettimeline::GetTimeline::Input query) -> String
+    def get_popular_uri: (String pds, Bskyrb::AppBskyUnspeccedGetpopular::GetPopular::Input query) -> String
   end
 
   class Credentials
@@ -49,6 +50,7 @@ module Bskyrb
     def initialize: (Session session) -> void
     def create_record: (untyped) -> HTTParty::Response
     def get_skyline: (Integer n) -> Bskyrb::postArray
+    def get_popular: (Integer n) -> Bskyrb::postArray
     def hydrate_feed: (HTTParty::Response, untyped) -> Bskyrb::postArray
   end
 end

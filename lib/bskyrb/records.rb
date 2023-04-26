@@ -134,6 +134,16 @@ module Bskyrb
       ), Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
     end
 
+    def get_popular(n)
+      query = Bskyrb::AppBskyUnspeccedGetpopular::GetPopular::Input.new.tap do |q|
+        q.limit = n
+      end
+      hydrate_feed HTTParty.get(
+        get_popular_uri(session.pds, query),
+        headers: default_authenticated_headers(session)
+      ), Bskyrb::AppBskyUnspeccedGetpopular::GetPopular::Output
+    end
+
     def hydrate_feed(response_hash, klass)
       klass.from_hash(response_hash).tap do |feed|
         feed.feed = response_hash["feed"].map do |h|
