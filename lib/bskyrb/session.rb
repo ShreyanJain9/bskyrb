@@ -12,7 +12,7 @@ module Bskyrb
     def query_obj_to_query_params(q)
       out = "?"
       q.to_h.each do |key, value|
-        out += "#{key}=#{value}&" unless value.nil? || value.empty?
+        out += "#{key}=#{value}&" unless value.nil? || (value.class.method_defined?(:empty?) && value.empty?)
       end
       out.slice(0...-1)
     end
@@ -39,6 +39,10 @@ module Bskyrb
 
     def get_timeline_uri(pds, query)
       "#{pds}/xrpc/app.bsky.feed.getTimeline#{query_obj_to_query_params(query)}"
+    end
+
+    def get_popular_uri(pds, query)
+      "#{pds}/xrpc/app.bsky.unspecced.getPopular#{query_obj_to_query_params(query)}"
     end
 
     def default_authenticated_headers(session)
