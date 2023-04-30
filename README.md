@@ -35,6 +35,8 @@ credentials = Bskyrb::Credentials.new(username, password)
 session = Bskyrb::Session.new(credentials, pds_url)
 bsky = Bskyrb::RecordManager.new(session)
 bsky.create_post("Hello world from bskyrb!")
+bsky.like("https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27")
+bsky.repost("https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27")
 ```
 
 ## Development
