@@ -1,7 +1,23 @@
 require "uri"
 require "httparty"
 
-module Bskyrb
+# def bsky_register(pds, user, password, invcode, email) # lets you create new accounts on a pds directly from ruby
+#   # doesn't go within session class because it wouldn't work unless you already have an account
+#   data = {
+#     "email": email,
+#     "handle": user + ".bsky.social", # defaulting to bsky.social handles because you can't add dns records for a DID that doesn't exist yet
+#     "inviteCode": invcode,
+#     "password": password,
+#   }
+#   resp = HTTParty.post(
+#     "#{pds}/xrpc/com.atproto.server.createAccount",
+#     body: data.to_json,
+#     headers: {'Content-Type' => 'application/json'}
+#   )
+#   resp
+# end
+
+module Bskyrb  
   module RequestUtils
     def resolve_handle(pds, username)
       HTTParty.get(
@@ -95,21 +111,6 @@ module Bskyrb
       @did = response["did"]
     end
   end
-  def register(pds = "https://bsky.social", user, password, invcode, email) # lets you create new accounts on a pds directly from ruby
-    # doesn't go within session class because it wouldn't work unless you already have an account
-    data = {
-      "email": email,
-      "handle": user + ".bsky.social", # defaulting to bsky.social handles because you can't add dns records for a DID that doesn't exist yet
-      "inviteCode": invcode,
-      "password": password,
-    }
-    resp = HTTParty.post(
-      "#{pds}/xrpc/com.atproto.server.createAccount",
-      body: data.to_json,
-      headers: {'Content-Type' => 'application/json'}
-    )
-    resp
-  end
-    
+
 
 end
