@@ -108,11 +108,10 @@ module Bskyrb
       create_record(input)
     end
 
-    def post_action(post_url, action_type)
-      post = get_post_by_url(post_url)
+    def post_action(post, action_type)
       post_cid = post.cid
       # person_youre_reskooting = resolve_handle(@session.pds, post.author)
-      at_uri = at_post_link(@session.pds, post_url).to_s
+      at_uri = post.uri
       data = {
         collection: action_type,
         repo: session.did,
@@ -129,11 +128,13 @@ module Bskyrb
     end
 
     def like(post_url)
-      post_action(post_url, "app.bsky.feed.like")
+      post = get_post_by_url(post_url)
+      post_action(post, "app.bsky.feed.like")
     end
 
     def repost(post_url)
-      post_action(post_url, "app.bsky.feed.repost")
+      post = get_post_by_url(post_url)
+      post_action(post, "app.bsky.feed.repost")
     end
 
     def get_latest_post(username)
