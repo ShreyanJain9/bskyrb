@@ -108,6 +108,34 @@ module Bskyrb
       create_record(input)
     end
 
+    def post_action(post_url, action_type)
+      post = get_post_by_url(post_url)
+      post_cid = post.cid
+      # person_youre_reskooting = resolve_handle(@session.pds, post.author)
+      at_uri = at_post_link(@session.pds, post_url).to_s
+      data = {
+        collection: action_type,
+        repo: session.did,
+        record: {
+            subject: {
+                uri: at_uri,
+                cid: "#{post_cid}", # cid of the post to like
+            },
+            createdAt: DateTime.now.iso8601(3),
+            "$type": action_type
+        }
+    }
+    create_record(data)
+    end
+
+    def like(post_url)
+      post_action(post_url, "app.bsky.feed.like")
+    end
+
+    def repost(post_url)
+      post_action(post_url, "app.bsky.feed.repost")
+    end
+
     def get_latest_post(username)
       feed = get_latest_n_posts(username, 1)
       feed.feed.first
