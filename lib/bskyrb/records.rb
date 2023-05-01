@@ -147,11 +147,11 @@ module Bskyrb
     # end
 
     def mute(username)
-      profile_action(username, "app.bsky.graph.muteActor")
+      profile_action(username, "app.bsky.graph.mute")
     end
 
     def unmute(username)
-      profile_action(username, "app.bsky.graph.unmuteActor")
+      profile_action(username, "app.bsky.graph.unmute")
     end
     
 
