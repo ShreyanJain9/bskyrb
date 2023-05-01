@@ -146,13 +146,13 @@ module Bskyrb
     #   profile_action(username, "app.bsky.graph.unfollow(?)")
     # end
 
-    def mute(username)
-      profile_action(username, "app.bsky.graph.mute")
-    end
+    # def mute(username)
+    #   profile_action(username, "app.bsky.graph.mute")
+    # end
 
-    def unmute(username)
-      profile_action(username, "app.bsky.graph.unmute")
-    end
+    # def unmute(username)
+    #   profile_action(username, "app.bsky.graph.unmute")
+    # end
     
 
     def block(username)
