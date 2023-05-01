@@ -95,18 +95,19 @@ module Bskyrb
       create_record(input)
     end
 
-    def follow(username)
+    def profile_action(username, type)
       input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
-        "collection" => "app.bsky.graph.follow",
+        "collection" => type,
         "repo" => session.did,
         "record" => {
           "subject" => resolve_handle(session.pds, username)["did"],
           "createdAt" => DateTime.now.iso8601(3),
-          "$type" => "app.bsky.graph.follow"
+          "$type" => type
         }
       })
       create_record(input)
     end
+
 
     def post_action(post, action_type)
       post_cid = post.cid
@@ -136,6 +137,28 @@ module Bskyrb
       post = get_post_by_url(post_url)
       post_action(post, "app.bsky.feed.repost")
     end
+    
+    def follow(username)
+      profile_action(username, "app.bsky.graph.follow")
+    end
+
+    # def unfollow(username)
+    #   profile_action(username, "app.bsky.graph.unfollow(?)")
+    # end
+
+    def mute(username)
+      profile_action(username, "app.bsky.graph.muteActor")
+    end
+
+    def unmute(username)
+      profile_action(username, "app.bsky.graph.unmuteActor")
+    end
+    
+
+    def block(username)
+      profile_action(username, "app.bsky.graph.block")
+    end
+
 
     def get_latest_post(username)
       feed = get_latest_n_posts(username, 1)
