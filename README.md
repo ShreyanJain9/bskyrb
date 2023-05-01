@@ -43,7 +43,9 @@ bsky.repost("https://staging.bsky.app/profile/snarfed.org/post/3juf23vmnjo2r")
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org). And configure the type checker:
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, run `./deploy.sh` and you will be guided through updating the version number, bundling the gem, and pushing it to RubyGems. You must be signed in with a RubyGems account that has push access to bskyrb. 
+
+And configure the type checker:
 
 ## Code generation
 
