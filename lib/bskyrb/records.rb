@@ -95,6 +95,9 @@ module Bskyrb
       create_record(input)
     end
 
+    def create_reply(replylink, text)
+    end
+
     def profile_action(username, type)
       input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
         "collection" => type,
