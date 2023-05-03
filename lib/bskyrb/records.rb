@@ -96,6 +96,27 @@ module Bskyrb
     end
 
     def create_reply(replylink, text)
+      reply_to = get_post_by_url(replylink)
+      reply_json = {
+        root: {
+            uri: reply_to.uri,
+            cid: reply_to.cid,
+        },
+        parent: {
+            uri: reply_to.uri,
+            cid: reply_to.cid,
+        },
+        collection: "app.bsky.feed.post",
+        repo: session.did,
+        record: {
+          "$type": "app.bsky.feed.post",
+          createdAt: DateTime.now.iso8601(3),
+          text: text
+        }
+      },
+      reply_hash = JSON.parse(reply_json.to_json)
+      reply = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash(reply_hash)
+      create_record(reply)
     end
 
     def profile_action(username, type)
@@ -113,16 +134,13 @@ module Bskyrb
 
 
     def post_action(post, action_type)
-      post_cid = post.cid
-      # person_youre_reskooting = resolve_handle(@session.pds, post.author)
-      at_uri = post.uri
       data = {
         collection: action_type,
         repo: session.did,
         record: {
             subject: {
-                uri: at_uri,
-                cid: "#{post_cid}", # cid of the post to like
+                uri: post.uri,
+                cid: post.cid,
             },
             createdAt: DateTime.now.iso8601(3),
             "$type": action_type
