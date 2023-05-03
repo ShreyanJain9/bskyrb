@@ -42,6 +42,15 @@ module Bskyrb
       )
     end
 
+    def delete_record(collection, rkey)
+      data = {"collection":"#{collection}","repo":"#{session.did}","rkey":"#{rkey}"}
+      resp = HTTParty.post(
+        "#{session.pds}/xrpc/com.atproto.repo.deleteRecord",
+        body: data.to_json,
+        headers: default_authenticated_headers(session)
+      )
+      resp
+    end
     def detect_facets(json_hash) # TODO, DOES NOT WORK YET
       # For some reason this always fails at finding text records and I have no idea why
       # Detect domain names that have been @mentioned in the text
