@@ -45,7 +45,7 @@ module Bskyrb
     def delete_record(collection, rkey)
       data = {"collection":"#{collection}","repo":"#{session.did}","rkey":"#{rkey}"}
       resp = HTTParty.post(
-        "#{session.pds}/xrpc/com.atproto.repo.deleteRecord",
+        delete_record_uri(session),
         body: data.to_json,
         headers: default_authenticated_headers(session)
       )
