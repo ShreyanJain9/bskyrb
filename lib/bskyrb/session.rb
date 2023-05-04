@@ -41,6 +41,10 @@ module Bskyrb
       "#{pds}/xrpc/com.atproto.repo.createRecord"
     end
 
+    def delete_record_uri(pds)
+      "#{pds}/xrpc/com.atproto.repo.deleteRecord"
+    end
+
     def upload_blob_uri(pds)
       "#{pds}/xrpc/com.atproto.repo.uploadBlob"
     end
