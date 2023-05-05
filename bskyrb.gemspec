@@ -5,7 +5,6 @@ require "bskyrb/version"
 specfiles = Dir["./lib/bskyrb/*"]
 specfiles.push("./lib/bskyrb.rb")
 
-
 Gem::Specification.new do |spec|
   spec.name = "bskyrb"
   spec.version = Bskyrb::VERSION
