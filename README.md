@@ -5,6 +5,7 @@
 - [Development](#development)
 - [Code generation](#code-generation)
   - [Type checking](#type-checking)
+  - [Tests](#tests)
   - [Formatting](#formatting)
 - [Contributing](#contributing)
   - [TODO](#todo)
@@ -43,7 +44,7 @@ bsky.repost("https://staging.bsky.app/profile/snarfed.org/post/3juf23vmnjo2r")
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, run `./deploy.sh` and you will be guided through updating the version number, bundling the gem, and pushing it to RubyGems. You must be signed in with a RubyGems account that has push access to bskyrb. 
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, run `./deploy.sh` and you will be guided through updating the version number, bundling the gem, and pushing it to RubyGems. You must be signed in with a RubyGems account that has push access to bskyrb.
 
 And configure the type checker:
 
@@ -105,10 +106,15 @@ bskyrb uses [.rbs type definitions](https://github.com/ruby/rbs). To check for a
 
 Use the [`rbs collection` tool](https://github.com/ruby/rbs/blob/master/docs/collection.md) to manage definitions for third-party dependencies, for example HTTParty. Use `bundle exec rbs collection install` to download third-party definitions (**you will need to do this before `bin/typecheck` will work**).
 
+### Tests
+
+Run the test suite with:
+
+    $ bundle exec rake test
+
 ### Formatting
 
 So nobody has to argue about formatting, bskyrb uses the `standard` gem. Run `bin/format` to format the code in this repo.
-
 
 ## Contributing
 
@@ -117,7 +123,7 @@ Please do!
 ### TODO
 
 - Build
-- Tests
+- More/better tests
 - (Eventually) Publish/release pipeline
 
 ## License
