@@ -1,5 +1,5 @@
 # Bskyrb
-
+![](https://img.shields.io/github/actions/workflow/status/ShreyanJain9/bskyrb/ruby.yml?style=plastic)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Development](#development)
