@@ -125,13 +125,18 @@ So nobody has to argue about formatting, bskyrb uses the `standard` gem. Run `bi
 
 Please do!
 
+### TODO
+
+- Build
+- More/better tests
+- (Eventually) Publish/release pipeline
+- Split into separate modules for XRPC, Lexicon, ATProto, etc
+
 ## Contributors
 
 <a href="https://github.com/ShreyanJain9/bskyrb/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ShreyanJain9/bskyrb" />
 </a>
-
-Made with [contrib.rocks](https://contrib.rocks).
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -141,13 +146,6 @@ Made with [contrib.rocks](https://contrib.rocks).
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-
-### TODO
-
-- Build
-- More/better tests
-- (Eventually) Publish/release pipeline
 
 ## License
 
