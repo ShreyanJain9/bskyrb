@@ -1,5 +1,6 @@
 # Bskyrb
 ![](https://img.shields.io/github/actions/workflow/status/ShreyanJain9/bskyrb/ruby.yml?style=plastic)
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Development](#development)
@@ -119,6 +120,18 @@ So nobody has to argue about formatting, bskyrb uses the `standard` gem. Run `bi
 ## Contributing
 
 Please do!
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 
 ### TODO
 
