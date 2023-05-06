@@ -43,14 +43,14 @@ module Bskyrb
     end
 
     def delete_record(collection, rkey)
-      data = {"collection":"#{collection}","repo":"#{session.did}","rkey":"#{rkey}"}
-      resp = HTTParty.post(
+      data = {collection: "#{collection}", repo: "#{session.did}", rkey: "#{rkey}"}
+      HTTParty.post(
         delete_record_uri(session),
         body: data.to_json,
         headers: default_authenticated_headers(session)
       )
-      resp
     end
+
     def detect_facets(json_hash) # TODO, DOES NOT WORK YET
       # For some reason this always fails at finding text records and I have no idea why
       # Detect domain names that have been @mentioned in the text
@@ -108,12 +108,12 @@ module Bskyrb
       reply_to = get_post_by_url(replylink)
       reply_json = {
         root: {
-            uri: reply_to.uri,
-            cid: reply_to.cid,
+          uri: reply_to.uri,
+          cid: reply_to.cid
         },
         parent: {
-            uri: reply_to.uri,
-            cid: reply_to.cid,
+          uri: reply_to.uri,
+          cid: reply_to.cid
         },
         collection: "app.bsky.feed.post",
         repo: session.did,
@@ -123,7 +123,7 @@ module Bskyrb
           text: text
         }
       },
-      reply_hash = JSON.parse(reply_json.to_json)
+        reply_hash = JSON.parse(reply_json.to_json)
       reply = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash(reply_hash)
       create_record(reply)
     end
@@ -141,21 +141,20 @@ module Bskyrb
       create_record(input)
     end
 
-
     def post_action(post, action_type)
       data = {
         collection: action_type,
         repo: session.did,
         record: {
-            subject: {
-                uri: post.uri,
-                cid: post.cid,
-            },
-            createdAt: DateTime.now.iso8601(3),
-            "$type": action_type
+          subject: {
+            uri: post.uri,
+            cid: post.cid
+          },
+          createdAt: DateTime.now.iso8601(3),
+          "$type": action_type
         }
-    }
-    create_record(data)
+      }
+      create_record(data)
     end
 
     def like(post_url)
@@ -167,28 +166,14 @@ module Bskyrb
       post = get_post_by_url(post_url)
       post_action(post, "app.bsky.feed.repost")
     end
-    
+
     def follow(username)
       profile_action(username, "app.bsky.graph.follow")
     end
 
-    # def unfollow(username)
-    #   profile_action(username, "app.bsky.graph.unfollow(?)")
-    # end
-                                    #NONE OF THESE WORK 
-    # def mute(username)
-    #   profile_action(username, "app.bsky.graph.mute")
-    # end
-
-    # def unmute(username)
-    #   profile_action(username, "app.bsky.graph.unmute")
-    # end
-    
-
     def block(username)
       profile_action(username, "app.bsky.graph.block")
     end
-
 
     def get_latest_post(username)
       feed = get_latest_n_posts(username, 1)

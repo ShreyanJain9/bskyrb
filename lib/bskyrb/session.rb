@@ -17,7 +17,7 @@ require "httparty"
 #   resp
 # end
 
-module Bskyrb  
+module Bskyrb
   module RequestUtils
     def resolve_handle(pds, username)
       HTTParty.get(
@@ -115,6 +115,4 @@ module Bskyrb
       @did = response["did"]
     end
   end
-
-
 end
