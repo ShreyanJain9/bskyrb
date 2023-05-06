@@ -10,6 +10,7 @@
   - [Formatting](#formatting)
 - [Contributing](#contributing)
   - [TODO](#todo)
+- [Contributors](#contributors)
 - [License](#license)
 - [Code of Conduct](#code-of-conduct)
 
