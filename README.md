@@ -23,6 +23,9 @@ Install the gem and add to the application's Gemfile by executing:
 If bundler is not being used to manage dependencies, install the gem by executing:
 
     $ gem install bskyrb
+    
+You can also install the gem by cloning this repository and running `./install-local.sh`.
+
 
 ## Usage
 
