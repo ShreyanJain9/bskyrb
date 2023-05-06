@@ -123,6 +123,12 @@ Please do!
 
 ## Contributors
 
+<a href="https://github.com/ShreyanJain9/bskyrb/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ShreyanJain9/bskyrb" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
