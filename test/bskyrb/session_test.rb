@@ -11,7 +11,7 @@ module Bskyrb
         body: {"accessJwt" => "ACCESS_JWT", "refreshJwt" => "REFRESH_JWT", "did" => "DID"}.to_json
       )
 
-      credentials = Bskyrb::Credentials.new("valid_username", "valid_password")
+      credentials = Bskyrb::Credentials.new(ENV["BSKY_USERNAME"], ENV["BSKY_PASSWORD"])
 
       session = Bskyrb::Session.new(credentials, "https://bsky.social")
 
