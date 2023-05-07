@@ -13,4 +13,5 @@ group :development do
   gem "rbs"
   gem "standard"
   gem "steep", ">= 1.3.2"
+  gem "webmock", "3.18.1"
 end
