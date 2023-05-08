@@ -15,7 +15,8 @@ bskyrb.code-workspace
 bskyrb-0.3.gem
 atproto/
 node_modules/
-lib/bskytest.rb 
+lib/bskytest.rb
+.byebug_history
 
 bskyrb-0.4.gem
 bskyrb-0.5.gem

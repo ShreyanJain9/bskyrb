@@ -94,6 +94,9 @@ module Bskyrb
         body: {identifier: credentials.username, password: credentials.pw}.to_json,
         headers: default_headers
       )
+
+      raise UnauthorizedError if response.code == 401
+
       @access_token = response["accessJwt"]
       @refresh_token = response["refreshJwt"]
       @did = response["did"]
