@@ -56,13 +56,34 @@ module Bskyrb
     end
 
     def at_post_link(pds, url)
-      # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
       url = url.to_s
-      # regex by chatgpt:
-      raise "The provided URL #{url} does not match the expected schema" unless /https:\/\/[a-zA-Z0-9.-]+\/profile\/[a-zA-Z0-9.-]+\/post\/[a-zA-Z0-9.-]+/.match?(url)
+
+      # Check if the URL is already in AT format
+      if url.start_with?("at://")
+        # Validate the username and post ID in the URL
+        parts = url.split("/")
+        if parts.length == 5 && parts[3] == "app.bsky.feed.post"
+          username = parts[2]
+          post_id = parts[4]
+          if post_id
+            return url
+          end
+        end
+
+        # If the URL is not valid, raise an error
+        raise "The provided URL #{url} is not a valid AT URL"
+      end
+
+      # Validate the format of the regular URL and extract the username and post ID
+      regex = /https:\/\/[a-zA-Z0-9.-]+\/profile\/[a-zA-Z0-9.-]+\/post\/[a-zA-Z0-9.-]+/
+      raise "The provided URL #{url} does not match the expected schema" unless regex.match?(url)
       username = url.split("/")[-3]
-      did = resolve_handle(pds, username)["did"]
       post_id = url.split("/")[-1]
+
+      # Validate the username and post ID in the AT URL
+      did = resolve_handle(pds, username)["did"]
+
+      # Construct the AT URL
       "at://#{did}/app.bsky.feed.post/#{post_id}"
     end
   end

@@ -40,9 +40,10 @@ pds_url = 'https://bsky.social'
 credentials = Bskyrb::Credentials.new(username, password)
 session = Bskyrb::Session.new(credentials, pds_url)
 bsky = Bskyrb::RecordManager.new(session)
-bsky.create_post("Hello world from bskyrb!")
-bsky.like("https://staging.bsky.app/profile/snarfed.org/post/3juf23vmnjo2r")
-bsky.repost("https://staging.bsky.app/profile/snarfed.org/post/3juf23vmnjo2r")
+post_uri = bsky.create_post("Hello world from bskyrb!")["uri"]
+bsky.like(post_uri)
+bsky.repost(post_uri)
+bsky.create_reply(post_uri, "Replying to post from bskyrb")
 ```
 
 ## Development
