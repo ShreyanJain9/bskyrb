@@ -43,51 +43,12 @@ module Bskyrb
     end
 
     def delete_record(collection, rkey)
-      data = {collection: "#{collection}", repo: "#{session.did}", rkey: "#{rkey}"}
+      data = {collection: collection, repo: session.did, rkey: rkey}
       HTTParty.post(
         delete_record_uri(session),
         body: data.to_json,
         headers: default_authenticated_headers(session)
       )
-    end
-
-    def detect_facets(json_hash) # TODO, DOES NOT WORK YET
-      # For some reason this always fails at finding text records and I have no idea why
-      # Detect domain names that have been @mentioned in the text
-      matches = json_hash["record"]["text"].scan(/@([^\s.]+\.[^\s]+)/)
-
-      # Create a facets array to hold the resolved handles
-      facets = []
-
-      # Loop through the matches and resolve the handles
-      matches.each do |match|
-        handle = match[0]
-        resolved_handle = resolve_handle(session.pds, handle)
-        byte_start = json_hash["record"]["text"].index("@" + handle)
-        byte_end = byte_start + handle.length
-        facet = {
-          "$type": "app.bsky.richtext.facet",
-          features: [
-            {
-              "$type": "app.bsky.richtext.facet#mention",
-              did: resolved_handle
-            }
-          ],
-          index: {
-            byteStart: byte_start,
-            byteEnd: byte_end
-          }
-        }
-        facets.push(facet)
-      end
-
-      # Append the facets to the JSON hash
-      json_hash["record"]["facets"] = facets
-
-      # Convert the JSON hash back to a string
-      JSON.generate(json_hash)
-
-      # "Doesn't work yet"
     end
 
     def create_post(text)
