@@ -73,9 +73,41 @@ module Bskyrb
     class ViewerState
       attr_accessor muted: untyped
 
+      attr_accessor mutedByList: untyped
+
+      attr_accessor blockedBy: untyped
+
+      attr_accessor blocking: untyped
+
       attr_accessor following: untyped
 
       attr_accessor followedBy: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyActorDefs
+    class Preferences
+      attr_accessor items: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyActorDefs
+    class AdultContentPref
+      attr_accessor enabled: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyActorDefs
+    class ContentLabelPref
+      attr_accessor label: untyped
+
+      attr_accessor visibility: untyped
 
       def self.from_hash: (untyped hash) -> untyped
     end
@@ -165,6 +197,8 @@ module Bskyrb
 
       attr_accessor value: untyped
 
+      attr_accessor labels: untyped
+
       attr_accessor embeds: untyped
 
       attr_accessor indexedAt: untyped
@@ -175,6 +209,14 @@ module Bskyrb
 
   module AppBskyEmbedRecord
     class ViewNotFound
+      attr_accessor uri: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyEmbedRecord
+    class ViewBlocked
       attr_accessor uri: untyped
 
       def self.from_hash: (untyped hash) -> untyped
@@ -283,6 +325,16 @@ module Bskyrb
     end
   end
 
+  module AppBskyFeedDefs
+    class BlockedPost
+      attr_accessor uri: untyped
+
+      attr_accessor blocked: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
   module AppBskyFeedGetlikes
     class Like
       attr_accessor indexedAt: untyped
@@ -320,6 +372,76 @@ module Bskyrb
       attr_accessor start: untyped
 
       attr_accessor end: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListViewBasic
+      attr_accessor uri: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor purpose: untyped
+
+      attr_accessor avatar: untyped
+
+      attr_accessor viewer: untyped
+
+      attr_accessor indexedAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListView
+      attr_accessor uri: untyped
+
+      attr_accessor creator: untyped
+
+      attr_accessor name: untyped
+
+      attr_accessor purpose: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor descriptionFacets: untyped
+
+      attr_accessor avatar: untyped
+
+      attr_accessor viewer: untyped
+
+      attr_accessor indexedAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListItemView
+      attr_accessor subject: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListPurpose
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyGraphDefs
+    class Modlist
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListViewerState
+      attr_accessor muted: untyped
 
       def self.from_hash: (untyped hash) -> untyped
     end
@@ -478,6 +600,12 @@ module Bskyrb
   end
 
   module ComAtprotoAdminDefs
+    class Escalate
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
     class ReportView
       attr_accessor id: untyped
 
@@ -533,6 +661,8 @@ module Bskyrb
 
       attr_accessor invitedBy: untyped
 
+      attr_accessor invitesDisabled: untyped
+
       def self.from_hash: (untyped hash) -> untyped
     end
   end
@@ -556,6 +686,8 @@ module Bskyrb
       attr_accessor invitedBy: untyped
 
       attr_accessor invites: untyped
+
+      attr_accessor invitesDisabled: untyped
 
       def self.from_hash: (untyped hash) -> untyped
     end
@@ -967,6 +1099,24 @@ module Bskyrb
     end
   end
 
+  module AppBskyActorGetpreferences
+    module GetPreferences
+      class Input
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[untyped, untyped]
+      end
+
+      class Output
+        attr_accessor preferences: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
   module AppBskyActorGetprofile
     module GetProfile
       class Input
@@ -1021,6 +1171,18 @@ module Bskyrb
         attr_accessor cursor: untyped
 
         attr_accessor actors: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyActorPutpreferences
+    module PutPreferences
+      class Input
+        attr_accessor preferences: untyped
 
         def self.from_hash: (untyped hash) -> untyped
 
@@ -1235,6 +1397,30 @@ module Bskyrb
     end
   end
 
+  module AppBskyGraphGetblocks
+    module GetBlocks
+      class Input
+        attr_accessor limit: untyped
+
+        attr_accessor cursor: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor cursor: untyped
+
+        attr_accessor blocks: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
   module AppBskyGraphGetfollowers
     module GetFollowers
       class Input
@@ -1291,6 +1477,84 @@ module Bskyrb
     end
   end
 
+  module AppBskyGraphGetlist
+    module GetList
+      class Input
+        attr_accessor list: untyped
+
+        attr_accessor limit: untyped
+
+        attr_accessor cursor: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor cursor: untyped
+
+        attr_accessor list: untyped
+
+        attr_accessor items: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyGraphGetlistmutes
+    module GetListMutes
+      class Input
+        attr_accessor limit: untyped
+
+        attr_accessor cursor: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor cursor: untyped
+
+        attr_accessor lists: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyGraphGetlists
+    module GetLists
+      class Input
+        attr_accessor actor: untyped
+
+        attr_accessor limit: untyped
+
+        attr_accessor cursor: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor cursor: untyped
+
+        attr_accessor lists: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
   module AppBskyGraphGetmutes
     module GetMutes
       class Input
@@ -1327,10 +1591,34 @@ module Bskyrb
     end
   end
 
+  module AppBskyGraphMuteactorlist
+    module MuteActorList
+      class Input
+        attr_accessor list: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
   module AppBskyGraphUnmuteactor
     module UnmuteActor
       class Input
         attr_accessor actor: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyGraphUnmuteactorlist
+    module UnmuteActorList
+      class Input
+        attr_accessor list: untyped
 
         def self.from_hash: (untyped hash) -> untyped
 
@@ -1400,6 +1688,8 @@ module Bskyrb
   module AppBskyUnspeccedGetpopular
     module GetPopular
       class Input
+        attr_accessor includeNsfw: untyped
+
         attr_accessor limit: untyped
 
         attr_accessor cursor: untyped
@@ -1421,12 +1711,36 @@ module Bskyrb
     end
   end
 
+  module ComAtprotoAdminDisableaccountinvites
+    module DisableAccountInvites
+      class Input
+        attr_accessor account: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
   module ComAtprotoAdminDisableinvitecodes
     module DisableInviteCodes
       class Input
         attr_accessor codes: untyped
 
         attr_accessor accounts: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module ComAtprotoAdminEnableaccountinvites
+    module EnableAccountInvites
+      class Input
+        attr_accessor account: untyped
 
         def self.from_hash: (untyped hash) -> untyped
 
@@ -1529,6 +1843,8 @@ module Bskyrb
         attr_accessor subject: untyped
 
         attr_accessor resolved: untyped
+
+        attr_accessor actionType: untyped
 
         attr_accessor limit: untyped
 
@@ -2009,6 +2325,20 @@ module Bskyrb
     end
   end
 
+  module ComAtprotoRepoRebaserepo
+    module RebaseRepo
+      class Input
+        attr_accessor repo: untyped
+
+        attr_accessor swapCommit: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
   module ComAtprotoRepoUploadblob
     module UploadBlob
       class Output
@@ -2027,6 +2357,8 @@ module Bskyrb
         attr_accessor email: untyped
 
         attr_accessor handle: untyped
+
+        attr_accessor did: untyped
 
         attr_accessor inviteCode: untyped
 
