@@ -140,6 +140,12 @@ module Bskyrb
     class ViewerState
       attr_accessor :muted
 
+      attr_accessor :mutedByList
+
+      attr_accessor :blockedBy
+
+      attr_accessor :blocking
+
       attr_accessor :following
 
       attr_accessor :followedBy
@@ -150,9 +156,64 @@ module Bskyrb
 
         instance.send(:muted=, hash["muted"])
 
+        instance.send(:mutedByList=, hash["mutedByList"])
+
+        instance.send(:blockedBy=, hash["blockedBy"])
+
+        instance.send(:blocking=, hash["blocking"])
+
         instance.send(:following=, hash["following"])
 
         instance.send(:followedBy=, hash["followedBy"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyActorDefs
+    class Preferences
+      attr_accessor :items
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:items=, hash["items"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyActorDefs
+    class AdultContentPref
+      attr_accessor :enabled
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:enabled=, hash["enabled"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyActorDefs
+    class ContentLabelPref
+      attr_accessor :label
+
+      attr_accessor :visibility
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:label=, hash["label"])
+
+        instance.send(:visibility=, hash["visibility"])
 
         instance
       end
@@ -310,6 +371,8 @@ module Bskyrb
 
       attr_accessor :value
 
+      attr_accessor :labels
+
       attr_accessor :embeds
 
       attr_accessor :indexedAt
@@ -326,6 +389,8 @@ module Bskyrb
 
         instance.send(:value=, hash["value"])
 
+        instance.send(:labels=, hash["labels"])
+
         instance.send(:embeds=, hash["embeds"])
 
         instance.send(:indexedAt=, hash["indexedAt"])
@@ -337,6 +402,21 @@ module Bskyrb
 
   module AppBskyEmbedRecord
     class ViewNotFound
+      attr_accessor :uri
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:uri=, hash["uri"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyEmbedRecord
+    class ViewBlocked
       attr_accessor :uri
 
       def self.from_hash(hash)
@@ -546,6 +626,25 @@ module Bskyrb
     end
   end
 
+  module AppBskyFeedDefs
+    class BlockedPost
+      attr_accessor :uri
+
+      attr_accessor :blocked
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:uri=, hash["uri"])
+
+        instance.send(:blocked=, hash["blocked"])
+
+        instance
+      end
+    end
+  end
+
   module AppBskyFeedGetlikes
     class Like
       attr_accessor :indexedAt
@@ -620,6 +719,136 @@ module Bskyrb
         instance.send(:start=, hash["start"])
 
         instance.send(:end=, hash["end"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListViewBasic
+      attr_accessor :uri
+
+      attr_accessor :name
+
+      attr_accessor :purpose
+
+      attr_accessor :avatar
+
+      attr_accessor :viewer
+
+      attr_accessor :indexedAt
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:uri=, hash["uri"])
+
+        instance.send(:name=, hash["name"])
+
+        instance.send(:purpose=, hash["purpose"])
+
+        instance.send(:avatar=, hash["avatar"])
+
+        instance.send(:viewer=, hash["viewer"])
+
+        instance.send(:indexedAt=, hash["indexedAt"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListView
+      attr_accessor :uri
+
+      attr_accessor :creator
+
+      attr_accessor :name
+
+      attr_accessor :purpose
+
+      attr_accessor :description
+
+      attr_accessor :descriptionFacets
+
+      attr_accessor :avatar
+
+      attr_accessor :viewer
+
+      attr_accessor :indexedAt
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:uri=, hash["uri"])
+
+        instance.send(:creator=, hash["creator"])
+
+        instance.send(:name=, hash["name"])
+
+        instance.send(:purpose=, hash["purpose"])
+
+        instance.send(:description=, hash["description"])
+
+        instance.send(:descriptionFacets=, hash["descriptionFacets"])
+
+        instance.send(:avatar=, hash["avatar"])
+
+        instance.send(:viewer=, hash["viewer"])
+
+        instance.send(:indexedAt=, hash["indexedAt"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListItemView
+      attr_accessor :subject
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:subject=, hash["subject"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListPurpose
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        new
+      end
+    end
+  end
+
+  module AppBskyGraphDefs
+    class Modlist
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        new
+      end
+    end
+  end
+
+  module AppBskyGraphDefs
+    class ListViewerState
+      attr_accessor :muted
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:muted=, hash["muted"])
 
         instance
       end
@@ -911,6 +1140,15 @@ module Bskyrb
   end
 
   module ComAtprotoAdminDefs
+    class Escalate
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        new
+      end
+    end
+  end
+
+  module ComAtprotoAdminDefs
     class ReportView
       attr_accessor :id
 
@@ -1004,6 +1242,8 @@ module Bskyrb
 
       attr_accessor :invitedBy
 
+      attr_accessor :invitesDisabled
+
       def self.from_hash(hash)
         # httparty-returned string-keyed hash
         instance = new
@@ -1021,6 +1261,8 @@ module Bskyrb
         instance.send(:moderation=, hash["moderation"])
 
         instance.send(:invitedBy=, hash["invitedBy"])
+
+        instance.send(:invitesDisabled=, hash["invitesDisabled"])
 
         instance
       end
@@ -1047,6 +1289,8 @@ module Bskyrb
 
       attr_accessor :invites
 
+      attr_accessor :invitesDisabled
+
       def self.from_hash(hash)
         # httparty-returned string-keyed hash
         instance = new
@@ -1068,6 +1312,8 @@ module Bskyrb
         instance.send(:invitedBy=, hash["invitedBy"])
 
         instance.send(:invites=, hash["invites"])
+
+        instance.send(:invitesDisabled=, hash["invitesDisabled"])
 
         instance
       end
@@ -1837,6 +2083,42 @@ module Bskyrb
     end
   end
 
+  module AppBskyActorGetpreferences
+    module GetPreferences
+      class Input
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          new
+        end
+
+        def to_h
+          {}
+        end
+      end
+
+      class Output
+        attr_accessor :preferences
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:preferences=, hash["preferences"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "preferences" => preferences
+
+          }
+        end
+      end
+    end
+  end
+
   module AppBskyActorGetprofile
     module GetProfile
       class Input
@@ -1970,6 +2252,31 @@ module Bskyrb
             "cursor" => cursor,
 
             "actors" => actors
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyActorPutpreferences
+    module PutPreferences
+      class Input
+        attr_accessor :preferences
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:preferences=, hash["preferences"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "preferences" => preferences
 
           }
         end
@@ -2483,6 +2790,64 @@ module Bskyrb
     end
   end
 
+  module AppBskyGraphGetblocks
+    module GetBlocks
+      class Input
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "limit" => limit,
+
+            "cursor" => cursor
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :blocks
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:blocks=, hash["blocks"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor,
+
+            "blocks" => blocks
+
+          }
+        end
+      end
+    end
+  end
+
   module AppBskyGraphGetfollowers
     module GetFollowers
       class Input
@@ -2623,6 +2988,198 @@ module Bskyrb
     end
   end
 
+  module AppBskyGraphGetlist
+    module GetList
+      class Input
+        attr_accessor :list
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:list=, hash["list"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "list" => list,
+
+            "limit" => limit,
+
+            "cursor" => cursor
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :list
+
+        attr_accessor :items
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:list=, hash["list"])
+
+          instance.send(:items=, hash["items"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor,
+
+            "list" => list,
+
+            "items" => items
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyGraphGetlistmutes
+    module GetListMutes
+      class Input
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "limit" => limit,
+
+            "cursor" => cursor
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :lists
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:lists=, hash["lists"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor,
+
+            "lists" => lists
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyGraphGetlists
+    module GetLists
+      class Input
+        attr_accessor :actor
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actor=, hash["actor"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actor" => actor,
+
+            "limit" => limit,
+
+            "cursor" => cursor
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :lists
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:lists=, hash["lists"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor,
+
+            "lists" => lists
+
+          }
+        end
+      end
+    end
+  end
+
   module AppBskyGraphGetmutes
     module GetMutes
       class Input
@@ -2706,6 +3263,31 @@ module Bskyrb
     end
   end
 
+  module AppBskyGraphMuteactorlist
+    module MuteActorList
+      class Input
+        attr_accessor :list
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:list=, hash["list"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "list" => list
+
+          }
+        end
+      end
+    end
+  end
+
   module AppBskyGraphUnmuteactor
     module UnmuteActor
       class Input
@@ -2724,6 +3306,31 @@ module Bskyrb
           {
 
             "actor" => actor
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyGraphUnmuteactorlist
+    module UnmuteActorList
+      class Input
+        attr_accessor :list
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:list=, hash["list"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "list" => list
 
           }
         end
@@ -2869,6 +3476,8 @@ module Bskyrb
   module AppBskyUnspeccedGetpopular
     module GetPopular
       class Input
+        attr_accessor :includeNsfw
+
         attr_accessor :limit
 
         attr_accessor :cursor
@@ -2876,6 +3485,8 @@ module Bskyrb
         def self.from_hash(hash)
           # httparty-returned string-keyed hash
           instance = new
+
+          instance.send(:includeNsfw=, hash["includeNsfw"])
 
           instance.send(:limit=, hash["limit"])
 
@@ -2886,6 +3497,8 @@ module Bskyrb
 
         def to_h
           {
+
+            "includeNsfw" => includeNsfw,
 
             "limit" => limit,
 
@@ -2924,6 +3537,31 @@ module Bskyrb
     end
   end
 
+  module ComAtprotoAdminDisableaccountinvites
+    module DisableAccountInvites
+      class Input
+        attr_accessor :account
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:account=, hash["account"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "account" => account
+
+          }
+        end
+      end
+    end
+  end
+
   module ComAtprotoAdminDisableinvitecodes
     module DisableInviteCodes
       class Input
@@ -2948,6 +3586,31 @@ module Bskyrb
             "codes" => codes,
 
             "accounts" => accounts
+
+          }
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminEnableaccountinvites
+    module EnableAccountInvites
+      class Input
+        attr_accessor :account
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:account=, hash["account"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "account" => account
 
           }
         end
@@ -3162,6 +3825,8 @@ module Bskyrb
 
         attr_accessor :resolved
 
+        attr_accessor :actionType
+
         attr_accessor :limit
 
         attr_accessor :cursor
@@ -3173,6 +3838,8 @@ module Bskyrb
           instance.send(:subject=, hash["subject"])
 
           instance.send(:resolved=, hash["resolved"])
+
+          instance.send(:actionType=, hash["actionType"])
 
           instance.send(:limit=, hash["limit"])
 
@@ -3187,6 +3854,8 @@ module Bskyrb
             "subject" => subject,
 
             "resolved" => resolved,
+
+            "actionType" => actionType,
 
             "limit" => limit,
 
@@ -4328,6 +4997,37 @@ module Bskyrb
     end
   end
 
+  module ComAtprotoRepoRebaserepo
+    module RebaseRepo
+      class Input
+        attr_accessor :repo
+
+        attr_accessor :swapCommit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance.send(:swapCommit=, hash["swapCommit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo,
+
+            "swapCommit" => swapCommit
+
+          }
+        end
+      end
+    end
+  end
+
   module ComAtprotoRepoUploadblob
     module UploadBlob
       class Output
@@ -4360,6 +5060,8 @@ module Bskyrb
 
         attr_accessor :handle
 
+        attr_accessor :did
+
         attr_accessor :inviteCode
 
         attr_accessor :password
@@ -4373,6 +5075,8 @@ module Bskyrb
           instance.send(:email=, hash["email"])
 
           instance.send(:handle=, hash["handle"])
+
+          instance.send(:did=, hash["did"])
 
           instance.send(:inviteCode=, hash["inviteCode"])
 
@@ -4389,6 +5093,8 @@ module Bskyrb
             "email" => email,
 
             "handle" => handle,
+
+            "did" => did,
 
             "inviteCode" => inviteCode,
 
