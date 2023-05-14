@@ -1,3 +1,4 @@
+# typed: false
 require "faye/websocket"
 require "eventmachine"
 require "cbor"

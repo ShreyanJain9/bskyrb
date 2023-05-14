@@ -1,3 +1,4 @@
+# typed: true
 module Bskyrb
   class RecordManager
     include RequestUtils
@@ -16,7 +17,7 @@ module Bskyrb
       end
       res = HTTParty.get(
         get_post_thread_uri(session.pds, query),
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       )
       Bskyrb::AppBskyFeedDefs::PostView.from_hash res["thread"]["post"]
     end
@@ -27,7 +28,7 @@ module Bskyrb
       HTTParty.post(
         upload_blob_uri(session.pds),
         body: image_bytes,
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       )
     end
 
@@ -38,16 +39,16 @@ module Bskyrb
       HTTParty.post(
         create_record_uri(session.pds),
         body: input.to_h.compact.to_json,
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       )
     end
 
     def delete_record(collection, rkey)
-      data = {collection: collection, repo: session.did, rkey: rkey}
+      data = { collection: collection, repo: session.did, rkey: rkey }
       HTTParty.post(
         delete_record_uri(session),
         body: data.to_json,
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       )
     end
 
@@ -59,8 +60,8 @@ module Bskyrb
         "record" => {
           "$type" => "app.bsky.feed.post",
           "createdAt" => DateTime.now.iso8601(3),
-          "text" => text
-        }
+          "text" => text,
+        },
       })
       create_record(input)
     end
@@ -76,17 +77,17 @@ module Bskyrb
           "reply" => {
             "parent" => {
               "uri" => reply_to.uri,
-              "cid" => reply_to.cid
+              "cid" => reply_to.cid,
             },
             "root" => {
               "uri" => reply_to.uri,
-              "cid" => reply_to.cid
-            }
+              "cid" => reply_to.cid,
+            },
           },
           "$type" => "app.bsky.feed.post",
           "createdAt" => DateTime.now.iso8601(3),
-          "text" => text
-        }
+          "text" => text,
+        },
       })
       create_record(input)
     end
@@ -98,8 +99,8 @@ module Bskyrb
         "record" => {
           "subject" => resolve_handle(session.pds, username)["did"],
           "createdAt" => DateTime.now.iso8601(3),
-          "$type" => type
-        }
+          "$type" => type,
+        },
       })
       create_record(input)
     end
@@ -111,11 +112,11 @@ module Bskyrb
         record: {
           subject: {
             uri: post.uri,
-            cid: post.cid
+            cid: post.cid,
           },
           createdAt: DateTime.now.iso8601(3),
-          "$type": action_type
-        }
+          "$type": action_type,
+        },
       }
       create_record(data)
     end
@@ -150,7 +151,7 @@ module Bskyrb
       end
       hydrate_feed HTTParty.get(
         get_author_feed_uri(session.pds, query),
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       ), Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Output
     end
 
@@ -160,7 +161,7 @@ module Bskyrb
       end
       hydrate_feed HTTParty.get(
         get_timeline_uri(session.pds, query),
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       ), Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
     end
 
@@ -170,7 +171,7 @@ module Bskyrb
       end
       hydrate_feed HTTParty.get(
         get_popular_uri(session.pds, query),
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       ), Bskyrb::AppBskyUnspeccedGetpopular::GetPopular::Output
     end
 
