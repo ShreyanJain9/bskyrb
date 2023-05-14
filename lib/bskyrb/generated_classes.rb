@@ -1,3 +1,4 @@
+# typed: true
 module Bskyrb
   module AppBskyActorDefs
     class ProfileViewBasic
