@@ -1,12 +1,10 @@
 # typed: false
-require "uri"
-require "httparty"
+
 
 module Bskyrb
   module RequestUtils
     def resolve_handle(pds, username)
-      resolveHandle = XRPC::Endpoint.new(pds, "com.atproto.identity.resolveHandle", :handle)
-      resolveHandle.get(handle: username)
+      XRPC.request(pds, "com.atproto.identity.resolveHandle", handle: username)
     end
 
     def query_obj_to_query_params(q)
