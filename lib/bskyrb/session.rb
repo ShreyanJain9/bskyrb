@@ -5,9 +5,8 @@ require "httparty"
 module Bskyrb
   module RequestUtils
     def resolve_handle(pds, username)
-      HTTParty.get(
-        "#{pds}/xrpc/com.atproto.identity.resolveHandle?handle=#{username}"
-      )
+      resolveHandle = XRPC::Endpoint.new(pds, "com.atproto.identity.resolveHandle", :handle)
+      resolveHandle.get(handle: username)
     end
 
     def query_obj_to_query_params(q)
@@ -19,7 +18,7 @@ module Bskyrb
     end
 
     def default_headers
-      {"Content-Type" => "application/json"}
+      { "Content-Type" => "application/json" }
     end
 
     def create_record_uri(pds)
@@ -52,7 +51,7 @@ module Bskyrb
 
     def default_authenticated_headers(session)
       default_headers.merge({
-        Authorization: "Bearer #{session.access_token}"
+        Authorization: "Bearer #{session.access_token}",
       })
     end
 
@@ -113,8 +112,8 @@ module Bskyrb
       uri = URI("#{pds}/xrpc/com.atproto.server.createSession")
       response = HTTParty.post(
         uri,
-        body: {identifier: credentials.username, password: credentials.pw}.to_json,
-        headers: default_headers
+        body: { identifier: credentials.username, password: credentials.pw }.to_json,
+        headers: default_headers,
       )
 
       raise UnauthorizedError if response.code == 401
