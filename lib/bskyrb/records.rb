@@ -49,7 +49,7 @@ module Bskyrb
       HTTParty.post(
         delete_record_uri(session),
         body: data.to_json,
-        headers: default_authenticated_headers(session),
+        headers: default_authenticated_headers(session)
       )
     end
 
