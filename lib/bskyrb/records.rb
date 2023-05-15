@@ -24,7 +24,7 @@ module Bskyrb
     end
 
     def upload_blob(blob_path, content_type)
-      # only images?
+      # only images
       image_bytes = File.binread(blob_path)
       HTTParty.post(
         upload_blob_uri(session.pds),
@@ -164,6 +164,11 @@ module Bskyrb
         get_timeline_uri(session.pds, query),
         headers: default_authenticated_headers(session),
       ), Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
+    end
+
+    def list_records(collection, username, limit = 10)
+      listRecords = XRPC::Endpoint.new(session.pds, "com.atproto.repo.listRecords", :repo, :collection, :limit)
+      listRecords.get(repo: resolve_handle(session.pds, username)["did"], collection: collection, limit: limit)
     end
 
     def get_popular(n)
