@@ -10,6 +10,7 @@ module Bskyrb
 
     def get_post_by_url(url, depth = 10)
       # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
+      # or "at://did:plc:scx5mrfxxrqlfzkjcpbt3xfr/app.bsky.feed.post/3jszsrnruws27"
       # regex by chatgpt:
       query = Bskyrb::AppBskyFeedGetpostthread::GetPostThread::Input.new.tap do |q|
         q.uri = at_post_link(session.pds, url)

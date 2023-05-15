@@ -16,4 +16,5 @@ group :development do
   gem "webmock", "3.18.1"
   gem "sorbet"
   gem "ruby-lsp"
+  gem "watchman"
 end

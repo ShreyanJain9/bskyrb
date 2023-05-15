@@ -4,16 +4,21 @@ require "httparty"
 require "json"
 
 module XRPC
-    class Requester
-        :attr_reader request_uri
-        def initialize(endpoint_location, params)
-            #Params is a json array of params for the method
-            @endpoint_location = endpoint_location
-            @request_uri = URI("#{pds}/xrpc/#{endpoint_location}?#{params}")
-        end
-        def request
-            HTTParty.get(@request_uri)
-            #TODO: Actually make usable. this is very much a placeholder for now
-        end
+  class Endpoint
+    attr_reader :request_uri
+
+    def initialize(pds, endpoint_location, *params)
+      @pds = pds
+      @endpoint_location = endpoint_location
+      @params = params
     end
+
+    def get(params)
+      query_params = URI.encode_www_form(params)
+      @request_uri = URI("#{@pds}/xrpc/#{@endpoint_location}?#{query_params}")
+
+      response = HTTParty.get(@request_uri)
+      JSON.parse(response.body)
+    end
+  end
 end
