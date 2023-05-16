@@ -1,8 +1,7 @@
 # typed: false
 
-
 module Bskyrb
-  module RequestUtils
+  module RequestUtils # Goal is to replace with pure XRPC eventually
     def resolve_handle(pds, username)
       XRPC.request(pds, "com.atproto.identity.resolveHandle", handle: username)
     end
@@ -33,18 +32,6 @@ module Bskyrb
 
     def get_post_thread_uri(pds, query)
       "#{pds}/xrpc/app.bsky.feed.getPostThread#{query_obj_to_query_params(query)}"
-    end
-
-    def get_author_feed_uri(pds, query)
-      "#{pds}/xrpc/app.bsky.feed.getAuthorFeed#{query_obj_to_query_params(query)}"
-    end
-
-    def get_timeline_uri(pds, query)
-      "#{pds}/xrpc/app.bsky.feed.getTimeline#{query_obj_to_query_params(query)}"
-    end
-
-    def get_popular_uri(pds, query)
-      "#{pds}/xrpc/app.bsky.unspecced.getPopular#{query_obj_to_query_params(query)}"
     end
 
     def default_authenticated_headers(session)
