@@ -49,11 +49,11 @@ module Bskyrb
       HTTParty.post(
         delete_record_uri(session),
         body: data.to_json,
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       )
     end
 
-    def create_post(text)
+    def create_post_or_reply(text, reply_to = nil)
       input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
         "collection" => "app.bsky.feed.post",
         "$type" => "app.bsky.feed.post",
@@ -64,33 +64,28 @@ module Bskyrb
           "text" => text,
         },
       })
+      if reply_to
+        input.record["reply"] = {
+          "parent" => {
+            "uri" => reply_to.uri,
+            "cid" => reply_to.cid,
+          },
+          "root" => {
+            "uri" => reply_to.uri,
+            "cid" => reply_to.cid,
+          },
+        }
+      end
       create_record(input)
+    end
+
+    def create_post(text)
+      create_post_or_reply(text)
     end
 
     def create_reply(replylink, text)
       reply_to = get_post_by_url(replylink)
-      input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
-        "collection" => "app.bsky.feed.post",
-        "$type" => "app.bsky.feed.post",
-        "repo" => session.did,
-
-        "record" => {
-          "reply" => {
-            "parent" => {
-              "uri" => reply_to.uri,
-              "cid" => reply_to.cid,
-            },
-            "root" => {
-              "uri" => reply_to.uri,
-              "cid" => reply_to.cid,
-            },
-          },
-          "$type" => "app.bsky.feed.post",
-          "createdAt" => DateTime.now.iso8601(3),
-          "text" => text,
-        },
-      })
-      create_record(input)
+      create_post_or_reply(text, reply_to)
     end
 
     def profile_action(username, type)
@@ -146,39 +141,26 @@ module Bskyrb
     end
 
     def get_latest_n_posts(username, n)
-      query = Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Input.new.tap do |q|
-        q.actor = username
-        q.limit = n
-      end
-      hydrate_feed HTTParty.get(
-        get_author_feed_uri(session.pds, query),
-        headers: default_authenticated_headers(session),
-      ), Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Output
+      endpoint = XRPC::Endpoint.new(session.pds, "app.bsky.feed.getAuthorFeed", authenticated: true)
+      endpoint.authenticate(session.access_token)
+      hydrate_feed endpoint.get(actor: username, limit: n), Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Output
     end
 
     def get_skyline(n)
-      query = Bskyrb::AppBskyFeedGettimeline::GetTimeline::Input.new.tap do |q|
-        q.limit = n
-      end
-      hydrate_feed HTTParty.get(
-        get_timeline_uri(session.pds, query),
-        headers: default_authenticated_headers(session),
-      ), Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
+      endpoint = XRPC::Endpoint.new(session.pds, "app.bsky.feed.getTimeline", authenticated: true)
+      endpoint.authenticate(session.access_token)
+      hydrate_feed endpoint.get(limit: n), Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
     end
 
     def list_records(collection, username, limit = 10)
-      listRecords = XRPC::Endpoint.new(session.pds, "com.atproto.repo.listRecords", :repo, :collection, :limit)
-      listRecords.get(repo: resolve_handle(session.pds, username)["did"], collection: collection, limit: limit)
+      listRecords = XRPC::Endpoint.new(session.pds, "com.atproto.repo.listRecords")
+      listRecords.get(repo: resolve_handle(session.pds, username)["did"], collection: collection, limit: limit)["records"]
     end
 
     def get_popular(n)
-      query = Bskyrb::AppBskyUnspeccedGetpopular::GetPopular::Input.new.tap do |q|
-        q.limit = n
-      end
-      hydrate_feed HTTParty.get(
-        get_popular_uri(session.pds, query),
-        headers: default_authenticated_headers(session),
-      ), Bskyrb::AppBskyUnspeccedGetpopular::GetPopular::Output
+      endpoint = XRPC::Endpoint.new session.pds, "app.bsky.unspecced.getPopular", authenticated: true
+      endpoint.authenticate session.access_token
+      hydrate_feed endpoint.get(limit: n), Bskyrb::AppBskyUnspeccedGetpopular::GetPopular::Output
     end
 
     def hydrate_feed(response_hash, klass)
