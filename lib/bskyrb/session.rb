@@ -15,7 +15,7 @@ module Bskyrb
     end
 
     def default_headers
-      { "Content-Type" => "application/json" }
+      {"Content-Type" => "application/json"}
     end
 
     def create_record_uri(pds)
@@ -24,6 +24,10 @@ module Bskyrb
 
     def delete_record_uri(pds)
       "#{pds}/xrpc/com.atproto.repo.deleteRecord"
+    end
+
+    def mute_actor_uri(pds)
+      "#{pds}/xrpc/app.bsky.graph.muteActor"
     end
 
     def upload_blob_uri(pds)
@@ -36,7 +40,7 @@ module Bskyrb
 
     def default_authenticated_headers(session)
       default_headers.merge({
-        Authorization: "Bearer #{session.access_token}",
+        Authorization: "Bearer #{session.access_token}"
       })
     end
 
@@ -97,8 +101,8 @@ module Bskyrb
       uri = URI("#{pds}/xrpc/com.atproto.server.createSession")
       response = HTTParty.post(
         uri,
-        body: { identifier: credentials.username, password: credentials.pw }.to_json,
-        headers: default_headers,
+        body: {identifier: credentials.username, password: credentials.pw}.to_json,
+        headers: default_headers
       )
 
       raise UnauthorizedError if response.code == 401

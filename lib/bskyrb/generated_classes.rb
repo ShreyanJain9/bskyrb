@@ -1,4 +1,3 @@
-# typed: true
 module Bskyrb
   module AppBskyActorDefs
     class ProfileViewBasic
@@ -215,6 +214,25 @@ module Bskyrb
         instance.send(:label=, hash["label"])
 
         instance.send(:visibility=, hash["visibility"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyActorDefs
+    class SavedFeedsPref
+      attr_accessor :pinned
+
+      attr_accessor :saved
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:pinned=, hash["pinned"])
+
+        instance.send(:saved=, hash["saved"])
 
         instance
       end
@@ -640,6 +658,144 @@ module Bskyrb
         instance.send(:uri=, hash["uri"])
 
         instance.send(:blocked=, hash["blocked"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyFeedDefs
+    class GeneratorView
+      attr_accessor :uri
+
+      attr_accessor :cid
+
+      attr_accessor :did
+
+      attr_accessor :creator
+
+      attr_accessor :displayName
+
+      attr_accessor :description
+
+      attr_accessor :descriptionFacets
+
+      attr_accessor :avatar
+
+      attr_accessor :likeCount
+
+      attr_accessor :viewer
+
+      attr_accessor :indexedAt
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:uri=, hash["uri"])
+
+        instance.send(:cid=, hash["cid"])
+
+        instance.send(:did=, hash["did"])
+
+        instance.send(:creator=, hash["creator"])
+
+        instance.send(:displayName=, hash["displayName"])
+
+        instance.send(:description=, hash["description"])
+
+        instance.send(:descriptionFacets=, hash["descriptionFacets"])
+
+        instance.send(:avatar=, hash["avatar"])
+
+        instance.send(:likeCount=, hash["likeCount"])
+
+        instance.send(:viewer=, hash["viewer"])
+
+        instance.send(:indexedAt=, hash["indexedAt"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyFeedDefs
+    class GeneratorViewerState
+      attr_accessor :like
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:like=, hash["like"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyFeedDefs
+    class SkeletonFeedPost
+      attr_accessor :post
+
+      attr_accessor :reason
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:post=, hash["post"])
+
+        instance.send(:reason=, hash["reason"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyFeedDefs
+    class SkeletonReasonRepost
+      attr_accessor :repost
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:repost=, hash["repost"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyFeedDescribefeedgenerator
+    class Feed
+      attr_accessor :uri
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:uri=, hash["uri"])
+
+        instance
+      end
+    end
+  end
+
+  module AppBskyFeedDescribefeedgenerator
+    class Links
+      attr_accessor :privacyPolicy
+
+      attr_accessor :termsOfService
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:privacyPolicy=, hash["privacyPolicy"])
+
+        instance.send(:termsOfService=, hash["termsOfService"])
 
         instance
       end
@@ -1322,6 +1478,21 @@ module Bskyrb
   end
 
   module ComAtprotoAdminDefs
+    class RepoViewNotFound
+      attr_accessor :did
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:did=, hash["did"])
+
+        instance
+      end
+    end
+  end
+
+  module ComAtprotoAdminDefs
     class RepoRef
       attr_accessor :did
 
@@ -1412,6 +1583,21 @@ module Bskyrb
         instance.send(:moderation=, hash["moderation"])
 
         instance.send(:repo=, hash["repo"])
+
+        instance
+      end
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class RecordViewNotFound
+      attr_accessor :uri
+
+      def self.from_hash(hash)
+        # httparty-returned string-keyed hash
+        instance = new
+
+        instance.send(:uri=, hash["uri"])
 
         instance
       end
@@ -2401,6 +2587,107 @@ module Bskyrb
     end
   end
 
+  module AppBskyFeedDescribefeedgenerator
+    module DescribeFeedGenerator
+      class Output
+        attr_accessor :did
+
+        attr_accessor :feeds
+
+        attr_accessor :links
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:did=, hash["did"])
+
+          instance.send(:feeds=, hash["feeds"])
+
+          instance.send(:links=, hash["links"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "did" => did,
+
+            "feeds" => feeds,
+
+            "links" => links
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetactorfeeds
+    module GetActorFeeds
+      class Input
+        attr_accessor :actor
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:actor=, hash["actor"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "actor" => actor,
+
+            "limit" => limit,
+
+            "cursor" => cursor
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :feeds
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:feeds=, hash["feeds"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor,
+
+            "feeds" => feeds
+
+          }
+        end
+      end
+    end
+  end
+
   module AppBskyFeedGetauthorfeed
     module GetAuthorFeed
       class Input
@@ -2427,6 +2714,238 @@ module Bskyrb
           {
 
             "actor" => actor,
+
+            "limit" => limit,
+
+            "cursor" => cursor
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :feed
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:feed=, hash["feed"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor,
+
+            "feed" => feed
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetfeed
+    module GetFeed
+      class Input
+        attr_accessor :feed
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:feed=, hash["feed"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "feed" => feed,
+
+            "limit" => limit,
+
+            "cursor" => cursor
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :cursor
+
+        attr_accessor :feed
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance.send(:feed=, hash["feed"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "cursor" => cursor,
+
+            "feed" => feed
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetfeedgenerator
+    module GetFeedGenerator
+      class Input
+        attr_accessor :feed
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:feed=, hash["feed"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "feed" => feed
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :view
+
+        attr_accessor :isOnline
+
+        attr_accessor :isValid
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:view=, hash["view"])
+
+          instance.send(:isOnline=, hash["isOnline"])
+
+          instance.send(:isValid=, hash["isValid"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "view" => view,
+
+            "isOnline" => isOnline,
+
+            "isValid" => isValid
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetfeedgenerators
+    module GetFeedGenerators
+      class Input
+        attr_accessor :feeds
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:feeds=, hash["feeds"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "feeds" => feeds
+
+          }
+        end
+      end
+
+      class Output
+        attr_accessor :feeds
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:feeds=, hash["feeds"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "feeds" => feeds
+
+          }
+        end
+      end
+    end
+  end
+
+  module AppBskyFeedGetfeedskeleton
+    module GetFeedSkeleton
+      class Input
+        attr_accessor :feed
+
+        attr_accessor :limit
+
+        attr_accessor :cursor
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:feed=, hash["feed"])
+
+          instance.send(:limit=, hash["limit"])
+
+          instance.send(:cursor=, hash["cursor"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "feed" => feed,
 
             "limit" => limit,
 
@@ -2554,6 +3073,8 @@ module Bskyrb
 
         attr_accessor :depth
 
+        attr_accessor :parentHeight
+
         def self.from_hash(hash)
           # httparty-returned string-keyed hash
           instance = new
@@ -2561,6 +3082,8 @@ module Bskyrb
           instance.send(:uri=, hash["uri"])
 
           instance.send(:depth=, hash["depth"])
+
+          instance.send(:parentHeight=, hash["parentHeight"])
 
           instance
         end
@@ -2570,7 +3093,9 @@ module Bskyrb
 
             "uri" => uri,
 
-            "depth" => depth
+            "depth" => depth,
+
+            "parentHeight" => parentHeight
 
           }
         end
@@ -3538,6 +4063,31 @@ module Bskyrb
     end
   end
 
+  module AppBskyUnspeccedGetpopularfeedgenerators
+    module GetPopularFeedGenerators
+      class Output
+        attr_accessor :feeds
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:feeds=, hash["feeds"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "feeds" => feeds
+
+          }
+        end
+      end
+    end
+  end
+
   module ComAtprotoAdminDisableaccountinvites
     module DisableAccountInvites
       class Input
@@ -3824,6 +4374,8 @@ module Bskyrb
       class Input
         attr_accessor :subject
 
+        attr_accessor :ignoreSubjects
+
         attr_accessor :resolved
 
         attr_accessor :actionType
@@ -3832,11 +4384,15 @@ module Bskyrb
 
         attr_accessor :cursor
 
+        attr_accessor :reverse
+
         def self.from_hash(hash)
           # httparty-returned string-keyed hash
           instance = new
 
           instance.send(:subject=, hash["subject"])
+
+          instance.send(:ignoreSubjects=, hash["ignoreSubjects"])
 
           instance.send(:resolved=, hash["resolved"])
 
@@ -3846,6 +4402,8 @@ module Bskyrb
 
           instance.send(:cursor=, hash["cursor"])
 
+          instance.send(:reverse=, hash["reverse"])
+
           instance
         end
 
@@ -3854,13 +4412,17 @@ module Bskyrb
 
             "subject" => subject,
 
+            "ignoreSubjects" => ignoreSubjects,
+
             "resolved" => resolved,
 
             "actionType" => actionType,
 
             "limit" => limit,
 
-            "cursor" => cursor
+            "cursor" => cursor,
+
+            "reverse" => reverse
 
           }
         end
@@ -3968,6 +4530,37 @@ module Bskyrb
 
         def to_h
           {}
+        end
+      end
+    end
+  end
+
+  module ComAtprotoAdminRebaserepo
+    module RebaseRepo
+      class Input
+        attr_accessor :repo
+
+        attr_accessor :swapCommit
+
+        def self.from_hash(hash)
+          # httparty-returned string-keyed hash
+          instance = new
+
+          instance.send(:repo=, hash["repo"])
+
+          instance.send(:swapCommit=, hash["swapCommit"])
+
+          instance
+        end
+
+        def to_h
+          {
+
+            "repo" => repo,
+
+            "swapCommit" => swapCommit
+
+          }
         end
       end
     end
