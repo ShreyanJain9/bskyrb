@@ -15,7 +15,23 @@ module Bskyrb
     end
 
     def default_headers
-      {"Content-Type" => "application/json"}
+      { "Content-Type" => "application/json" }
+    end
+
+    def create_session_uri(pds)
+      "#{pds}/xrpc/com.atproto.server.createSession"
+    end
+
+    def delete_session_uri(pds)
+      "#{pds}/xrpc/com.atproto.server.deleteSession"
+    end
+
+    def refresh_session_uri(pds)
+      "#{pds}/xrpc/com.atproto.server.refreshSession"
+    end
+
+    def get_session_uri(pds)
+      "#{pds}/xrpc/com.atproto.server.getSession"
     end
 
     def create_record_uri(pds)
@@ -40,7 +56,13 @@ module Bskyrb
 
     def default_authenticated_headers(session)
       default_headers.merge({
-        Authorization: "Bearer #{session.access_token}"
+        Authorization: "Bearer #{session.access_token}",
+      })
+    end
+
+    def refresh_token_headers(session)
+      default_headers.merge({
+        Authorization: "Bearer #{session.refresh_token}",
       })
     end
 
@@ -78,11 +100,12 @@ module Bskyrb
   end
 
   class Credentials
-    attr_reader :username, :pw
+    attr_reader :username, :pw, :pds
 
-    def initialize(username, pw)
+    def initialize(username, pw, pds = "https://bsky.social")
       @username = username
       @pw = pw
+      @pds = pds # credentials are pds-specific
     end
   end
 
@@ -91,18 +114,17 @@ module Bskyrb
 
     attr_reader :credentials, :pds, :access_token, :refresh_token, :did
 
-    def initialize(credentials, pds, should_open = true)
+    def initialize(credentials, should_open = true)
       @credentials = credentials
-      @pds = pds
+      @pds = credentials.pds
       open! if should_open
     end
 
     def open!
-      uri = URI("#{pds}/xrpc/com.atproto.server.createSession")
       response = HTTParty.post(
-        uri,
-        body: {identifier: credentials.username, password: credentials.pw}.to_json,
-        headers: default_headers
+        URI(create_session_uri(pds)),
+        body: { identifier: credentials.username, password: credentials.pw }.to_json,
+        headers: default_headers,
       )
 
       raise UnauthorizedError if response.code == 401
@@ -110,6 +132,35 @@ module Bskyrb
       @access_token = response["accessJwt"]
       @refresh_token = response["refreshJwt"]
       @did = response["did"]
+    end
+
+    def refresh!
+      response = HTTParty.post(
+        URI(refresh_session_uri(pds)),
+        headers: refresh_token_headers(self),
+      )
+      raise UnauthorizedError if response.code == 401
+      @access_token = response["accessJwt"]
+      @refresh_token = response["refreshJwt"]
+    end
+
+    def get_session()
+      HTTParty.get(
+        URI(get_session_uri(pds)),
+        headers: default_authenticated_headers(self),
+      )
+    end
+
+    def delete!
+      response = HTTParty.post(
+        URI(delete_session_uri(pds)),
+        headers: refresh_token_headers(self),
+      )
+      if response.code == 200
+        return { success: true }
+      else
+        raise UnauthorizedError
+      end
     end
   end
 end
