@@ -20,5 +20,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "json", ">= 2.0"
   spec.add_runtime_dependency "date", ">= 3.3.3"
   spec.add_runtime_dependency "httparty", ">= 0.21.0"
-  spec.add_runtime_dependency "xrpc", ">= 0.0.1"
+  spec.add_runtime_dependency "xrpc", ">= 0.0.4"
 end
