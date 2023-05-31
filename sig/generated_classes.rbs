@@ -113,6 +113,16 @@ module Bskyrb
     end
   end
 
+  module AppBskyActorDefs
+    class SavedFeedsPref
+      attr_accessor pinned: untyped
+
+      attr_accessor saved: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
   module AppBskyEmbedExternal
     class External
       attr_accessor uri: untyped
@@ -330,6 +340,78 @@ module Bskyrb
       attr_accessor uri: untyped
 
       attr_accessor blocked: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class GeneratorView
+      attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
+
+      attr_accessor did: untyped
+
+      attr_accessor creator: untyped
+
+      attr_accessor displayName: untyped
+
+      attr_accessor description: untyped
+
+      attr_accessor descriptionFacets: untyped
+
+      attr_accessor avatar: untyped
+
+      attr_accessor likeCount: untyped
+
+      attr_accessor viewer: untyped
+
+      attr_accessor indexedAt: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class GeneratorViewerState
+      attr_accessor like: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class SkeletonFeedPost
+      attr_accessor post: untyped
+
+      attr_accessor reason: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDefs
+    class SkeletonReasonRepost
+      attr_accessor repost: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDescribefeedgenerator
+    class Feed
+      attr_accessor uri: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module AppBskyFeedDescribefeedgenerator
+    class Links
+      attr_accessor privacyPolicy: untyped
+
+      attr_accessor termsOfService: untyped
 
       def self.from_hash: (untyped hash) -> untyped
     end
@@ -694,6 +776,14 @@ module Bskyrb
   end
 
   module ComAtprotoAdminDefs
+    class RepoViewNotFound
+      attr_accessor did: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
     class RepoRef
       attr_accessor did: untyped
 
@@ -738,6 +828,14 @@ module Bskyrb
       attr_accessor moderation: untyped
 
       attr_accessor repo: untyped
+
+      def self.from_hash: (untyped hash) -> untyped
+    end
+  end
+
+  module ComAtprotoAdminDefs
+    class RecordViewNotFound
+      attr_accessor uri: untyped
 
       def self.from_hash: (untyped hash) -> untyped
     end
@@ -1239,10 +1337,148 @@ module Bskyrb
     end
   end
 
+  module AppBskyFeedDescribefeedgenerator
+    module DescribeFeedGenerator
+      class Output
+        attr_accessor did: untyped
+
+        attr_accessor feeds: untyped
+
+        attr_accessor links: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyFeedGetactorfeeds
+    module GetActorFeeds
+      class Input
+        attr_accessor actor: untyped
+
+        attr_accessor limit: untyped
+
+        attr_accessor cursor: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor cursor: untyped
+
+        attr_accessor feeds: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
   module AppBskyFeedGetauthorfeed
     module GetAuthorFeed
       class Input
         attr_accessor actor: untyped
+
+        attr_accessor limit: untyped
+
+        attr_accessor cursor: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor cursor: untyped
+
+        attr_accessor feed: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyFeedGetfeed
+    module GetFeed
+      class Input
+        attr_accessor feed: untyped
+
+        attr_accessor limit: untyped
+
+        attr_accessor cursor: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor cursor: untyped
+
+        attr_accessor feed: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyFeedGetfeedgenerator
+    module GetFeedGenerator
+      class Input
+        attr_accessor feed: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor view: untyped
+
+        attr_accessor isOnline: untyped
+
+        attr_accessor isValid: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyFeedGetfeedgenerators
+    module GetFeedGenerators
+      class Input
+        attr_accessor feeds: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+
+      class Output
+        attr_accessor feeds: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
+  module AppBskyFeedGetfeedskeleton
+    module GetFeedSkeleton
+      class Input
+        attr_accessor feed: untyped
 
         attr_accessor limit: untyped
 
@@ -1303,6 +1539,8 @@ module Bskyrb
         attr_accessor uri: untyped
 
         attr_accessor depth: untyped
+
+        attr_accessor parentHeight: untyped
 
         def self.from_hash: (untyped hash) -> untyped
 
@@ -1711,6 +1949,18 @@ module Bskyrb
     end
   end
 
+  module AppBskyUnspeccedGetpopularfeedgenerators
+    module GetPopularFeedGenerators
+      class Output
+        attr_accessor feeds: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
+      end
+    end
+  end
+
   module ComAtprotoAdminDisableaccountinvites
     module DisableAccountInvites
       class Input
@@ -1842,6 +2092,8 @@ module Bskyrb
       class Input
         attr_accessor subject: untyped
 
+        attr_accessor ignoreSubjects: untyped
+
         attr_accessor resolved: untyped
 
         attr_accessor actionType: untyped
@@ -1849,6 +2101,8 @@ module Bskyrb
         attr_accessor limit: untyped
 
         attr_accessor cursor: untyped
+
+        attr_accessor reverse: untyped
 
         def self.from_hash: (untyped hash) -> untyped
 
@@ -1901,6 +2155,20 @@ module Bskyrb
         def self.from_hash: (untyped hash) -> untyped
 
         def to_h: () -> ::Hash[untyped, untyped]
+      end
+    end
+  end
+
+  module ComAtprotoAdminRebaserepo
+    module RebaseRepo
+      class Input
+        attr_accessor repo: untyped
+
+        attr_accessor swapCommit: untyped
+
+        def self.from_hash: (untyped hash) -> untyped
+
+        def to_h: () -> ::Hash[::String, untyped]
       end
     end
   end

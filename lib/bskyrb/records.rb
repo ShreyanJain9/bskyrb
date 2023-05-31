@@ -1,4 +1,5 @@
 # typed: true
+
 module Bskyrb
   class RecordManager
     include RequestUtils
@@ -18,7 +19,7 @@ module Bskyrb
       end
       res = HTTParty.get(
         get_post_thread_uri(session.pds, query),
-        headers: default_authenticated_headers(session),
+        headers: default_authenticated_headers(session)
       )
       Bskyrb::AppBskyFeedDefs::PostView.from_hash res["thread"]["post"]
     end
@@ -29,7 +30,7 @@ module Bskyrb
       HTTParty.post(
         upload_blob_uri(session.pds),
         body: image_bytes,
-        headers: default_authenticated_headers(session),
+        headers: default_authenticated_headers(session)
       )
     end
 
@@ -40,16 +41,16 @@ module Bskyrb
       HTTParty.post(
         create_record_uri(session.pds),
         body: input.to_h.compact.to_json,
-        headers: default_authenticated_headers(session),
+        headers: default_authenticated_headers(session)
       )
     end
 
     def delete_record(collection, rkey)
-      data = { collection: collection, repo: session.did, rkey: rkey }
+      data = {collection: collection, repo: session.did, rkey: rkey}
       HTTParty.post(
         delete_record_uri(session),
         body: data.to_json,
-        headers: default_authenticated_headers(session),
+        headers: default_authenticated_headers(session)
       )
     end
 
@@ -61,19 +62,19 @@ module Bskyrb
         "record" => {
           "$type" => "app.bsky.feed.post",
           "createdAt" => DateTime.now.iso8601(3),
-          "text" => text,
-        },
+          "text" => text
+        }
       })
       if reply_to
         input.record["reply"] = {
           "parent" => {
             "uri" => reply_to.uri,
-            "cid" => reply_to.cid,
+            "cid" => reply_to.cid
           },
           "root" => {
             "uri" => reply_to.uri,
-            "cid" => reply_to.cid,
-          },
+            "cid" => reply_to.cid
+          }
         }
       end
       create_record(input)
@@ -95,8 +96,8 @@ module Bskyrb
         "record" => {
           "subject" => resolve_handle(session.pds, username)["did"],
           "createdAt" => DateTime.now.iso8601(3),
-          "$type" => type,
-        },
+          "$type" => type
+        }
       })
       create_record(input)
     end
@@ -108,11 +109,11 @@ module Bskyrb
         record: {
           subject: {
             uri: post.uri,
-            cid: post.cid,
+            cid: post.cid
           },
           createdAt: DateTime.now.iso8601(3),
-          "$type": action_type,
-        },
+          "$type": action_type
+        }
       }
       create_record(data)
     end
@@ -135,30 +136,38 @@ module Bskyrb
       profile_action(username, "app.bsky.graph.block")
     end
 
+    def mute(username)
+      HTTParty.post(
+        mute_actor_uri(session.pds),
+        body: {actor: username}.to_json,
+        headers: default_authenticated_headers(session)
+      )
+    end
+
     def get_latest_post(username)
       feed = get_latest_n_posts(username, 1)
       feed.feed.first
     end
 
     def get_latest_n_posts(username, n)
-      endpoint = XRPC::Endpoint.new(session.pds, "app.bsky.feed.getAuthorFeed", authenticated: true)
+      endpoint = XRPC::EasyEndpoint.new(session.pds, "app.bsky.feed.getAuthorFeed", authenticated: true)
       endpoint.authenticate(session.access_token)
       hydrate_feed endpoint.get(actor: username, limit: n), Bskyrb::AppBskyFeedGetauthorfeed::GetAuthorFeed::Output
     end
 
     def get_skyline(n)
-      endpoint = XRPC::Endpoint.new(session.pds, "app.bsky.feed.getTimeline", authenticated: true)
+      endpoint = XRPC::EasyEndpoint.new(session.pds, "app.bsky.feed.getTimeline", authenticated: true)
       endpoint.authenticate(session.access_token)
       hydrate_feed endpoint.get(limit: n), Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
     end
 
     def list_records(collection, username, limit = 10)
-      listRecords = XRPC::Endpoint.new(session.pds, "com.atproto.repo.listRecords")
+      listRecords = XRPC::EasyEndpoint.new(session.pds, "com.atproto.repo.listRecords")
       listRecords.get(repo: resolve_handle(session.pds, username)["did"], collection: collection, limit: limit)["records"]
     end
 
     def get_popular(n)
-      endpoint = XRPC::Endpoint.new session.pds, "app.bsky.unspecced.getPopular", authenticated: true
+      endpoint = XRPC::EasyEndpoint.new session.pds, "app.bsky.unspecced.getPopular", authenticated: true
       endpoint.authenticate session.access_token
       hydrate_feed endpoint.get(limit: n), Bskyrb::AppBskyUnspeccedGetpopular::GetPopular::Output
     end
