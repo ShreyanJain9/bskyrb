@@ -9,7 +9,6 @@
 Gemfile.lock
 bskyrb.code-workspace
 /.gem_rbs_collection/
-atproto/
 node_modules/
 lib/bskytest.rb
 .byebug_history
