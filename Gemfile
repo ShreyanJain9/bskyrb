@@ -14,7 +14,7 @@ group :development do
   gem "standard"
   gem "steep", ">= 1.3.2"
   gem "webmock", "3.18.1"
-  gem "sorbet"
   gem "ruby-lsp"
   gem "watchman"
+  gem 'pry', '~> 0.13.1'
 end
