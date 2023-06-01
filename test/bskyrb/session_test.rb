@@ -8,8 +8,8 @@ module Bskyrb
     def test_create_session_with_valid_credentials_returns_an_open_session
       stub_request(:post, "https://bsky.social/xrpc/com.atproto.server.createSession").to_return(
         status: 200,
-        headers: { "Content-Type" => "application/json" },
-        body: { "accessJwt" => "ACCESS_JWT", "refreshJwt" => "REFRESH_JWT", "did" => "DID" }.to_json,
+        headers: {"Content-Type" => "application/json"},
+        body: {"accessJwt" => "ACCESS_JWT", "refreshJwt" => "REFRESH_JWT", "did" => "DID"}.to_json
       )
 
       credentials = ATProto::Credentials.new(ENV["BSKY_USERNAME"], ENV["BSKY_PASSWORD"])
