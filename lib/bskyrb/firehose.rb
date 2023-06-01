@@ -1,4 +1,5 @@
 # typed: false
+
 require "faye/websocket"
 require "eventmachine"
 require "cbor"
@@ -24,14 +25,12 @@ EM.run {
 
     if payload["ops"].first["path"].include? "app.bsky.feed.post"
       # payload#["blocks"].length
-      decoded = CBOR.decode(payload)
 
       # Convert the decoded object to JSON
-      json = decoded.to_json
+      json = payload.to_json
 
       # Print the JSON object
       puts json
     end
   end
 }
-# end

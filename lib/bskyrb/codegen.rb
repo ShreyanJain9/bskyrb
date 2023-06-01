@@ -1,4 +1,5 @@
 # typed: false
+
 require "json"
 require "erb"
 
@@ -33,10 +34,10 @@ module Bskyrb
         @@active_namespace = parsed["id"].split(".").map(&:capitalize).join("")
         next if k == "main"
         output[ref_to_class_str(k)] = if v["type"] == "record"
-            build_class_hash_from_schema(v["record"]["properties"])
-          else
-            build_class_hash_from_schema(v)
-          end
+          build_class_hash_from_schema(v["record"]["properties"])
+        else
+          build_class_hash_from_schema(v)
+        end
       end
       output
     end
@@ -81,14 +82,14 @@ module Bskyrb
         end
 
         output[key] = if value["type"] == "object"
-            build_class_hash_from_schema(value, {})
-          elsif value["type"] == "array"
-            [build_class_hash_from_schema(value, {}).values.first]
-          elsif value["type"] == "ref"
-            ref_to_class_str(value["ref"])
-          else
-            -1
-          end
+          build_class_hash_from_schema(value, {})
+        elsif value["type"] == "array"
+          [build_class_hash_from_schema(value, {}).values.first]
+        elsif value["type"] == "ref"
+          ref_to_class_str(value["ref"])
+        else
+          -1
+        end
       end
       output
     end
@@ -123,7 +124,7 @@ end
 
     def self.basic_class_definitions(classes_hash)
       classes_hash.map do |klass_str, properties|
-        ERB.new(basic_template).result_with_hash({ klass_str: klass_str, properties: properties })
+        ERB.new(basic_template).result_with_hash({klass_str: klass_str, properties: properties})
       end
     end
 
@@ -163,7 +164,7 @@ end
 
     def self.input_output_class_definitions(classes_hash)
       classes_hash.map do |klass_str, properties|
-        ERB.new(input_output_template).result_with_hash({ klass_str: klass_str, properties: properties })
+        ERB.new(input_output_template).result_with_hash({klass_str: klass_str, properties: properties})
       end
     end
   end

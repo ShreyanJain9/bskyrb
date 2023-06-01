@@ -16,5 +16,5 @@ group :development do
   gem "webmock", "3.18.1"
   gem "ruby-lsp"
   gem "watchman"
-  gem 'pry', '~> 0.13.1'
+  gem "pry", "~> 0.13.1"
 end

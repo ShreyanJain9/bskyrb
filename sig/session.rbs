@@ -1,0 +1,35 @@
+module ATProto
+  class Credentials
+    attr_reader username: String
+
+    attr_reader pw: String
+
+    attr_reader pds: String
+
+    def initialize: (?::String username, ?::String pw, ?::String pds) -> void
+  end
+
+  class Session
+    include RequestUtils
+
+    attr_reader credentials: ATProto::Credentials
+
+    attr_reader pds: String
+
+    attr_reader access_token: String
+
+    attr_reader refresh_token: String
+
+    attr_reader did: String
+
+    def initialize: (untyped credentials, ?bool should_open) -> void
+
+    def open!: () -> untyped
+
+    def refresh!: () -> untyped
+
+    def get_session: () -> untyped
+
+    def delete!: () -> untyped
+  end
+end

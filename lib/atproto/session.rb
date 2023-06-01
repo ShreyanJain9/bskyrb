@@ -1,4 +1,5 @@
 # typed: false
+
 require "atproto/requests"
 
 module ATProto
@@ -26,8 +27,8 @@ module ATProto
     def open!
       response = HTTParty.post(
         URI(create_session_uri(pds)),
-        body: { identifier: credentials.username, password: credentials.pw }.to_json,
-        headers: default_headers,
+        body: {identifier: credentials.username, password: credentials.pw}.to_json,
+        headers: default_headers
       )
 
       raise UnauthorizedError if response.code == 401
@@ -40,27 +41,27 @@ module ATProto
     def refresh!
       response = HTTParty.post(
         URI(refresh_session_uri(pds)),
-        headers: refresh_token_headers(self),
+        headers: refresh_token_headers(self)
       )
       raise UnauthorizedError if response.code == 401
       @access_token = response["accessJwt"]
       @refresh_token = response["refreshJwt"]
     end
 
-    def get_session()
+    def get_session
       HTTParty.get(
         URI(get_session_uri(pds)),
-        headers: default_authenticated_headers(self),
+        headers: default_authenticated_headers(self)
       )
     end
 
     def delete!
       response = HTTParty.post(
         URI(delete_session_uri(pds)),
-        headers: refresh_token_headers(self),
+        headers: refresh_token_headers(self)
       )
       if response.code == 200
-        return { success: true }
+        {success: true}
       else
         raise UnauthorizedError
       end
