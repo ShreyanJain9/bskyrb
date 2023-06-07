@@ -37,8 +37,8 @@ username = 'your_username'
 password = 'your_password'
 pds_url = 'https://bsky.social'
 
-credentials =  ATProto::Credentials.new(username, password)
-session = ATProto::Session.new(credentials, pds_url)
+credentials =  ATProto::Credentials.new(username, password, pds_url)
+session = ATProto::Session.new(credentials)
 bsky = Bskyrb::RecordManager.new(session)
 post_uri = bsky.create_post("Hello world from bskyrb!")["uri"]
 bsky.like(post_uri)
