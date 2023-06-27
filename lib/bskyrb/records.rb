@@ -30,7 +30,7 @@ module Bskyrb
       HTTParty.post(
         upload_blob_uri(session.pds),
         body: image_bytes,
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session).merge("Content-Type" => content_type)
       )
     end
 
