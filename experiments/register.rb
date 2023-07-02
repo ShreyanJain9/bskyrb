@@ -9,12 +9,12 @@ class Array
   def to_base58
     r = ""
     n = BigDecimal("0")
-    self.each do |byte|
+    each do |byte|
       n = n * 256 + byte
     end
     loop do
       r += B58BT[n % 58]
-      n = n / 58
+      n /= 58
       break if n == 0
     end
     r.reverse
@@ -44,14 +44,14 @@ inviteCode = (gets || "").chomp
 host = "https://bsky.social" if host.empty?
 host = "https://#{host}" unless host.start_with?("http")
 headers = {
-  "Content-Type" => "application/json",
+  "Content-Type" => "application/json"
 }
 body = {
   handle: handle,
   password: password,
   email: email,
   inviteCode: inviteCode,
-  recoveryKey: did,
+  recoveryKey: did
 }.to_json
 response = HTTParty.post("#{host}/xrpc/com.atproto.server.createAccount", headers: headers, body: body)
 jres = JSON.parse(response.body)
