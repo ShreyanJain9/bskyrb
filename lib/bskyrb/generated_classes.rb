@@ -886,6 +886,8 @@ module Bskyrb
     class ListViewBasic
       attr_accessor :uri
 
+      attr_accessor :cid
+
       attr_accessor :name
 
       attr_accessor :purpose
@@ -901,6 +903,8 @@ module Bskyrb
         instance = new
 
         instance.send(:uri=, hash["uri"])
+
+        instance.send(:cid=, hash["cid"])
 
         instance.send(:name=, hash["name"])
 
@@ -920,6 +924,8 @@ module Bskyrb
   module AppBskyGraphDefs
     class ListView
       attr_accessor :uri
+
+      attr_accessor :cid
 
       attr_accessor :creator
 
@@ -942,6 +948,8 @@ module Bskyrb
         instance = new
 
         instance.send(:uri=, hash["uri"])
+
+        instance.send(:cid=, hash["cid"])
 
         instance.send(:creator=, hash["creator"])
 
@@ -1313,6 +1321,8 @@ module Bskyrb
 
       attr_accessor :reason
 
+      attr_accessor :subjectRepoHandle
+
       attr_accessor :subject
 
       attr_accessor :reportedBy
@@ -1330,6 +1340,8 @@ module Bskyrb
         instance.send(:reasonType=, hash["reasonType"])
 
         instance.send(:reason=, hash["reason"])
+
+        instance.send(:subjectRepoHandle=, hash["subjectRepoHandle"])
 
         instance.send(:subject=, hash["subject"])
 
@@ -4376,6 +4388,8 @@ module Bskyrb
 
         attr_accessor :ignoreSubjects
 
+        attr_accessor :reporters
+
         attr_accessor :resolved
 
         attr_accessor :actionType
@@ -4393,6 +4407,8 @@ module Bskyrb
           instance.send(:subject=, hash["subject"])
 
           instance.send(:ignoreSubjects=, hash["ignoreSubjects"])
+
+          instance.send(:reporters=, hash["reporters"])
 
           instance.send(:resolved=, hash["resolved"])
 
@@ -4413,6 +4429,8 @@ module Bskyrb
             "subject" => subject,
 
             "ignoreSubjects" => ignoreSubjects,
+
+            "reporters" => reporters,
 
             "resolved" => resolved,
 

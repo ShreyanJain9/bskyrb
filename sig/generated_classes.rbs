@@ -463,6 +463,8 @@ module Bskyrb
     class ListViewBasic
       attr_accessor uri: untyped
 
+      attr_accessor cid: untyped
+
       attr_accessor name: untyped
 
       attr_accessor purpose: untyped
@@ -480,6 +482,8 @@ module Bskyrb
   module AppBskyGraphDefs
     class ListView
       attr_accessor uri: untyped
+
+      attr_accessor cid: untyped
 
       attr_accessor creator: untyped
 
@@ -694,6 +698,8 @@ module Bskyrb
       attr_accessor reasonType: untyped
 
       attr_accessor reason: untyped
+
+      attr_accessor subjectRepoHandle: untyped
 
       attr_accessor subject: untyped
 
@@ -2093,6 +2099,8 @@ module Bskyrb
         attr_accessor subject: untyped
 
         attr_accessor ignoreSubjects: untyped
+
+        attr_accessor reporters: untyped
 
         attr_accessor resolved: untyped
 
