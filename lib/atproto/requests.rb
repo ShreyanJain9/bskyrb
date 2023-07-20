@@ -7,7 +7,7 @@ module ATProto
 
   module RequestUtils # Goal is to replace with pure XRPC eventually
     def resolve_handle(pds, username)
-      XRPC.request(pds, "com.atproto.identity.resolveHandle", handle: username)
+      XRPC::Client.new(pds).get.com_atproto_identity_resolveHandle(handle: username)
     end
 
     def query_obj_to_query_params(q)
@@ -19,7 +19,7 @@ module ATProto
     end
 
     def default_headers
-      {"Content-Type" => "application/json"}
+      { "Content-Type" => "application/json" }
     end
 
     def create_session_uri(pds)
@@ -60,13 +60,13 @@ module ATProto
 
     def default_authenticated_headers(session)
       default_headers.merge({
-        Authorization: "Bearer #{session.access_token}"
+        Authorization: "Bearer #{session.access_token}",
       })
     end
 
     def refresh_token_headers(session)
       default_headers.merge({
-        Authorization: "Bearer #{session.refresh_token}"
+        Authorization: "Bearer #{session.refresh_token}",
       })
     end
 

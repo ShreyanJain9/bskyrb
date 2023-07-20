@@ -1,25 +1,34 @@
 # typed: true
 
+require "bskyrb/post_tools"
+
 module Bskyrb
-  class RecordManager
+  class Client
     include ATProto::RequestUtils
+    include PostTools
     attr_reader :session
 
     def initialize(session)
       @session = session
+      @pds = session.credentials.pds
+    end
+
+    def create_record(input)
+      HTTParty.post(
+        create_record_uri(session.pds),
+        body: input.to_json,
+        headers: default_authenticated_headers(session),
+      )
     end
 
     def get_post_by_url(url, depth = 10)
-      # e.g. "https://staging.bsky.app/profile/naia.bsky.social/post/3jszsrnruws27"
-      # or "at://did:plc:scx5mrfxxrqlfzkjcpbt3xfr/app.bsky.feed.post/3jszsrnruws27"
-      # regex by chatgpt:
       query = Bskyrb::AppBskyFeedGetpostthread::GetPostThread::Input.new.tap do |q|
         q.uri = at_post_link(session.pds, url)
         q.depth = depth
       end
       res = HTTParty.get(
         get_post_thread_uri(session.pds, query),
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session),
       )
       Bskyrb::AppBskyFeedDefs::PostView.from_hash res["thread"]["post"]
     end
@@ -30,51 +39,32 @@ module Bskyrb
       HTTParty.post(
         upload_blob_uri(session.pds),
         body: image_bytes,
-        headers: default_authenticated_headers(session).merge("Content-Type" => content_type)
-      )
-    end
-
-    def create_record(input)
-      unless input.is_a?(Hash) || input.class.name.include?("Input")
-        raise "`create_record` takes an Input class or a hash"
-      end
-      HTTParty.post(
-        create_record_uri(session.pds),
-        body: input.to_h.compact.to_json,
-        headers: default_authenticated_headers(session)
-      )
-    end
-
-    def delete_record(collection, rkey)
-      data = {collection: collection, repo: session.did, rkey: rkey}
-      HTTParty.post(
-        delete_record_uri(session),
-        body: data.to_json,
-        headers: default_authenticated_headers(session)
+        headers: default_authenticated_headers(session).merge("Content-Type" => content_type),
       )
     end
 
     def create_post_or_reply(text, reply_to = nil)
-      input = Bskyrb::ComAtprotoRepoCreaterecord::CreateRecord::Input.from_hash({
+      input = {
         "collection" => "app.bsky.feed.post",
         "$type" => "app.bsky.feed.post",
         "repo" => session.did,
         "record" => {
           "$type" => "app.bsky.feed.post",
           "createdAt" => DateTime.now.iso8601(3),
-          "text" => text
-        }
-      })
+          "text" => text,
+          "facets" => create_facets(text),
+        },
+      }
       if reply_to
         input.record["reply"] = {
           "parent" => {
             "uri" => reply_to.uri,
-            "cid" => reply_to.cid
+            "cid" => reply_to.cid,
           },
           "root" => {
             "uri" => reply_to.uri,
-            "cid" => reply_to.cid
-          }
+            "cid" => reply_to.cid,
+          },
         }
       end
       create_record(input)
@@ -96,8 +86,8 @@ module Bskyrb
         "record" => {
           "subject" => resolve_handle(session.pds, username)["did"],
           "createdAt" => DateTime.now.iso8601(3),
-          "$type" => type
-        }
+          "$type" => type,
+        },
       })
       create_record(input)
     end
@@ -109,11 +99,11 @@ module Bskyrb
         record: {
           subject: {
             uri: post.uri,
-            cid: post.cid
+            cid: post.cid,
           },
           createdAt: DateTime.now.iso8601(3),
-          "$type": action_type
-        }
+          "$type": action_type,
+        },
       }
       create_record(data)
     end
@@ -139,8 +129,8 @@ module Bskyrb
     def mute(username)
       HTTParty.post(
         mute_actor_uri(session.pds),
-        body: {actor: username}.to_json,
-        headers: default_authenticated_headers(session)
+        body: { actor: resolve_handle(username) }.to_json,
+        headers: default_authenticated_headers(session),
       )
     end
 
@@ -159,11 +149,6 @@ module Bskyrb
       endpoint = XRPC::EasyEndpoint.new(session.pds, "app.bsky.feed.getTimeline", authenticated: true)
       endpoint.authenticate(session.access_token)
       hydrate_feed endpoint.get(limit: n), Bskyrb::AppBskyFeedGettimeline::GetTimeline::Output
-    end
-
-    def list_records(collection, username, limit = 10)
-      listRecords = XRPC::EasyEndpoint.new(session.pds, "com.atproto.repo.listRecords")
-      listRecords.get(repo: resolve_handle(session.pds, username)["did"], collection: collection, limit: limit)["records"]
     end
 
     def get_popular(n)
