@@ -17,6 +17,6 @@ group :development do
   gem "ruby-lsp"
   gem "watchman"
   gem "pry", "~> 0.13.1"
-  gem "secp256k1-ruby"
   gem "bigdecimal"
+  gem "tapioca"
 end

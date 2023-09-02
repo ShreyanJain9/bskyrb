@@ -1,22 +1,20 @@
-require "uri"
-require_relative "../atproto/requests"
-require "xrpc"
-# module Bskyrb
-#   include Atmosfire
-
-#   class Client
-#     include RequestUtils
-#     attr_reader :session
-
-#     def initialize(session)
-#       @session = session
-#     end
-#   end
-# end
-
+# typed: true
 module Bskyrb
   module PostTools
-    def create_facets(text)
+    include Atmosfire::RequestUtils
+    extend T::Sig
+
+    sig { params(post_record: Atmosfire::Record).returns(Hash) }
+
+    def root_post(post_record)
+      if post_record.content["reply"].nil?
+        post_record.strongref.to_json
+      else
+        post_record.content["reply"]["root"]
+      end
+    end
+
+    def create_facets(text, pds = "https://bsky.social")
       facets = []
 
       # Regex patterns
@@ -25,9 +23,9 @@ module Bskyrb
 
       # Find mentions
       text.enum_for(:scan, mention_pattern).each do |m|
-        index_start = Regexp.last_match.offset(0).first
-        index_end = Regexp.last_match.offset(0).last
-        did = resolve_handle(@pds, (m.join("").strip)[1..-1])["did"]
+        index_start = T.must(Regexp.last_match).offset(0).first
+        index_end = T.must(Regexp.last_match).offset(0).last
+        did = resolve_handle((m.join("").strip)[1..-1], pds) #["did"]
         unless did.nil?
           facets.push(
             "$type" => "app.bsky.richtext.facet",
@@ -47,10 +45,10 @@ module Bskyrb
 
       # Find links
       text.enum_for(:scan, link_pattern).each do |m|
-        index_start = Regexp.last_match.offset(0).first
-        index_end = Regexp.last_match.offset(0).last
+        index_start = T.must(Regexp.last_match).offset(0).first
+        index_end = T.must(Regexp.last_match).offset(0).last
         m.compact!
-        path = "#{m[1]}#{m[2..-1].join("")}".strip
+        link = URI.join("#{m[0]}:/", "#{m[1]}#{m[2..-1].join("")}".strip).to_s.chomp("/")
         facets.push(
           "$type" => "app.bsky.richtext.facet",
           "index" => {
@@ -59,7 +57,7 @@ module Bskyrb
           },
           "features" => [
             {
-              "uri" => URI.parse("#{m[0]}://#{path}/").normalize.to_s, # this is the matched link
+              "uri" => link, # this is the matched link
               "$type" => "app.bsky.richtext.facet#link",
             },
           ],
@@ -68,32 +66,55 @@ module Bskyrb
 
       facets.empty? ? nil : facets
     end
+
+    sig { params(reply_uri: String, pds: String).returns(Hash) }
+
+    def reply_ref(reply_uri, pds: "https://bsky.social")
+      reply_to = Atmosfire::Record.from_uri(at_uri(reply_uri, pds))
+      {
+        "parent" => reply_to.strongref.to_json,
+        "root" => root_post(reply_to),
+      }
+    end
   end
 end
 
 module Bskyrb
   class PostRecord
-    include ATProto::RequestUtils
     include PostTools
-    attr_accessor :text, :timestamp, :facets, :embed, :pds
+    extend T::Sig
+    attr_accessor :text, :timestamp, :facets, :embed, :pds, :reply
 
-    def initialize(text, timestamp: DateTime.now.iso8601(3), pds: "https://bsky.social")
-      @text = text
+    def initialize(text, timestamp: DateTime.now.iso8601(3), pds: "https://bsky.social", reply: nil)
+      @text = T.let(text, String)
       @timestamp = timestamp
       @pds = pds
+      @reply = reply_ref(reply, pds: pds) unless reply.nil?
+      create_facets!()
     end
+
+    sig { returns(Hash) }
 
     def to_json_hash
       {
-        text: @text,
-        createdAt: @timestamp,
-        "$type": "app.bsky.feed.post",
-        facets: @facets,
-      }
+        "text" => @text,
+        "createdAt" => @timestamp,
+        "$type" => "app.bsky.feed.post",
+        "facets" => @facets,
+        "embed" => @embed,
+        "reply" => @reply,
+      }.compact
     end
 
     def create_facets!()
-      @facets = create_facets(@text)
+      @facets = T.let(create_facets(@text, pds), T.nilable(Array))
+    end
+  end
+end
+
+module Bskyrb
+  module PostTools
+    class Facet
     end
   end
 end

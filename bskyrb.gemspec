@@ -2,8 +2,7 @@ lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "bskyrb/version"
 
-specfiles = Dir["./lib/bskyrb/*", "./lib/atproto/*"]
-specfiles.push("./lib/bskyrb.rb")
+specfiles = Dir["./lib/**/*.rb"]
 
 Gem::Specification.new do |spec|
   spec.name = "bskyrb"
@@ -16,9 +15,5 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.files = specfiles
   spec.require_paths = ["lib"]
-
-  spec.add_runtime_dependency "json", ">= 2.0"
-  spec.add_runtime_dependency "date", ">= 3.3.3"
-  spec.add_runtime_dependency "httparty", ">= 0.21.0"
-  spec.add_runtime_dependency "xrpc", ">= 0.1.5"
+  spec.add_runtime_dependency "at_protocol", "~> 0.0.4.1"
 end
